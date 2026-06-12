@@ -21,7 +21,7 @@ const RT_CONFIG = {
   
   // Kontak Pengurus untuk WhatsApp dan Tampilan
   kontak: {
-    noWaKetua: "6282212345678", // Ganti dengan nomor WA Ketua RT (awali dengan kode negara 62, tanpa tanda + atau spasi)
+    noWaKetua: "6282218222557", // Ganti dengan nomor WA Ketua RT (awali dengan kode negara 62, tanpa tanda + atau spasi)
     namaSekretaris: "Budi Santoso",
     noWaSekretaris: "6285322223333", // Nomor WA Sekretaris
     namaBendahara: "Siti Rahma",
@@ -255,10 +255,9 @@ function renderInfoUmum() {
   document.getElementById("kontak-bendahara").textContent = RT_CONFIG.kontak.namaBendahara;
   
   // Link WhatsApp langsung di tombol-tombol
-  const waBtnHeader = document.getElementById("wa-btn-header");
-  if (waBtnHeader) {
-    waBtnHeader.href = `https://wa.me/${RT_CONFIG.kontak.noWaKetua}`;
-  }
+  document.querySelectorAll('a[href*="wa.me/"]').forEach(link => {
+    link.href = `https://wa.me/${RT_CONFIG.kontak.noWaKetua}`;
+  });
 }
 
 // B. RENDER ORGANIGRAM (PENGURUS)
