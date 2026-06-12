@@ -621,3 +621,5 @@ function setupScrollAnimation() {
     revealObserver.observe(reveal);
   });
 }
+
+// Akhir dari berkas script.js - Sinkronisasi Email Vercel
