@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Resmi RT 006 Warung Cikopi</title>
+  
+  <!-- Meta SEO -->
+  <meta name="description" content="Portal informasi resmi warga RT 006 Kampung Warung Cikopi, Desa Salebu, Kec. Mangunreja, Tasikmalaya. Dapatkan informasi pengumuman, program, kegiatan, dan kontak pengurus secara transparan.">
+  <meta name="keywords" content="RT 006, Warung Cikopi, Desa Salebu, Mangunreja, Tasikmalaya, Website RT, Rukun Tetangga">
+  <meta name="author" content="RT 006 Warung Cikopi">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              300: '#86efac',
+              400: '#4ade80',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+              950: '#052e16',
+            },
+            accent: {
+              gold: '#eab308',
+              'gold-dark': '#ca8a04',
+            }
+          },
+          fontSize: {
+            'xxs': '0.7rem',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+
+  <!-- ==================== NAVBAR ==================== -->
+  <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+    <nav id="navbar" class="glass-nav text-slate-800 transition-all duration-300 py-3 md:py-4 px-4 sm:px-6 lg:px-12 flex justify-between items-center">
+      <!-- Logo dan Nama RT -->
+      <a href="#beranda" class="flex items-center gap-3 group">
+        <img src="assets/img/logo-rt06.jpg" alt="Logo RT 006" class="w-10 h-10 rounded-full border-2 border-emerald-600 shadow-md group-hover:scale-105 transition-transform duration-300" onerror="this.src='https://images.unsplash.com/photo-1590490360182-c33d57733427?w=100&auto=format&fit=crop&q=80';">
+        <div class="flex flex-col">
+          <span class="font-extrabold text-base tracking-tight leading-none text-emerald-800 group-hover:text-emerald-600 transition-colors duration-300">RT 006</span>
+          <span class="text-xs text-slate-500 font-semibold tracking-wider uppercase">Warung Cikopi</span>
+        </div>
+      </a>
+
+      <!-- Menu Utama (Desktop) -->
+      <div class="hidden lg:flex items-center gap-6 font-semibold text-sm">
+        <a href="#beranda" class="hover:text-emerald-600 transition-colors duration-200">Beranda</a>
+        <a href="#profil" class="hover:text-emerald-600 transition-colors duration-200">Profil RT</a>
+        <a href="#pengurus" class="hover:text-emerald-600 transition-colors duration-200">Pengurus</a>
+        <a href="#pengumuman" class="hover:text-emerald-600 transition-colors duration-200">Pengumuman</a>
+        <a href="#kegiatan" class="hover:text-emerald-600 transition-colors duration-200">Kegiatan & Program</a>
+        <a href="#galeri" class="hover:text-emerald-600 transition-colors duration-200">Galeri</a>
+        <a href="#kontak" class="hover:text-emerald-600 transition-colors duration-200">Kontak</a>
+      </div>
+
+      <!-- Tombol Hubungi Pengurus (Desktop) -->
+      <div class="hidden lg:block">
+        <a id="wa-btn-header" href="https://wa.me/6282212345678" target="_blank" class="btn-gold px-5 py-2.5 rounded-full font-bold text-xs flex items-center gap-2">
+          <i class="fab fa-whatsapp text-lg"></i> HUBUNGI PENGURUS
+        </a>
+      </div>
+
+      <!-- Tombol Hamburger (Mobile) -->
+      <button id="menu-toggle" class="lg:hidden text-2xl focus:outline-none p-1 text-slate-800" aria-label="Toggle Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-white/95 backdrop-blur-lg border-b border-slate-100 shadow-xl transition-all duration-300">
+      <div class="flex flex-col p-5 gap-4 font-semibold text-slate-700">
+        <a href="#beranda" class="hover:text-emerald-600 border-b border-slate-50 pb-2">Beranda</a>
+        <a href="#profil" class="hover:text-emerald-600 border-b border-slate-50 pb-2">Profil RT</a>
+        <a href="#pengurus" class="hover:text-emerald-600 border-b border-slate-50 pb-2">Pengurus</a>
+        <a href="#pengumuman" class="hover:text-emerald-600 border-b border-slate-50 pb-2">Pengumuman</a>
+        <a href="#kegiatan" class="hover:text-emerald-600 border-b border-slate-50 pb-2">Kegiatan & Program</a>
+        <a href="#galeri" class="hover:text-emerald-600 border-b border-slate-50 pb-2">Galeri</a>
+        <a href="#kontak" class="hover:text-emerald-600 pb-2">Kontak</a>
+        <a href="https://wa.me/6282212345678" target="_blank" class="bg-emerald-600 text-white py-3 rounded-xl text-center flex items-center justify-center gap-2 shadow-md">
+          <i class="fab fa-whatsapp"></i> Hubungi Pengurus
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow pt-16 md:pt-20">
+
+    <!-- ==================== SECTION 1: BERANDA (HERO) ==================== -->
+    <section id="beranda" class="relative overflow-hidden bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-950 text-white min-h-[90vh] flex items-center py-16 md:py-24">
+      <!-- Background Pattern (Dekoratif) -->
+      <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+      
+      <div class="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Kolom Kiri: Judul dan Deskripsi -->
+        <div class="lg:col-span-7 flex flex-col gap-6 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-3.5 py-1.5 rounded-full text-xs font-bold text-emerald-300 mx-auto lg:mx-0 w-fit tracking-wide">
+            <i class="fas fa-bullhorn text-emerald-400"></i> INFORMASI RESMI LINGKUNGAN RT
+          </div>
+          
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+            Website Resmi <br class="hidden sm:inline">
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-300">
+              RT 006 Warung Cikopi
+            </span>
+          </h1>
+          
+          <p class="text-emerald-100 text-sm sm:text-base md:text-lg max-w-2xl font-medium leading-relaxed mx-auto lg:mx-0">
+            Pusat informasi warga, pengumuman, kegiatan, dan program lingkungan RT 006 Warung Cikopi.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-2">
+            <a href="#pengumuman" class="btn-gold px-8 py-3.5 rounded-full font-bold text-sm flex items-center justify-center gap-2">
+              <i class="fas fa-bullhorn"></i> LIHAT PENGUMUMAN
+            </a>
+            <a href="#kontak" class="btn-outline-green hover:bg-emerald-600 hover:text-white px-8 py-3.5 rounded-full font-bold text-sm flex items-center justify-center gap-2">
+              <i class="fas fa-phone-alt"></i> HUBUNGI PENGURUS
+            </a>
+          </div>
+        </div>
+        
+        <!-- Kolom Kanan: Logo / Banner & Info Cepat -->
+        <div class="lg:col-span-5 flex flex-col gap-6 w-full max-w-md mx-auto lg:max-w-none">
+          <!-- Logo Display Card -->
+          <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-3xl p-6 shadow-2xl flex items-center gap-5">
+            <img src="assets/img/logo-rt06.jpg" alt="Logo RT 006" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-amber-400 shadow-lg" onerror="this.src='https://images.unsplash.com/photo-1590490360182-c33d57733427?w=200&auto=format&fit=crop&q=80';">
+            <div>
+              <h3 class="font-bold text-lg text-white">RT 006 Warung Cikopi</h3>
+              <p class="text-xs text-emerald-200 mt-1 leading-relaxed">Kp. Warung Cikopi, Ds. Salebu, Kec. Mangunreja, Kab. Tasikmalaya</p>
+            </div>
+          </div>
+
+          <!-- Highlight Program Utama -->
+          <div class="bg-gradient-to-r from-amber-500 to-yellow-500 rounded-3xl p-6 shadow-lg text-emerald-950 flex gap-4 items-start">
+            <div class="bg-white/20 p-3 rounded-2xl text-xl mt-1 text-emerald-900">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <div>
+              <span class="text-xs font-extrabold uppercase tracking-wider text-emerald-900/80">Program Utama Lingkungan</span>
+              <h4 class="font-extrabold text-base sm:text-lg mt-1" id="stat-program-hero">Pengadaan KWh Listrik untuk Pos Kamling</h4>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== SAMBUTAN KETUA RT ==================== -->
+    <section class="py-12 bg-white border-b border-slate-100">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-12">
+        <div class="max-w-4xl mx-auto flex flex-col md:flex-row gap-8 items-center">
+          <!-- Photo Ketua RT / Placeholder -->
+          <div class="relative flex-shrink-0">
+            <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-4 border-emerald-100 shadow-lg">
+              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop&q=80" alt="Bapak Kusdiana - Ketua RT 006" class="w-full h-full object-cover">
+            </div>
+            <div class="absolute -bottom-2 -right-2 bg-emerald-600 text-white rounded-full p-2.5 text-xs shadow-md">
+              <i class="fas fa-quote-left"></i>
+            </div>
+          </div>
+          <!-- Text Sambutan -->
+          <div class="flex-grow text-center md:text-left flex flex-col gap-3">
+            <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Sambutan Ketua RT</span>
+            <h3 class="text-xl sm:text-2xl font-bold text-slate-800">
+              Bapak Kusdiana
+            </h3>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed italic">
+              "Assalamualaikum Wr. Wb. Selamat datang di portal informasi resmi warga RT 006 Warung Cikopi. Media ini hadir untuk mempererat komunikasi, mempercepat penyebaran informasi pengumuman, dan transparansi kegiatan pembangunan di lingkungan kita. Mari bersama wujudkan lingkungan aman, nyaman, dan rukun melalui gotong royong."
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== INFO CEPAT RT ==================== -->
+    <section class="py-12 bg-slate-50 border-b border-slate-100">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-12">
+        <div class="text-center mb-8">
+          <h3 class="text-lg font-bold text-slate-800 tracking-wide uppercase">Info Cepat RT 006</h3>
+          <p class="text-xs text-slate-500 mt-1">Gambaran umum kondisi lingkungan kami saat ini</p>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-5xl mx-auto">
+          <!-- Stat 1: KK -->
+          <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 text-center flex flex-col justify-center items-center">
+            <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-lg mb-3">
+              <i class="fas fa-users"></i>
+            </div>
+            <span class="text-slate-400 text-xs font-semibold">Jumlah Kepala Keluarga</span>
+            <span class="text-lg sm:text-2xl font-extrabold text-slate-800 mt-1" id="stat-kk-hero">75 KK</span>
+          </div>
+          <!-- Stat 2: Warga -->
+          <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 text-center flex flex-col justify-center items-center">
+            <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-lg mb-3">
+              <i class="fas fa-user-friends"></i>
+            </div>
+            <span class="text-slate-400 text-xs font-semibold">Jumlah Warga</span>
+            <span class="text-lg sm:text-2xl font-extrabold text-slate-800 mt-1" id="stat-warga-hero">245 Jiwa</span>
+          </div>
+          <!-- Stat 3: Pos Kamling -->
+          <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 text-center flex flex-col justify-center items-center">
+            <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-lg mb-3">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <span class="text-slate-400 text-xs font-semibold">Jumlah Pos Kamling</span>
+            <span class="text-lg sm:text-2xl font-extrabold text-slate-800 mt-1" id="stat-pos-hero">1 Unit</span>
+          </div>
+          <!-- Stat 4: Status Program -->
+          <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 text-center flex flex-col justify-center items-center">
+            <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-lg mb-3">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <span class="text-slate-400 text-xs font-semibold">Status Program</span>
+            <span class="text-lg sm:text-2xl font-extrabold text-emerald-600 mt-1" id="stat-status-hero">Aktif</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==================== SECTION 2: PROFIL RT ==================== -->
+    <section id="profil" class="py-16 md:py-24 bg-white border-b border-slate-100">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-12">
+        <div class="text-center max-w-2xl mx-auto mb-16 flex flex-col gap-3">
+          <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Mengenal Lebih Dekat</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800">Tentang RT 006 Warung Cikopi</h2>
+          <div class="w-16 h-1 bg-emerald-600 mx-auto rounded-full mt-2"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start max-w-6xl mx-auto">
+          <!-- Kiri: Gambaran & Visi Misi -->
+          <div class="lg:col-span-7 flex flex-col gap-8">
+            <div class="flex flex-col gap-4">
+              <h3 class="text-xl sm:text-2xl font-bold text-slate-800">Identitas dan Wilayah RT 006</h3>
+              <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                RT 006 Warung Cikopi merupakan salah satu wilayah Rukun Tetangga yang berada di bawah naungan administrasi Desa Salebu, Kecamatan Mangunreja, Kabupaten Tasikmalaya. Lingkungan kami berkomitmen menjaga keamanan dan rasa kekeluargaan yang erat demi kebahagiaan bersama.
+              </p>
+            </div>
+            
+            <!-- Visi -->
+            <div class="bg-emerald-50/50 border-l-4 border-emerald-600 p-6 rounded-r-2xl">
+              <h4 class="font-extrabold text-emerald-800 text-lg flex items-center gap-2">
+                <i class="fas fa-eye text-emerald-600"></i> VISI RT 006
+              </h4>
+              <p class="text-slate-700 text-sm sm:text-base mt-2 font-medium italic leading-relaxed">
+                “Mewujudkan lingkungan RT 006 yang aman, nyaman, bersih, rukun, dan aktif dalam kegiatan sosial kemasyarakatan.”
+              </p>
+            </div>
+
+            <!-- Misi -->
+            <div class="flex flex-col gap-4">
+              <h4 class="font-bold text-slate-800 text-lg flex items-center gap-2">
+                <i class="fas fa-tasks text-emerald-600"></i> MISI RT 006
+              </h4>
+              <ul class="grid grid-cols-1 gap-3 text-slate-600 text-sm">
+                <li class="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                  <span class="bg-emerald-600 text-white rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0 text-xxs font-bold mt-0.5">1</span>
+                  <span>Meningkatkan keamanan lingkungan melalui ronda malam secara bergilir dan koordinasi intensif antar warga.</span>
+                </li>
+                <li class="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                  <span class="bg-emerald-600 text-white rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0 text-xxs font-bold mt-0.5">2</span>
+                  <span>Menjaga kebersihan dan kelestarian lingkungan melalui kegiatan kerja bakti berkala.</span>
+                </li>
+                <li class="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                  <span class="bg-emerald-600 text-white rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0 text-xxs font-bold mt-0.5">3</span>
+                  <span>Meningkatkan komunikasi dan transparansi administrasi antara pengurus RT dan warga.</span>
+                </li>
+                <li class="flex items-start gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                  <span class="bg-emerald-600 text-white rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0 text-xxs font-bold mt-0.5">4</span>
+                  <span>Mendukung penuh program lingkungan pemerintah desa yang bermanfaat bagi masyarakat setempat.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Kanan: Detail Identitas Wilayah & Stat Lengkap -->
+          <div class="lg:col-span-5 flex flex-col gap-6">
+            <!-- Card Data Wilayah -->
+            <div class="bg-white rounded-3xl shadow-lg border border-slate-100 overflow-hidden">
+              <div class="bg-emerald-800 text-white p-6">
+                <h4 class="font-extrabold text-lg flex items-center gap-2 text-white">
+                  <i class="fas fa-map-marked-alt text-amber-400"></i> Identitas Wilayah
+                </h4>
+                <p class="text-xs text-emerald-200 mt-1">Detail administratif rukun tetangga</p>
+              </div>
+              <div class="divide-y divide-slate-100 text-sm">
+                <div class="flex justify-between p-4 bg-slate-50/50">
+                  <span class="font-bold text-slate-500">Rukun Tetangga</span>
+                  <span class="font-extrabold text-slate-800">RT 006</span>
+                </div>
+                <div class="flex justify-between p-4">
+                  <span class="font-bold text-slate-500">Kampung</span>
+                  <span class="font-semibold text-slate-800">Warung Cikopi</span>
+                </div>
+                <div class="flex justify-between p-4 bg-slate-50/50">
+                  <span class="font-bold text-slate-500">Desa</span>
+                  <span class="font-semibold text-slate-800">Salebu</span>
+                </div>
+                <div class="flex justify-between p-4">
+                  <span class="font-bold text-slate-500">Kecamatan</span>
+                  <span class="font-semibold text-slate-800">Mangunreja</span>
+                </div>
+                <div class="flex justify-between p-4 bg-slate-50/50">
+                  <span class="font-bold text-slate-500">Kabupaten</span>
+                  <span class="font-semibold text-slate-800">Tasikmalaya</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Data Wilayah Penduduk -->
+            <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-3xl p-6 shadow-xl flex flex-col gap-4">
+              <h4 class="font-bold text-base border-b border-white/10 pb-3 text-white">
+                <i class="fas fa-chart-pie text-emerald-400 mr-2"></i> Data Singkat Wilayah
+              </h4>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <span class="text-xs text-slate-400 font-semibold block">Kepala Keluarga</span>
+                  <span class="text-lg sm:text-xl font-extrabold text-white mt-0.5 block" id="stat-kk-profil">75 KK</span>
+                </div>
+                <div>
+                  <span class="text-xs text-slate-400 font-semibold block">Jumlah Warga</span>
+                  <span class="text-lg sm:text-xl font-extrabold text-white mt-0.5 block" id="stat-warga-profil">245 Jiwa</span>
+                </div>
+                <div>
+                  <span class="text-xs text-slate-400 font-semibold block">Jumlah Bangunan</span>
+                  <span class="text-lg sm:text-xl font-extrabold text-white mt-0.5 block" id="stat-rumah-profil">68 Rumah</span>
+                </div>
+                <div>
+                  <span class="text-xs text-slate-400 font-semibold block">Fasilitas Utama</span>
+                  <span class="text-sm sm:text-base font-extrabold text-emerald-300 mt-0.5 block" id="stat-pos-profil">Pos Kamling</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==================== SECTION 3: PENGURUS (ORGANIGRAM) ==================== -->
+    <section id="pengurus" class="py-16 md:py-24 bg-slate-50 border-b border-slate-100">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-12">
+        <div class="text-center max-w-2xl mx-auto mb-16 flex flex-col gap-3">
+          <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Struktur Organisasi</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800">Organigram Pengurus RT</h2>
+          <div class="w-16 h-1 bg-emerald-600 mx-auto rounded-full mt-2"></div>
+        </div>
+
+        <!-- Desktop & Mobile Responsive Organigram Tree -->
+        <!-- container overflow-x agar tidak rusak di layar sangat kecil, scrollable ke samping dengan indikator visual -->
+        <div class="w-full overflow-x-auto pb-8 mb-12">
+          <div class="min-w-[760px] lg:min-w-0 flex flex-col items-center p-4">
+            
+            <!-- 1. PENASIHAT -->
+            <div class="flex flex-col items-center mb-6">
+              <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-56 relative z-10">
+                <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-base font-bold">
+                  <i class="fas fa-user-tie"></i>
+                </div>
+                <h4 class="font-extrabold text-slate-800 text-base" id="nama-penasihat">H. Maimun</h4>
+                <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Penasihat</p>
+              </div>
+              <!-- Line Down -->
+              <div class="w-0.5 h-6 bg-emerald-400"></div>
+            </div>
+
+            <!-- 2. KETUA RT -->
+            <div class="flex flex-col items-center mb-6">
+              <div class="organigram-card bg-gradient-to-br from-emerald-700 to-emerald-900 text-white rounded-2xl shadow-xl p-5 text-center w-60 relative z-10 ring-4 ring-emerald-100">
+                <div class="w-12 h-12 bg-white text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-xl font-bold">
+                  <i class="fas fa-user-shield"></i>
+                </div>
+                <h4 class="font-extrabold text-white text-lg" id="nama-ketua">Kusdiana</h4>
+                <p class="text-xs font-bold text-amber-300 uppercase tracking-widest mt-0.5">Ketua RT</p>
+              </div>
+              <!-- Line Down -->
+              <div class="w-0.5 h-6 bg-emerald-400"></div>
+            </div>
+
+            <!-- 3. WAKIL KETUA -->
+            <div class="flex flex-col items-center w-full mb-6">
+              <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-56 relative z-10">
+                <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-base font-bold">
+                  <i class="fas fa-user-friends"></i>
+                </div>
+                <h4 class="font-extrabold text-slate-800 text-base" id="nama-wakilKetua">Asep Sunandar</h4>
+                <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Wakil Ketua</p>
+              </div>
+              <!-- Line Down and Horizontal Branch on Desktop -->
+              <div class="w-0.5 h-6 bg-emerald-400"></div>
+              
+              <!-- Desktop Horizontal Line -->
+              <div class="hidden md:block w-full max-w-4xl relative h-0.5 bg-emerald-400">
+                <!-- Drop line to Sekretaris (Left) -->
+                <div class="absolute top-0 left-[12%] w-0.5 h-6 bg-emerald-400"></div>
+                <!-- Drop line to Bendahara (Middle) -->
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-6 bg-emerald-400"></div>
+                <!-- Drop line to Seksi Bidang (Right) -->
+                <div class="absolute top-0 right-[12%] w-0.5 h-6 bg-emerald-400"></div>
+              </div>
+            </div>
+
+            <!-- 4. SEKRETARIS, BENDAHARA, BIDANG -->
+            <div class="flex flex-row justify-between w-full max-w-5xl items-start gap-4">
+              
+              <!-- SEKRETARIS -->
+              <div class="flex flex-col items-center w-1/3">
+                <!-- Mobile-only vertical line -->
+                <div class="md:hidden w-0.5 h-6 bg-emerald-400"></div>
+                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-52 relative z-10">
+                  <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-base font-bold">
+                    <i class="fas fa-file-signature"></i>
+                  </div>
+                  <h4 class="font-extrabold text-slate-800 text-sm" id="nama-sekretaris">Budi Santoso</h4>
+                  <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Sekretaris</p>
+                </div>
+              </div>
+
+              <!-- BENDAHARA -->
+              <div class="flex flex-col items-center w-1/3">
+                <!-- Mobile-only vertical line -->
+                <div class="md:hidden w-0.5 h-6 bg-emerald-400"></div>
+                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-52 relative z-10">
+                  <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-base font-bold">
+                    <i class="fas fa-wallet"></i>
+                  </div>
+                  <h4 class="font-extrabold text-slate-800 text-sm" id="nama-bendahara">Siti Rahma</h4>
+                  <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Bendahara</p>
+                </div>
+              </div>
+
+              <!-- BIDANG / DIVISI -->
+              <div class="flex flex-col items-center w-1/3">
+                <!-- Mobile-only vertical line -->
+                <div class="md:hidden w-0.5 h-6 bg-emerald-400"></div>
+                <div class="organigram-card bg-emerald-50 border-2 border-dashed border-emerald-400 rounded-2xl p-4 text-center w-52 relative z-10">
+                  <div class="w-10 h-10 bg-emerald-200 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-base font-bold">
+                    <i class="fas fa-users-cog"></i>
+                  </div>
+                  <h4 class="font-extrabold text-emerald-900 text-sm">Seksi Bidang</h4>
+                  <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Divisi Kerja</p>
+                </div>
+                <!-- Line down from Bidang to subdivisions -->
+                <div class="w-0.5 h-6 bg-emerald-400"></div>
+                
+                <!-- Desktop Horizontal Line for subdivision branch -->
+                <div class="hidden md:block w-72 relative h-0.5 bg-emerald-400">
+                  <!-- Left: Keamanan -->
+                  <div class="absolute top-0 left-0 w-0.5 h-6 bg-emerald-400"></div>
+                  <!-- Right: Keagamaan -->
+                  <div class="absolute top-0 right-0 w-0.5 h-6 bg-emerald-400"></div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- 5. SUBDIVISI: KEAMANAN & KEAGAMAAN (SEJAJAR DI BAWAH SEKSI BIDANG) -->
+            <div class="flex flex-row justify-end w-full max-w-5xl gap-4 mt-6 md:mt-0">
+              <!-- Keamanan -->
+              <div class="flex flex-col items-center w-1/3 md:w-auto md:mr-10">
+                <!-- Mobile-only vertical line -->
+                <div class="md:hidden w-0.5 h-6 bg-emerald-400"></div>
+                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-48 relative z-10">
+                  <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-base font-bold">
+                    <i class="fas fa-shield-alt"></i>
+                  </div>
+                  <h4 class="font-extrabold text-slate-800 text-xs" id="nama-keamanan">Dadang</h4>
+                  <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Keamanan</p>
+                </div>
+              </div>
+
+              <!-- Keagamaan -->
+              <div class="flex flex-col items-center w-1/3 md:w-auto">
+                <!-- Mobile-only vertical line -->
+                <div class="md:hidden w-0.5 h-6 bg-emerald-400"></div>
+                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-48 relative z-10">
+                  <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-base font-bold">
+                    <i class="fas fa-mosque"></i>
+                  </div>
+                  <h4 class="font-extrabold text-slate-800 text-xs" id="nama-keagamaan">Ustadz Yayan</h4>
+                  <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Keagamaan</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Rincian Tugas Pengurus -->
+        <div class="max-w-4xl mx-auto bg-white rounded-3xl p-6 sm:p-8 shadow-md border border-slate-100">
+          <h3 class="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
+            <i class="fas fa-info-circle text-emerald-600"></i> Tugas Pokok & Fungsi Pengurus
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+            <!-- Penasihat -->
+            <div class="flex gap-3 items-start">
+              <div class="bg-emerald-50 text-emerald-700 rounded-xl p-2.5 mt-0.5">
+                <i class="fas fa-user-tie"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-800">Penasihat</h4>
+                <p class="text-slate-500 text-xs mt-1">Memberikan arahan, saran, dan pertimbangan kepada pengurus RT untuk kebaikan lingkungan.</p>
+              </div>
+            </div>
+            <!-- Ketua RT -->
+            <div class="flex gap-3 items-start">
+              <div class="bg-emerald-50 text-emerald-700 rounded-xl p-2.5 mt-0.5">
+                <i class="fas fa-user-shield"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-800">Ketua RT</h4>
+                <p class="text-slate-500 text-xs mt-1">Memimpin organisasi, mengoordinasikan kegiatan, menyalurkan aspirasi warga, dan melayani urusan administrasi.</p>
+              </div>
+            </div>
+            <!-- Wakil Ketua -->
+            <div class="flex gap-3 items-start">
+              <div class="bg-emerald-50 text-emerald-700 rounded-xl p-2.5 mt-0.5">
+                <i class="fas fa-user-friends"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-800">Wakil Ketua</h4>
+                <p class="text-slate-500 text-xs mt-1">Membantu Ketua RT dalam menjalankan roda pengurusan dan mewakili tugas ketua ketika berhalangan hadir.</p>
+              </div>
+            </div>
+            <!-- Sekretaris -->
+            <div class="flex gap-3 items-start">
+              <div class="bg-emerald-50 text-emerald-700 rounded-xl p-2.5 mt-0.5">
+                <i class="fas fa-file-signature"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-800">Sekretaris</h4>
+                <p class="text-slate-500 text-xs mt-1">Mengelola persuratan, notulen rapat, pencatatan data kependudukan warga, dan arsip administrasi.</p>
+              </div>
+            </div>
+            <!-- Bendahara -->
+            <div class="flex gap-3 items-start">
+              <div class="bg-emerald-50 text-emerald-700 rounded-xl p-2.5 mt-0.5">
+                <i class="fas fa-wallet"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-800">Bendahara</h4>
+                <p class="text-slate-500 text-xs mt-1">Mengelola pemasukan, pengeluaran kas pembangunan, menyusun laporan keuangan kegiatan warga secara berkala.</p>
+              </div>
+            </div>
+            <!-- Keamanan -->
+            <div class="flex gap-3 items-start">
+              <div class="bg-emerald-50 text-emerald-700 rounded-xl p-2.5 mt-0.5">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-800">Keamanan</h4>
+                <p class="text-slate-500 text-xs mt-1">Mengoordinasikan ronda malam bergilir, memantau keamanan wilayah, dan koordinasi dengan pos keamanan desa.</p>
+              </div>
+            </div>
+            <!-- Keagamaan -->
+            <div class="flex gap-3 items-start md:col-span-2">
+              <div class="bg-emerald-50 text-emerald-700 rounded-xl p-2.5 mt-0.5">
+                <i class="fas fa-mosque"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-800">Keagamaan</h4>
+                <p class="text-slate-500 text-xs mt-1">Mengoordinasikan kegiatan ibadah, hari besar keagamaan, kepedulian sosial, dan kerukunan umat beragama di lingkungan RT.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==================== SECTION 4: PENGUMUMAN ==================== -->
+    <section id="pengumuman" class="py-16 md:py-24 bg-white border-b border-slate-100">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-12">
+        <div class="text-center max-w-2xl mx-auto mb-16 flex flex-col gap-3">
+          <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Informasi Warga</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800">Pengumuman Terbaru</h2>
+          <div class="w-16 h-1 bg-emerald-600 mx-auto rounded-full mt-2"></div>
+        </div>
+
+        <!-- Grid Pengumuman (Akan Diisi Dinamis oleh script.js) -->
+        <div id="pengumuman-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          <!-- Placeholder saat loading -->
+          <div class="text-center py-8 text-slate-400 col-span-full">Memuat pengumuman...</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==================== SECTION 5: KEGIATAN & PROGRAM ==================== -->
+    <section id="kegiatan" class="py-16 md:py-24 bg-slate-50 border-b border-slate-100">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-12">
+        <div class="text-center max-w-2xl mx-auto mb-12 flex flex-col gap-3">
+          <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Aktivitas Lingkungan</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800">Kegiatan & Program Kerja</h2>
+          <div class="w-16 h-1 bg-emerald-600 mx-auto rounded-full mt-2"></div>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap justify-center gap-3 mb-10 max-w-3xl mx-auto">
+          <button class="filter-btn active px-5 py-2.5 rounded-full text-xs font-bold border border-slate-200 shadow-sm" data-filter="all">
+            Semua Kategori
+          </button>
+          <button class="filter-btn bg-white text-slate-700 hover:border-emerald-600 hover:text-emerald-600 px-5 py-2.5 rounded-full text-xs font-bold border border-slate-200 shadow-sm" data-filter="rutin">
+            Kegiatan Rutin
+          </button>
+          <button class="filter-btn bg-white text-slate-700 hover:border-emerald-600 hover:text-emerald-600 px-5 py-2.5 rounded-full text-xs font-bold border border-slate-200 shadow-sm" data-filter="program">
+            Program Lingkungan
+          </button>
+          <button class="filter-btn bg-white text-slate-700 hover:border-emerald-600 hover:text-emerald-600 px-5 py-2.5 rounded-full text-xs font-bold border border-slate-200 shadow-sm" data-filter="koordinasi">
+            Kegiatan Koordinasi
+          </button>
+        </div>
+
+        <!-- Grid Kegiatan (Akan Diisi Dinamis oleh script.js) -->
+        <div id="kegiatan-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          <!-- Placeholder saat loading -->
+          <div class="text-center py-8 text-slate-400 col-span-full">Memuat kegiatan...</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==================== SECTION 6: GALERI ==================== -->
+    <section id="galeri" class="py-16 md:py-24 bg-white border-b border-slate-100">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-12">
+        <div class="text-center max-w-2xl mx-auto mb-16 flex flex-col gap-3">
+          <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Dokumentasi Warga</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800">Galeri Foto RT 006</h2>
+          <div class="w-16 h-1 bg-emerald-600 mx-auto rounded-full mt-2"></div>
+        </div>
+
+        <!-- Grid Galeri (Akan Diisi Dinamis oleh script.js) -->
+        <div id="galeri-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <!-- Placeholder saat loading -->
+          <div class="text-center py-8 text-slate-400 col-span-full">Memuat dokumentasi galeri...</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==================== SECTION 7: KONTAK ==================== -->
+    <section id="kontak" class="py-16 md:py-24 bg-slate-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-12">
+        <div class="text-center max-w-2xl mx-auto mb-16 flex flex-col gap-3">
+          <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Layanan Informasi</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800">Kontak & Aspirasi Warga</h2>
+          <div class="w-16 h-1 bg-emerald-600 mx-auto rounded-full mt-2"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-5xl mx-auto items-stretch">
+          <!-- Kiri: Informasi Kontak RT -->
+          <div class="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 shadow-lg border border-slate-100 flex flex-col justify-between reveal">
+            <div class="flex flex-col gap-6">
+              <h3 class="text-xl font-bold text-slate-800">Hubungi Kami</h3>
+              <p class="text-slate-500 text-sm leading-relaxed">
+                Silakan hubungi pengurus RT 006 melalui WhatsApp atau kirim laporan dan usulan langsung melalui formulir di samping.
+              </p>
+
+              <!-- Informasi Detail -->
+              <div class="flex flex-col gap-5 text-sm">
+                <!-- Alamat -->
+                <div class="flex gap-4 items-start">
+                  <div class="w-9 h-9 bg-emerald-50 text-emerald-700 rounded-xl flex items-center justify-center flex-shrink-0 text-base">
+                    <i class="fas fa-map-marker-alt"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-slate-800">Alamat Wilayah</h4>
+                    <p class="text-slate-500 text-xs mt-1" id="kontak-alamat">Kp. Warung Cikopi, Ds. Salebu, Kec. Mangunreja, Kab. Tasikmalaya</p>
+                  </div>
+                </div>
+                <!-- Ketua RT -->
+                <div class="flex gap-4 items-start">
+                  <div class="w-9 h-9 bg-emerald-50 text-emerald-700 rounded-xl flex items-center justify-center flex-shrink-0 text-base">
+                    <i class="fas fa-user-shield"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-slate-800">Ketua RT</h4>
+                    <p class="text-slate-500 text-xs mt-1" id="kontak-ketua">Kusdiana</p>
+                  </div>
+                </div>
+                <!-- Sekretaris -->
+                <div class="flex gap-4 items-start">
+                  <div class="w-9 h-9 bg-emerald-50 text-emerald-700 rounded-xl flex items-center justify-center flex-shrink-0 text-base">
+                    <i class="fas fa-file-signature"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-slate-800">Sekretaris</h4>
+                    <p class="text-slate-500 text-xs mt-1" id="kontak-sekretaris">Budi Santoso</p>
+                  </div>
+                </div>
+                <!-- Bendahara -->
+                <div class="flex gap-4 items-start">
+                  <div class="w-9 h-9 bg-emerald-50 text-emerald-700 rounded-xl flex items-center justify-center flex-shrink-0 text-base">
+                    <i class="fas fa-wallet"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-slate-800">Bendahara</h4>
+                    <p class="text-slate-500 text-xs mt-1" id="kontak-bendahara">Siti Rahma</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tombol WA -->
+            <div class="pt-6 border-t border-slate-100 mt-6">
+              <a href="https://wa.me/6282212345678" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-6 rounded-2xl flex items-center justify-center gap-3 transition-colors shadow-md">
+                <i class="fab fa-whatsapp text-xl"></i> Chat WhatsApp Ketua RT
+              </a>
+            </div>
+          </div>
+
+          <!-- Kanan: Form Aspirasi Warga -->
+          <div class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 shadow-lg border border-slate-100 reveal">
+            <h3 class="text-xl font-bold text-slate-800 mb-2">Formulir Pesan & Aspirasi</h3>
+            <p class="text-slate-500 text-sm mb-6">Kirimkan masukan atau laporan Anda, sistem akan meneruskannya ke WhatsApp Ketua RT.</p>
+
+            <form id="warga-contact-form" class="flex flex-col gap-5">
+              <!-- Nama -->
+              <div class="flex flex-col gap-1.5">
+                <label for="form-nama" class="text-xs font-bold text-slate-700 uppercase">Nama Lengkap</label>
+                <div class="relative">
+                  <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
+                    <i class="fas fa-user"></i>
+                  </span>
+                  <input type="text" id="form-nama" required placeholder="Masukkan nama Anda" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm">
+                </div>
+              </div>
+
+              <!-- No WA -->
+              <div class="flex flex-col gap-1.5">
+                <label for="form-wa" class="text-xs font-bold text-slate-700 uppercase">Nomor WhatsApp Anda</label>
+                <div class="relative">
+                  <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
+                    <i class="fab fa-whatsapp"></i>
+                  </span>
+                  <input type="tel" id="form-wa" required placeholder="Contoh: 0812xxxxxxxx" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm">
+                </div>
+              </div>
+
+              <!-- Pesan -->
+              <div class="flex flex-col gap-1.5">
+                <label for="form-pesan" class="text-xs font-bold text-slate-700 uppercase">Isi Laporan / Aspirasi</label>
+                <textarea id="form-pesan" required rows="4" placeholder="Tuliskan laporan, keluhan, saran, atau pertanyaan Anda di sini..." class="w-full p-4 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm resize-none"></textarea>
+              </div>
+
+              <!-- Submit -->
+              <button type="submit" class="w-full btn-gold py-3.5 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg">
+                <i class="fas fa-paper-plane"></i> KIRIM PESAN KE WHATSAPP
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-gradient-to-br from-emerald-950 to-emerald-900 text-slate-200 border-t border-emerald-800">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-12 py-12 grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+      
+      <!-- Footer Info -->
+      <div class="md:col-span-5 flex flex-col gap-4">
+        <a href="#beranda" class="flex items-center gap-3 w-fit">
+          <img src="assets/img/logo-rt06.jpg" alt="Logo RT 006" class="w-12 h-12 rounded-full border-2 border-amber-400" onerror="this.src='https://images.unsplash.com/photo-1590490360182-c33d57733427?w=100&auto=format&fit=crop&q=80';">
+          <div class="flex flex-col">
+            <span class="font-extrabold text-lg tracking-tight leading-none text-white">RT 006 Warung Cikopi</span>
+            <span class="text-xxs text-emerald-300 font-bold uppercase tracking-wider">Ds. Salebu, Tasikmalaya</span>
+          </div>
+        </a>
+        <p class="text-xs text-emerald-100/70 max-w-sm leading-relaxed">
+          Portal informasi resmi warga RT 006 Kampung Warung Cikopi. Wadah komunikasi digital, layanan informasi pengumuman, program pembangunan, dan gotong royong warga.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="md:col-span-3 flex flex-col gap-4">
+        <h4 class="font-bold text-white text-sm tracking-wider uppercase">Menu Utama</h4>
+        <div class="grid grid-cols-2 gap-2 text-xs text-emerald-100/70">
+          <a href="#beranda" class="hover:text-amber-300 transition-colors">Beranda</a>
+          <a href="#profil" class="hover:text-amber-300 transition-colors">Profil RT</a>
+          <a href="#pengurus" class="hover:text-amber-300 transition-colors">Pengurus</a>
+          <a href="#pengumuman" class="hover:text-amber-300 transition-colors">Pengumuman</a>
+          <a href="#kegiatan" class="hover:text-amber-300 transition-colors">Kegiatan & Program</a>
+          <a href="#galeri" class="hover:text-amber-300 transition-colors">Galeri</a>
+          <a href="#kontak" class="hover:text-amber-300 transition-colors">Kontak</a>
+        </div>
+      </div>
+
+      <!-- Legal Info / Address -->
+      <div class="md:col-span-4 flex flex-col gap-4 text-xs">
+        <h4 class="font-bold text-white text-sm tracking-wider uppercase">Lokasi RT 006</h4>
+        <div class="flex gap-3 items-start text-emerald-100/70 leading-relaxed">
+          <i class="fas fa-map-marker-alt text-amber-400 text-lg mt-0.5"></i>
+          <p>
+            RT 006 Warung Cikopi, Kampung Warung Cikopi, Desa Salebu, Kecamatan Mangunreja, Kabupaten Tasikmalaya, Jawa Barat, 46415.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Copyright -->
+    <div class="bg-emerald-950/80 py-6 border-t border-emerald-900/50 text-center text-xs text-emerald-100/50">
+      <div class="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p>&copy; 2026 RT 006 Warung Cikopi. Hak Cipta Dilindungi Undang-Undang.</p>
+        <p>Didesain secara profesional &bull; Modern & Responsif</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== BACK TO TOP BUTTON ==================== -->
+  <a id="back-to-top" href="#beranda" class="fixed bottom-6 right-6 z-40 bg-emerald-600 hover:bg-emerald-700 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-colors text-lg" aria-label="Back to Top">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <!-- ==================== GALLERY LIGHTBOX MODAL ==================== -->
+  <div id="lightboxModal" class="lightbox-modal flex-col justify-center items-center">
+    <!-- Close Button -->
+    <button id="lightboxClose" class="absolute top-6 right-6 text-white text-4xl hover:text-amber-400 focus:outline-none transition-colors" aria-label="Tutup">
+      <i class="fas fa-times"></i>
+    </button>
+    
+    <!-- Lightbox Container -->
+    <div class="relative flex items-center justify-between w-full max-w-4xl px-4 sm:px-12">
+      <!-- Prev Button -->
+      <button class="text-white text-3xl hover:text-amber-400 focus:outline-none transition-colors p-2" onclick="changeLightboxImage(-1)" aria-label="Sebelumnya">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      
+      <!-- Image Display -->
+      <div class="flex flex-col items-center">
+        <img id="lightboxImage" src="" alt="Gallery Image" class="lightbox-content">
+        <p id="lightboxCaption" class="text-white text-center mt-4 text-sm font-medium tracking-wide bg-slate-900/60 px-4 py-2 rounded-xl backdrop-blur-sm max-w-lg"></p>
+      </div>
+      
+      <!-- Next Button -->
+      <button class="text-white text-3xl hover:text-amber-400 focus:outline-none transition-colors p-2" onclick="changeLightboxImage(1)" aria-label="Selanjutnya">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main JS -->
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
