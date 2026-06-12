@@ -643,6 +643,25 @@
           <!-- Placeholder saat loading -->
           <div class="text-center py-8 text-slate-400 col-span-full">Memuat kegiatan...</div>
         </div>
+
+        <!-- Sub-section: Informasi Keamanan & Jadwal Ronda -->
+        <div class="mt-20 border-t border-slate-200/60 pt-16">
+          <div class="text-center max-w-2xl mx-auto mb-10 flex flex-col gap-3 reveal">
+            <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Sistem Keamanan Lingkungan (SISKAMLING)</span>
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-800">Informasi Keamanan & Jadwal Ronda</h3>
+            <div class="w-12 h-1 bg-emerald-600 mx-auto rounded-full mt-1"></div>
+            <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+              Pos Kamling RT 006 menjadi pusat kegiatan keamanan warga dan ronda malam. Jadwal ronda dibuat secara bergilir untuk menjaga lingkungan tetap aman, tertib, dan nyaman.
+            </p>
+          </div>
+
+          <!-- Grid Jadwal Ronda (Akan Diisi Dinamis oleh script.js) -->
+          <div id="ronda-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            <!-- Placeholder saat loading -->
+            <div class="text-center py-8 text-slate-400 col-span-full">Memuat jadwal ronda...</div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -777,6 +796,65 @@
             </form>
           </div>
         </div>
+
+        <!-- Baris Baru: Lokasi Google Maps -->
+        <div class="mt-16 max-w-5xl mx-auto reveal">
+          <div class="bg-white rounded-3xl shadow-lg border border-slate-100 overflow-hidden grid grid-cols-1 md:grid-cols-12 items-stretch">
+            
+            <!-- Kolom Map -->
+            <div class="md:col-span-7 w-full h-[320px] md:h-auto min-h-[300px]">
+              <iframe
+                src="https://www.google.com/maps?q=-7.3739143,108.0621371&z=18&output=embed"
+                width="100%"
+                height="100%"
+                style="border:0; min-height: 300px; height: 100%;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+            
+            <!-- Kolom Deskripsi Lokasi -->
+            <div class="md:col-span-5 p-6 sm:p-8 flex flex-col justify-between gap-6 bg-white">
+              <div class="flex flex-col gap-4">
+                <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest text-left">Peta Wilayah</span>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-800 text-left">Lokasi RT 006 Warung Cikopi</h3>
+                <div class="w-12 h-1 bg-emerald-600 rounded-full mt-1"></div>
+                
+                <div class="flex gap-3 items-start text-sm mt-4">
+                  <div class="w-8 h-8 bg-emerald-50 text-emerald-700 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-mosque"></i>
+                  </div>
+                  <div class="text-left">
+                    <h4 class="font-bold text-slate-800">Titik Tengah Wilayah</h4>
+                    <p class="text-slate-500 text-xs mt-1">Titik tengah wilayah RT 006 berada di sekitar Masjid Al-Muhajirin 06.</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-3 items-start text-sm">
+                  <div class="w-8 h-8 bg-emerald-50 text-emerald-700 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-map-marker-alt"></i>
+                  </div>
+                  <div class="text-left">
+                    <h4 class="font-bold text-slate-800">Alamat Lengkap</h4>
+                    <p class="text-slate-500 text-xs mt-1">RT 006 Warung Cikopi, Kp. Warung Cikopi, Ds. Salebu, Kec. Mangunreja, Kab. Tasikmalaya.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Button Buka di Google Maps -->
+              <div class="pt-4 border-t border-slate-100 mt-2 text-left">
+                <a href="https://www.google.com/maps/place/Masjid+Al-Muhajirin+06/@-7.3751902,108.0624973,19z/data=!4m9!1m2!2m1!1sRT+006+Warung+Cikopi+Kp.+Warung+Cikopi+Ds.+Salebu+Kec.+Mangunreja+Kab.+Tasikmalaya!3m5!1s0x2e6f5579b26e1da3:0x53301c9c8e102a00!8m2!3d-7.3739143!4d108.0621371!16s%2Fg%2F11j7xy4tmp?entry=ttu" 
+                   target="_blank" 
+                   class="btn-gold w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-sm shadow-md transition-transform duration-300 hover:-translate-y-0.5">
+                  <i class="fas fa-external-link-alt"></i> Buka di Google Maps
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </section>
 

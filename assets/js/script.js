@@ -173,6 +173,47 @@ const DATA_GALERI = [
 ];
 
 // ==========================================================================
+// 5. DATA JADWAL RONDA RT 006
+// ==========================================================================
+const DATA_RONDA = [
+  {
+    hari: "Malam Senin",
+    lokasi: "Pos Kamling RT 006",
+    petugas: ["Ahmad", "Budi", "Dedi", "Asep"]
+  },
+  {
+    hari: "Malam Selasa",
+    lokasi: "Pos Kamling RT 006",
+    petugas: ["Ujang", "Dadan", "Rudi", "Iwan"]
+  },
+  {
+    hari: "Malam Rabu",
+    lokasi: "Pos Kamling RT 006",
+    petugas: ["Agus", "Heri", "Jajang", "Yusuf"]
+  },
+  {
+    hari: "Malam Kamis",
+    lokasi: "Pos Kamling RT 006",
+    petugas: ["Dani", "Rahmat", "Yana", "Eman"]
+  },
+  {
+    hari: "Malam Jumat",
+    lokasi: "Pos Kamling RT 006",
+    petugas: ["Hendra", "Taufik", "Cecep", "Adit"]
+  },
+  {
+    hari: "Malam Sabtu",
+    lokasi: "Pos Kamling RT 006",
+    petugas: ["Rian", "Fajar", "Opik", "Diki"]
+  },
+  {
+    hari: "Malam Minggu",
+    lokasi: "Pos Kamling RT 006",
+    petugas: ["Wildan", "Sandi", "Roni", "Usep"]
+  }
+];
+
+// ==========================================================================
 // INISIALISASI & RENDER DATA KE HALAMAN
 // ==========================================================================
 
@@ -181,6 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderOrganigram();
   renderPengumuman();
   renderKegiatan("all");
+  renderJadwalRonda();
   renderGaleri();
   setupEventListeners();
   setupScrollAnimation();
@@ -330,6 +372,49 @@ function renderGaleri() {
         </div>
         <div class="absolute top-4 right-4 bg-white/20 backdrop-blur-md rounded-full p-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <i class="fas fa-search-plus"></i>
+        </div>
+      </div>
+    `;
+    container.innerHTML += cardHTML;
+  });
+}
+
+// F. RENDER JADWAL RONDA
+function renderJadwalRonda() {
+  const container = document.getElementById("ronda-grid");
+  if (!container) return;
+  
+  container.innerHTML = "";
+  
+  DATA_RONDA.forEach(item => {
+    // Generate list of names
+    const listHTML = item.petugas.map(nama => `
+      <li class="flex items-center gap-2 text-slate-600 text-xs py-1 border-b border-slate-50 last:border-b-0 ronda-card-bullet">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+        <span class="font-medium">${nama}</span>
+      </li>
+    `).join("");
+    
+    const cardHTML = `
+      <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-5 hover-card-trigger flex flex-col justify-between reveal">
+        <div>
+          <!-- Header Card: Hari & Icon -->
+          <div class="flex items-center justify-between mb-3">
+            <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-lg">
+              <i class="fas fa-moon text-amber-500"></i> ${item.hari}
+            </span>
+            <div class="text-slate-300 text-base">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+          </div>
+          <!-- Lokasi Ronda -->
+          <div class="flex items-center gap-1.5 text-xxs text-slate-400 font-bold uppercase tracking-wider mb-4">
+            <i class="fas fa-map-marker-alt text-emerald-600"></i> ${item.lokasi}
+          </div>
+          <!-- Petugas Ronda -->
+          <ul class="flex flex-col gap-0.5">
+            ${listHTML}
+          </ul>
         </div>
       </div>
     `;

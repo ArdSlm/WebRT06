@@ -179,3 +179,16 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Ronda Card Bullet Hover Animation */
+.ronda-card-bullet {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.ronda-card-bullet:hover {
+  transform: translateX(4px);
+}
+
+.ronda-card-bullet:hover span.font-medium {
+  color: var(--color-primary-main);
+}
