@@ -80,7 +80,7 @@ const DATA_PENGURUS = {
 
 // 2. DATA PENGUMUMAN RT 006
 // Anda bisa menambah, menghapus, atau mengubah item di dalam array ini.
-const DATA_PENGUMUMAN = [
+const DATA_PENGUMUMAN = JSON.parse(localStorage.getItem("DATA_PENGUMUMAN")) || [
   {
     id: 1,
     judul: "Kerja Bakti Lingkungan",
@@ -117,7 +117,7 @@ const DATA_PENGUMUMAN = [
 
 // 3. DATA KEGIATAN & PROGRAM RT 006
 // Kategori yang tersedia: "rutin" (Kegiatan Rutin), "program" (Program Lingkungan), "koordinasi" (Kegiatan Koordinasi)
-const DATA_KEGIATAN = [
+const DATA_KEGIATAN = JSON.parse(localStorage.getItem("DATA_KEGIATAN")) || [
   {
     judul: "Ronda Malam",
     kategori: "program",
@@ -138,7 +138,7 @@ const DATA_KEGIATAN = [
     judul: "Rapat Warga",
     kategori: "koordinasi",
     kategoriLabel: "Kegiatan Koordinasi",
-    status: "Menyesuaikan",
+    status: "Musyawarah",
     statusColor: "bg-blue-500",
     deskripsi: "Pertemuan musyawarah berkala antara warga dan jajaran pengurus untuk menampung masukan dan evaluasi program."
   }
@@ -147,7 +147,7 @@ const DATA_KEGIATAN = [
 // 4. DATA GALERI FOTO RT 006
 // Silakan ganti nilai 'image' dengan path gambar lokal Anda apabila sudah ada, contoh: "assets/img/foto1.jpg"
 // Saat ini menggunakan Unsplash premium mockups untuk visual terbaik pada demo pertama.
-const DATA_GALERI = [
+const DATA_GALERI = JSON.parse(localStorage.getItem("DATA_GALERI")) || [
   {
     judul: "Logo RT 006",
     image: "assets/img/logo-rt06.jpg",
@@ -183,7 +183,7 @@ const DATA_GALERI = [
 // ==========================================================================
 // 5. DATA JADWAL RONDA RT 006
 // ==========================================================================
-const DATA_RONDA = [
+const DATA_RONDA = JSON.parse(localStorage.getItem("DATA_RONDA")) || [
   {
     hari: "Malam Senin",
     lokasi: "Pos Kamling RT 006",
@@ -224,7 +224,7 @@ const DATA_RONDA = [
 // ==========================================================================
 // 6. DATA PRESTASI & PENGHARGAAN
 // ==========================================================================
-const DATA_PRESTASI = [
+const DATA_PRESTASI = JSON.parse(localStorage.getItem("DATA_PRESTASI")) || [
   {
     tahun: "2025",
     judul: "Lingkungan Terbersih RW",
@@ -765,6 +765,14 @@ function switchAdminTab(tabIndex) {
 }
 
 function setupAdminPanel() {
+  const saveLocalStorageData = () => {
+    localStorage.setItem("DATA_PENGUMUMAN", JSON.stringify(DATA_PENGUMUMAN));
+    localStorage.setItem("DATA_KEGIATAN", JSON.stringify(DATA_KEGIATAN));
+    localStorage.setItem("DATA_GALERI", JSON.stringify(DATA_GALERI));
+    localStorage.setItem("DATA_RONDA", JSON.stringify(DATA_RONDA));
+    localStorage.setItem("DATA_PRESTASI", JSON.stringify(DATA_PRESTASI));
+  };
+
   // Admin Login Form Submit
   const loginForm = document.getElementById("admin-login-form");
   if (loginForm) {
@@ -810,6 +818,7 @@ function setupAdminPanel() {
       const id = DATA_PENGUMUMAN.length ? Math.max(...DATA_PENGUMUMAN.map(item => item.id)) + 1 : 1;
       
       DATA_PENGUMUMAN.push({ id, judul, tanggal, isi, kategori, badgeColor });
+      saveLocalStorageData();
       renderPengumuman();
       formPengumuman.reset();
       alert("Pengumuman berhasil ditambahkan!");
@@ -836,6 +845,7 @@ function setupAdminPanel() {
       const kategoriLabel = kategori === "program" ? "Program Lingkungan" : "Kegiatan Koordinasi";
 
       DATA_KEGIATAN.push({ judul, kategori, kategoriLabel, status, statusColor, deskripsi });
+      saveLocalStorageData();
       renderKegiatan("all");
       formKegiatan.reset();
       
@@ -873,6 +883,7 @@ function setupAdminPanel() {
         reader.onload = function(event) {
           const imageBase64 = event.target.result;
           DATA_GALERI.push({ judul, image: imageBase64, deskripsi });
+          saveLocalStorageData();
           renderGaleri();
           formGaleri.reset();
           alert("Galeri berhasil ditambahkan!");
@@ -898,6 +909,7 @@ function setupAdminPanel() {
       const match = DATA_RONDA.find(item => item.hari === hari);
       if (match) {
         match.petugas = petugasText.split(",").map(name => name.trim()).filter(name => name.length > 0);
+        saveLocalStorageData();
         renderJadwalRonda();
         formRonda.reset();
         alert("Jadwal ronda berhasil diperbarui!");
@@ -927,6 +939,7 @@ function setupAdminPanel() {
       else if (colorSel === "Indigo") color = "bg-indigo-100 text-indigo-700";
 
       DATA_PRESTASI.push({ tahun, judul, penyelenggara, deskripsi, icon, color });
+      saveLocalStorageData();
       renderPrestasi();
       formPrestasi.reset();
       alert("Prestasi berhasil ditambahkan!");
