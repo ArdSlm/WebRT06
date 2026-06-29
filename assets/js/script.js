@@ -11,9 +11,9 @@ const RT_CONFIG = {
   
   // Statistik RT (Akan terupdate di Beranda & Profil)
   statistik: {
-    jumlahKK: 75,
-    jumlahWarga: 245,
-    jumlahRumah: 68,
+    jumlahKK: 105,
+    jumlahWarga: 315,
+    jumlahRumah: 100,
     posKamling: 1,
     statusProgram: "Aktif",
     programUtama: "Pengadaan KWh Listrik untuk Pos Kamling"
@@ -22,9 +22,9 @@ const RT_CONFIG = {
   // Kontak Pengurus untuk WhatsApp dan Tampilan
   kontak: {
     noWaKetua: "6282218222557", // Ganti dengan nomor WA Ketua RT (awali dengan kode negara 62, tanpa tanda + atau spasi)
-    namaSekretaris: "Budi Santoso",
+    namaSekretaris: "Iis Ahyantini",
     noWaSekretaris: "6285322223333", // Nomor WA Sekretaris
-    namaBendahara: "Siti Rahma",
+    namaBendahara: "Kodir",
     noWaBendahara: "6289655556666" // Nomor WA Bendahara
   }
 };
@@ -33,32 +33,48 @@ const RT_CONFIG = {
 // Note: Nama-nama di bawah ini dihubungkan langsung ke elemen organigram.
 const DATA_PENGURUS = {
   penasihat: {
-    nama: "H. Maimun",
+    nama: "Dede Sunarya",
     tugas: "memberikan arahan dan masukan kepada pengurus RT"
   },
   ketua: {
     nama: "Kusdiana",
-    tugas: "memimpin dan mengoordinasikan kegiatan warga"
+    tugas: "memimpin dan mengoordinasikan kegiatan warga serta pelayanan administrasi"
   },
   wakilKetua: {
-    nama: "Asep Sunandar",
-    tugas: "membantu tugas Ketua RT"
+    nama: "Jajat Sudrajat",
+    tugas: "membantu tugas Ketua RT dan mewakili jika berhalangan"
   },
   sekretaris: {
-    nama: "Budi Santoso",
-    tugas: "mengelola administrasi dan pencatatan kegiatan"
+    nama: "Iis Ahyantini",
+    tugas: "mengelola persuratan, notulensi rapat, dan arsip data kependudukan"
   },
   bendahara: {
-    nama: "Siti Rahma",
-    tugas: "mengelola kebutuhan dana kegiatan warga"
+    nama: "Kodir",
+    tugas: "mengelola kas, keuangan pembangunan, dan laporan berkala warga"
   },
   keamanan: {
-    nama: "Dadang",
-    tugas: "mengoordinasikan ronda dan keamanan lingkungan"
+    nama: "Eded",
+    tugas: "mengoordinasikan ronda malam dan menjaga ketertiban lingkungan"
   },
   keagamaan: {
-    nama: "Ustadz Yayan",
-    tugas: "mengoordinasikan kegiatan keagamaan warga"
+    nama: "Ust. Ana Sutisna",
+    tugas: "mengoordinasikan kegiatan ibadah dan pembinaan kerukunan warga"
+  },
+  sosial: {
+    nama: "Dede Suherlan",
+    tugas: "mengoordinasikan kegiatan kepedulian sosial, gotong royong, dan duka cita"
+  },
+  pelayanan: {
+    nama: "Hasan Anshori",
+    tugas: "membantu pelayanan administrasi umum dan kebutuhan informasi warga"
+  },
+  kepemudaan: {
+    nama: "Bunyamin",
+    tugas: "mewadahi kegiatan olahraga, kreativitas pemuda, dan Karang Taruna"
+  },
+  pkk: {
+    nama: "Yuni Maesaroh",
+    tugas: "mengoordinasikan pembinaan kesejahteraan keluarga dan kesehatan ibu/anak"
   }
 };
 
@@ -279,20 +295,16 @@ function renderInfoUmum() {
 // B. RENDER ORGANIGRAM (PENGURUS)
 function renderOrganigram() {
   // Memasukkan nama dan tugas ke masing-masing posisi
-  const roles = ["penasihat", "ketua", "wakilKetua", "sekretaris", "bendahara", "keamanan", "keagamaan"];
+  const roles = ["penasihat", "ketua", "wakilKetua", "sekretaris", "bendahara", "keamanan", "keagamaan", "sosial", "pelayanan", "kepemudaan", "pkk"];
   
   roles.forEach(roleKey => {
     // Cari elemen berdasarkan ID
     const nameEl = document.getElementById(`nama-${roleKey}`);
     const taskEl = document.getElementById(`tugas-${roleKey}`);
     
-    // Sesuaikan mapping key jika camelCase
-    let dataKey = roleKey;
-    if (roleKey === "wakilKetua") dataKey = "wakilKetua";
-    
-    if (DATA_PENGURUS[dataKey]) {
-      if (nameEl) nameEl.textContent = DATA_PENGURUS[dataKey].nama;
-      if (taskEl) taskEl.textContent = DATA_PENGURUS[dataKey].tugas;
+    if (DATA_PENGURUS[roleKey]) {
+      if (nameEl) nameEl.textContent = DATA_PENGURUS[roleKey].nama;
+      if (taskEl) taskEl.textContent = DATA_PENGURUS[roleKey].tugas;
     }
   });
 }
