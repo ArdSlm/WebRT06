@@ -851,15 +851,27 @@ function setupAdminPanel() {
     formGaleri.addEventListener("submit", (e) => {
       e.preventDefault();
       const judul = document.getElementById("admin-gal-judul").value.trim();
-      const image = document.getElementById("admin-gal-url").value.trim();
+      const fileInput = document.getElementById("admin-gal-file");
       const deskripsi = document.getElementById("admin-gal-deskripsi").value.trim();
 
-      DATA_GALERI.push({ judul, image, deskripsi });
-      renderGaleri();
-      formGaleri.reset();
-      alert("Galeri berhasil ditambahkan!");
-      closeAdminModal();
-      setupScrollAnimation();
+      if (fileInput && fileInput.files && fileInput.files[0]) {
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+          const imageBase64 = event.target.result;
+          DATA_GALERI.push({ judul, image: imageBase64, deskripsi });
+          renderGaleri();
+          formGaleri.reset();
+          alert("Galeri berhasil ditambahkan!");
+          closeAdminModal();
+          setupScrollAnimation();
+        };
+
+        reader.readAsDataURL(file);
+      } else {
+        alert("Silakan pilih file gambar terlebih dahulu!");
+      }
     });
   }
 
