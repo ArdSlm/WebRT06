@@ -2,6 +2,12 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
+  <script>
+    window.onerror = function(message, source, lineno, colno, error) {
+      alert("GLOBAL ERROR: " + message + " at " + source + ":" + lineno + ":" + colno);
+      return false;
+    };
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Website Resmi RT 006 Warung Cikopi</title>
   
@@ -75,6 +81,7 @@
         <a href="#pengurus" class="hover:text-emerald-600 transition-colors duration-200">Pengurus</a>
         <a href="#pengumuman" class="hover:text-emerald-600 transition-colors duration-200">Pengumuman</a>
         <a href="#kegiatan" class="hover:text-emerald-600 transition-colors duration-200">Kegiatan & Program</a>
+        <a href="#prestasi" class="hover:text-emerald-600 transition-colors duration-200">Prestasi</a>
         <a href="#galeri" class="hover:text-emerald-600 transition-colors duration-200">Galeri</a>
         <a href="#kontak" class="hover:text-emerald-600 transition-colors duration-200">Kontak</a>
       </div>
@@ -100,6 +107,7 @@
         <a href="#pengurus" class="hover:text-emerald-600 border-b border-slate-50 pb-2">Pengurus</a>
         <a href="#pengumuman" class="hover:text-emerald-600 border-b border-slate-50 pb-2">Pengumuman</a>
         <a href="#kegiatan" class="hover:text-emerald-600 border-b border-slate-50 pb-2">Kegiatan & Program</a>
+        <a href="#prestasi" class="hover:text-emerald-600 border-b border-slate-50 pb-2">Prestasi</a>
         <a href="#galeri" class="hover:text-emerald-600 border-b border-slate-50 pb-2">Galeri</a>
         <a href="#kontak" class="hover:text-emerald-600 pb-2">Kontak</a>
         <a href="https://wa.me/6282218222557" target="_blank" class="bg-emerald-600 text-white py-3 rounded-xl text-center flex items-center justify-center gap-2 shadow-md">
@@ -627,9 +635,6 @@
           <button class="filter-btn active px-5 py-2.5 rounded-full text-xs font-bold border border-slate-200 shadow-sm" data-filter="all">
             Semua Kategori
           </button>
-          <button class="filter-btn bg-white text-slate-700 hover:border-emerald-600 hover:text-emerald-600 px-5 py-2.5 rounded-full text-xs font-bold border border-slate-200 shadow-sm" data-filter="rutin">
-            Kegiatan Rutin
-          </button>
           <button class="filter-btn bg-white text-slate-700 hover:border-emerald-600 hover:text-emerald-600 px-5 py-2.5 rounded-full text-xs font-bold border border-slate-200 shadow-sm" data-filter="program">
             Program Lingkungan
           </button>
@@ -662,6 +667,23 @@
           </div>
         </div>
 
+      </div>
+    </section>
+
+    <!-- ==================== SECTION: PRESTASI & PENGHARGAAN ==================== -->
+    <section id="prestasi" class="py-16 md:py-24 bg-slate-50 border-b border-slate-100">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-12">
+        <div class="text-center max-w-2xl mx-auto mb-16 flex flex-col gap-3">
+          <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Kebanggaan Warga</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800">Prestasi & Penghargaan RT 006</h2>
+          <div class="w-16 h-1 bg-emerald-600 mx-auto rounded-full mt-2"></div>
+        </div>
+
+        <!-- Grid Prestasi (Akan Diisi Dinamis oleh script.js) -->
+        <div id="prestasi-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          <!-- Placeholder saat loading -->
+          <div class="text-center py-8 text-slate-400 col-span-full">Memuat prestasi...</div>
+        </div>
       </div>
     </section>
 
@@ -887,6 +909,7 @@
           <a href="#pengurus" class="hover:text-amber-300 transition-colors">Pengurus</a>
           <a href="#pengumuman" class="hover:text-amber-300 transition-colors">Pengumuman</a>
           <a href="#kegiatan" class="hover:text-amber-300 transition-colors">Kegiatan & Program</a>
+          <a href="#prestasi" class="hover:text-amber-300 transition-colors">Prestasi</a>
           <a href="#galeri" class="hover:text-amber-300 transition-colors">Galeri</a>
           <a href="#kontak" class="hover:text-amber-300 transition-colors">Kontak</a>
         </div>
@@ -946,7 +969,230 @@
     </div>
   </div>
 
+  <!-- ==================== FLOATING ADMIN BUTTON ==================== -->
+  <button id="admin-floating-btn" onclick="triggerAdminLogin()" class="fixed bottom-6 left-6 z-40 w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110 active:scale-95 bg-gradient-to-br from-amber-400 to-amber-600 text-slate-950 text-lg cursor-pointer hover:shadow-amber-500/30" aria-label="Admin Control Panel">
+    <i class="fas fa-lock"></i>
+  </button>
+
+  <!-- ==================== ADMIN CONTROL PANEL MODAL ==================== -->
+  <div id="adminModal" class="fixed inset-0 z-[9999] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4 md:p-6 transition-all duration-300 hidden">
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col relative">
+      
+      <!-- Close Button -->
+      <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center cursor-pointer text-lg focus:outline-none" aria-label="Tutup Panel Admin">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <!-- Screen 1: Admin Login (Tampil jika belum login) -->
+      <div id="admin-login-screen" class="flex flex-col items-center justify-center p-8 md:p-12 text-center max-w-md mx-auto w-full my-auto">
+        <div class="w-16 h-16 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center text-2xl mb-6 shadow-sm">
+          <i class="fas fa-lock"></i>
+        </div>
+        <h3 class="text-xl font-bold text-slate-800">Akses Admin RT 006</h3>
+        <p class="text-xs text-slate-500 mt-2 mb-6">Masukkan kata sandi administrator untuk mengelola data portal warga.</p>
+        
+        <form id="admin-login-form" class="w-full flex flex-col gap-3">
+          <input type="password" id="admin-password-input" required placeholder="Kata Sandi (rt006admin)" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50 text-center font-semibold">
+          <p id="admin-login-error" class="text-xs text-rose-500 font-semibold hidden">Kata sandi yang Anda masukkan salah!</p>
+          <button type="submit" class="btn-gold w-full py-3 rounded-xl font-bold text-sm shadow-md mt-2 cursor-pointer">
+            Masuk ke Panel
+          </button>
+        </form>
+      </div>
+
+      <!-- Screen 2: Admin Panel Content (Tersembunyi secara default) -->
+      <div id="admin-panel-content" class="flex-grow flex flex-col overflow-hidden hidden">
+        <!-- Modal Header -->
+        <div class="px-6 pt-6 pb-2">
+          <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+            <i class="fas fa-user-cog text-emerald-600"></i> Panel Kontrol Admin
+          </h3>
+          <p class="text-xs text-slate-500 mt-1">Kelola data pengumuman, kegiatan, galeri, jadwal ronda, dan prestasi secara instan.</p>
+        </div>
+
+        <!-- Tab Buttons -->
+        <div class="flex border-b border-slate-100 px-6 overflow-x-auto gap-2 scrollbar-none">
+          <button onclick="switchAdminTab(0)" class="admin-tab-btn px-4 py-3 text-sm font-bold text-emerald-600 border-b-2 border-emerald-600 transition-all cursor-pointer whitespace-nowrap focus:outline-none">
+            <i class="fas fa-bullhorn mr-1.5"></i> Pengumuman
+          </button>
+          <button onclick="switchAdminTab(1)" class="admin-tab-btn px-4 py-3 text-sm font-bold text-slate-500 border-b-2 border-transparent hover:text-emerald-600 transition-all cursor-pointer whitespace-nowrap focus:outline-none">
+            <i class="fas fa-tasks mr-1.5"></i> Kegiatan
+          </button>
+          <button onclick="switchAdminTab(2)" class="admin-tab-btn px-4 py-3 text-sm font-bold text-slate-500 border-b-2 border-transparent hover:text-emerald-600 transition-all cursor-pointer whitespace-nowrap focus:outline-none">
+            <i class="fas fa-images mr-1.5"></i> Galeri
+          </button>
+          <button onclick="switchAdminTab(3)" class="admin-tab-btn px-4 py-3 text-sm font-bold text-slate-500 border-b-2 border-transparent hover:text-emerald-600 transition-all cursor-pointer whitespace-nowrap focus:outline-none">
+            <i class="fas fa-calendar-alt mr-1.5"></i> Jadwal Ronda
+          </button>
+          <button onclick="switchAdminTab(4)" class="admin-tab-btn px-4 py-3 text-sm font-bold text-slate-500 border-b-2 border-transparent hover:text-emerald-600 transition-all cursor-pointer whitespace-nowrap focus:outline-none">
+            <i class="fas fa-trophy mr-1.5"></i> Prestasi
+          </button>
+        </div>
+
+      <!-- Tab Contents -->
+      <div class="p-6 overflow-y-auto flex-grow">
+        
+        <!-- Tab 1: Pengumuman -->
+        <form id="admin-form-pengumuman" class="admin-tab-content flex flex-col gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex flex-col gap-1.5">
+              <label for="admin-ann-judul" class="text-xs font-bold text-slate-700 uppercase">Judul Pengumuman</label>
+              <input type="text" id="admin-ann-judul" required placeholder="Contoh: Kerja Bakti Akbar" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50">
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="admin-ann-tanggal" class="text-xs font-bold text-slate-700 uppercase">Tanggal</label>
+              <input type="text" id="admin-ann-tanggal" required placeholder="Contoh: Minggu, 20 Juli 2026" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50">
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex flex-col gap-1.5">
+              <label for="admin-ann-kategori" class="text-xs font-bold text-slate-700 uppercase">Kategori</label>
+              <input type="text" id="admin-ann-kategori" required placeholder="Contoh: Kerja Bakti" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50">
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="admin-ann-badge" class="text-xs font-bold text-slate-700 uppercase">Warna Badge</label>
+              <select id="admin-ann-badge" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50">
+                <option value="Hijau">Hijau</option>
+                <option value="Biru">Biru</option>
+                <option value="Ungu">Ungu</option>
+                <option value="Kuning">Kuning</option>
+              </select>
+            </div>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="admin-ann-isi" class="text-xs font-bold text-slate-700 uppercase">Isi Pengumuman</label>
+            <textarea id="admin-ann-isi" required rows="3" placeholder="Tulis rincian pengumuman di sini..." class="w-full p-4 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50 resize-none"></textarea>
+          </div>
+          <button type="submit" class="btn-gold w-full py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg cursor-pointer">
+            <i class="fas fa-plus-circle"></i> Tambah Pengumuman
+          </button>
+        </form>
+
+        <!-- Tab 2: Kegiatan -->
+        <form id="admin-form-kegiatan" class="admin-tab-content flex flex-col gap-4 hidden">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex flex-col gap-1.5">
+              <label for="admin-keg-judul" class="text-xs font-bold text-slate-700 uppercase">Judul Kegiatan</label>
+              <input type="text" id="admin-keg-judul" required placeholder="Contoh: Senam Pagi Bersama" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50">
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="admin-keg-kategori" class="text-xs font-bold text-slate-700 uppercase">Kategori</label>
+              <select id="admin-keg-kategori" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50">
+                <option value="program">Program Lingkungan (program)</option>
+                <option value="koordinasi">Kegiatan Koordinasi (koordinasi)</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex flex-col gap-1.5">
+              <label for="admin-keg-status" class="text-xs font-bold text-slate-700 uppercase">Status</label>
+              <input type="text" id="admin-keg-status" required placeholder="Contoh: Terencana / Aktif" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50">
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="admin-keg-color" class="text-xs font-bold text-slate-700 uppercase">Warna Status</label>
+              <select id="admin-keg-color" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50">
+                <option value="Hijau">Hijau</option>
+                <option value="Kuning">Kuning</option>
+                <option value="Biru">Biru</option>
+              </select>
+            </div>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="admin-keg-deskripsi" class="text-xs font-bold text-slate-700 uppercase">Deskripsi</label>
+            <textarea id="admin-keg-deskripsi" required rows="3" placeholder="Tulis deskripsi kegiatan di sini..." class="w-full p-4 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50 resize-none"></textarea>
+          </div>
+          <button type="submit" class="btn-gold w-full py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg cursor-pointer">
+            <i class="fas fa-plus-circle"></i> Tambah Kegiatan
+          </button>
+        </form>
+
+        <!-- Tab 3: Galeri -->
+        <form id="admin-form-galeri" class="admin-tab-content flex flex-col gap-4 hidden">
+          <div class="flex flex-col gap-1.5">
+            <label for="admin-gal-judul" class="text-xs font-bold text-slate-700 uppercase">Judul Galeri</label>
+            <input type="text" id="admin-gal-judul" required placeholder="Contoh: Rapat Koordinasi Pos Ronda" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50">
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="admin-gal-url" class="text-xs font-bold text-slate-700 uppercase">URL Gambar</label>
+            <input type="url" id="admin-gal-url" required placeholder="Contoh: https://images.unsplash.com/... atau path lokal" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50">
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="admin-gal-deskripsi" class="text-xs font-bold text-slate-700 uppercase">Deskripsi Gambar</label>
+            <textarea id="admin-gal-deskripsi" required rows="3" placeholder="Tulis deskripsi singkat gambar di sini..." class="w-full p-4 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50 resize-none"></textarea>
+          </div>
+          <button type="submit" class="btn-gold w-full py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg cursor-pointer">
+            <i class="fas fa-plus-circle"></i> Tambah Galeri
+          </button>
+        </form>
+
+        <!-- Tab 4: Jadwal Ronda -->
+        <form id="admin-form-ronda" class="admin-tab-content flex flex-col gap-4 hidden">
+          <div class="flex flex-col gap-1.5">
+            <label for="admin-ron-hari" class="text-xs font-bold text-slate-700 uppercase">Hari Ronda</label>
+            <select id="admin-ron-hari" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50">
+              <option value="Malam Senin">Malam Senin</option>
+              <option value="Malam Selasa">Malam Selasa</option>
+              <option value="Malam Rabu">Malam Rabu</option>
+              <option value="Malam Kamis">Malam Kamis</option>
+              <option value="Malam Jumat">Malam Jumat</option>
+              <option value="Malam Sabtu">Malam Sabtu</option>
+              <option value="Malam Minggu">Malam Minggu</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="admin-ron-petugas" class="text-xs font-bold text-slate-700 uppercase">Daftar Petugas (Pisahkan dengan koma)</label>
+            <textarea id="admin-ron-petugas" required rows="3" placeholder="Contoh: Ahmad, Budi, Dedi, Asep" class="w-full p-4 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50 resize-none"></textarea>
+          </div>
+          <button type="submit" class="btn-gold w-full py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg cursor-pointer">
+            <i class="fas fa-save"></i> Perbarui Jadwal Ronda
+          </button>
+        </form>
+
+        <!-- Tab 5: Prestasi -->
+        <form id="admin-form-prestasi" class="admin-tab-content flex flex-col gap-4 hidden">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex flex-col gap-1.5">
+              <label for="admin-pres-tahun" class="text-xs font-bold text-slate-700 uppercase">Tahun</label>
+              <input type="text" id="admin-pres-tahun" required placeholder="Contoh: 2026" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50">
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="admin-pres-judul" class="text-xs font-bold text-slate-700 uppercase">Judul Prestasi</label>
+              <input type="text" id="admin-pres-judul" required placeholder="Contoh: Pos Ronda Teraktif" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50">
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex flex-col gap-1.5">
+              <label for="admin-pres-penyelenggara" class="text-xs font-bold text-slate-700 uppercase">Penyelenggara</label>
+              <input type="text" id="admin-pres-penyelenggara" required placeholder="Contoh: Kelurahan Salebu" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50">
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="admin-pres-icon" class="text-xs font-bold text-slate-700 uppercase">Ikon FontAwesome</label>
+              <input type="text" id="admin-pres-icon" required placeholder="Contoh: fas fa-trophy atau fas fa-medal" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50">
+            </div>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="admin-pres-color" class="text-xs font-bold text-slate-700 uppercase">Warna Ikon & Background</label>
+            <select id="admin-pres-color" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50">
+              <option value="Amber">Amber (Kuning Emas)</option>
+              <option value="Emerald">Emerald (Hijau)</option>
+              <option value="Blue">Blue (Biru)</option>
+              <option value="Indigo">Indigo (Ungu Biru)</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="admin-pres-deskripsi" class="text-xs font-bold text-slate-700 uppercase">Deskripsi Penghargaan</label>
+            <textarea id="admin-pres-deskripsi" required rows="3" placeholder="Tulis deskripsi prestasi di sini..." class="w-full p-4 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-slate-50 resize-none"></textarea>
+          </div>
+          <button type="submit" class="btn-gold w-full py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg cursor-pointer">
+            <i class="fas fa-plus-circle"></i> Tambah Prestasi
+          </button>
+        </form>
+
+      </div> <!-- End Screen 2: Admin Panel Content -->
+    </div>
+  </div>
+
   <!-- Main JS -->
-  <script src="assets/js/script.js"></script>
+  <script src="assets/js/script.js?v=3"></script>
 </body>
 </html>

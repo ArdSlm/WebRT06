@@ -104,27 +104,19 @@ const DATA_PENGUMUMAN = [
 const DATA_KEGIATAN = [
   {
     judul: "Ronda Malam",
-    kategori: "rutin",
-    kategoriLabel: "Kegiatan Rutin",
+    kategori: "program",
+    kategoriLabel: "Program Lingkungan",
     status: "Aktif",
     statusColor: "bg-emerald-500",
     deskripsi: "Kegiatan rutin warga untuk menjaga keamanan lingkungan dari berbagai gangguan pada malam hari."
   },
   {
     judul: "Kerja Bakti",
-    kategori: "rutin",
-    kategoriLabel: "Kegiatan Rutin",
+    kategori: "program",
+    kategoriLabel: "Program Lingkungan",
     status: "Rutin",
     statusColor: "bg-emerald-500",
     deskripsi: "Gotong royong membersihkan lingkungan RT agar tetap bersih, indah, sehat, dan bebas banjir."
-  },
-  {
-    judul: "Pengadaan KWh Pos Kamling",
-    kategori: "program",
-    kategoriLabel: "Program Lingkungan",
-    status: "Dalam Pengajuan",
-    statusColor: "bg-amber-500",
-    deskripsi: "Program pengadaan sambungan listrik mandiri untuk mendukung penerangan, sarana, dan aktivitas Pos Kamling."
   },
   {
     judul: "Rapat Warga",
@@ -214,6 +206,28 @@ const DATA_RONDA = [
 ];
 
 // ==========================================================================
+// 6. DATA PRESTASI & PENGHARGAAN
+// ==========================================================================
+const DATA_PRESTASI = [
+  {
+    tahun: "2025",
+    judul: "Lingkungan Terbersih RW",
+    penyelenggara: "Kelurahan Salebu",
+    deskripsi: "RT 006 meraih penghargaan sebagai lingkungan terbersih tingkat RW.",
+    icon: "fas fa-trophy",
+    color: "bg-amber-100 text-amber-700"
+  },
+  {
+    tahun: "2024",
+    judul: "Keamanan Lingkungan Terbaik",
+    penyelenggara: "Kecamatan Mangunreja",
+    deskripsi: "Penghargaan atas konsistensi ronda malam dan zero crime rate.",
+    icon: "fas fa-medal",
+    color: "bg-emerald-100 text-emerald-700"
+  }
+];
+
+// ==========================================================================
 // INISIALISASI & RENDER DATA KE HALAMAN
 // ==========================================================================
 
@@ -224,8 +238,10 @@ document.addEventListener("DOMContentLoaded", () => {
   renderKegiatan("all");
   renderJadwalRonda();
   renderGaleri();
+  renderPrestasi();
   setupEventListeners();
   setupScrollAnimation();
+  setupAdminPanel();
 });
 
 // A. RENDER INFO UMUM & STATISTIK
@@ -583,7 +599,17 @@ function setupEventListeners() {
     });
   }
 
-  // Escape key close lightbox
+  // Close admin modal by clicking backdrop
+  const adminModal = document.getElementById("adminModal");
+  if (adminModal) {
+    adminModal.addEventListener("click", (e) => {
+      if (e.target === adminModal) {
+        closeAdminModal();
+      }
+    });
+  }
+
+  // Escape key close lightbox or admin modal
   document.addEventListener("keydown", (e) => {
     if (modal && modal.style.display === "flex") {
       if (e.key === "Escape") {
@@ -592,6 +618,11 @@ function setupEventListeners() {
         changeLightboxImage(1);
       } else if (e.key === "ArrowLeft") {
         changeLightboxImage(-1);
+      }
+    }
+    if (adminModal && !adminModal.classList.contains("hidden")) {
+      if (e.key === "Escape") {
+        closeAdminModal();
       }
     }
   });
@@ -620,5 +651,271 @@ function setupScrollAnimation() {
     revealObserver.observe(reveal);
   });
 }
+
+// G. RENDER PRESTASI & PENGHARGAAN
+function renderPrestasi() {
+  const container = document.getElementById("prestasi-grid");
+  if (!container) return;
+  
+  container.innerHTML = "";
+  
+  DATA_PRESTASI.forEach(item => {
+    const cardHTML = `
+      <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-6 hover-card-trigger flex flex-col md:flex-row gap-5 items-start reveal">
+        <!-- Icon Container -->
+        <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-xl ${item.color}">
+          <i class="${item.icon}"></i>
+        </div>
+        <!-- Content Container -->
+        <div class="flex-grow">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="px-2.5 py-0.5 rounded-full text-xxs font-extrabold bg-emerald-50 text-emerald-800 uppercase tracking-wide">
+              Tahun ${item.tahun}
+            </span>
+            <span class="text-slate-400 text-xs font-semibold">
+              <i class="fas fa-university mr-1"></i> ${item.penyelenggara}
+            </span>
+          </div>
+          <h4 class="text-lg font-bold text-slate-800 mb-1">${item.judul}</h4>
+          <p class="text-slate-600 text-sm leading-relaxed">${item.deskripsi}</p>
+        </div>
+      </div>
+    `;
+    container.innerHTML += cardHTML;
+  });
+}
+
+// ==========================================================================
+// ADMIN CONTROL PANEL ACTIONS
+// ==========================================================================
+
+let isAdminLoggedIn = false;
+
+function triggerAdminLogin() {
+  openAdminModal();
+}
+
+function openAdminModal() {
+  const modal = document.getElementById("adminModal");
+  if (!modal) return;
+  
+  modal.classList.remove("hidden");
+  document.body.style.overflow = "hidden"; // Disable background scrolling
+
+  const loginScreen = document.getElementById("admin-login-screen");
+  const panelContent = document.getElementById("admin-panel-content");
+  const passwordInput = document.getElementById("admin-password-input");
+  const errorMsg = document.getElementById("admin-login-error");
+
+  if (isAdminLoggedIn) {
+    if (loginScreen) loginScreen.classList.add("hidden");
+    if (panelContent) panelContent.classList.remove("hidden");
+  } else {
+    if (loginScreen) loginScreen.classList.remove("hidden");
+    if (panelContent) panelContent.classList.add("hidden");
+    if (errorMsg) errorMsg.classList.add("hidden");
+    if (passwordInput) {
+      passwordInput.value = "";
+      setTimeout(() => passwordInput.focus(), 100);
+    }
+  }
+}
+
+function closeAdminModal() {
+  const modal = document.getElementById("adminModal");
+  if (modal) {
+    modal.classList.add("hidden");
+    document.body.style.overflow = "auto"; // Re-enable background scrolling
+  }
+}
+
+function switchAdminTab(tabIndex) {
+  const tabs = document.querySelectorAll(".admin-tab-btn");
+  const contents = document.querySelectorAll(".admin-tab-content");
+  
+  tabs.forEach((tab, index) => {
+    if (index === tabIndex) {
+      tab.classList.remove("text-slate-500", "border-transparent");
+      tab.classList.add("text-emerald-600", "border-emerald-600");
+    } else {
+      tab.classList.remove("text-emerald-600", "border-emerald-600");
+      tab.classList.add("text-slate-500", "border-transparent");
+    }
+  });
+  
+  contents.forEach((content, index) => {
+    if (index === tabIndex) {
+      content.classList.remove("hidden");
+    } else {
+      content.classList.add("hidden");
+    }
+  });
+}
+
+function setupAdminPanel() {
+  // Admin Login Form Submit
+  const loginForm = document.getElementById("admin-login-form");
+  if (loginForm) {
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const passwordInput = document.getElementById("admin-password-input");
+      const errorMsg = document.getElementById("admin-login-error");
+      const loginScreen = document.getElementById("admin-login-screen");
+      const panelContent = document.getElementById("admin-panel-content");
+
+      if (passwordInput && passwordInput.value === "rt006admin") {
+        isAdminLoggedIn = true;
+        if (loginScreen) loginScreen.classList.add("hidden");
+        if (panelContent) panelContent.classList.remove("hidden");
+        if (errorMsg) errorMsg.classList.add("hidden");
+        if (passwordInput) passwordInput.value = "";
+      } else {
+        if (errorMsg) errorMsg.classList.remove("hidden");
+        if (passwordInput) {
+          passwordInput.value = "";
+          passwordInput.focus();
+        }
+      }
+    });
+  }
+
+  // Tab 1: Pengumuman
+  const formPengumuman = document.getElementById("admin-form-pengumuman");
+  if (formPengumuman) {
+    formPengumuman.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const judul = document.getElementById("admin-ann-judul").value.trim();
+      const tanggal = document.getElementById("admin-ann-tanggal").value.trim();
+      const isi = document.getElementById("admin-ann-isi").value.trim();
+      const kategori = document.getElementById("admin-ann-kategori").value.trim();
+      const badgeSel = document.getElementById("admin-ann-badge").value;
+      
+      let badgeColor = "bg-emerald-100 text-emerald-800";
+      if (badgeSel === "Biru") badgeColor = "bg-blue-100 text-blue-800";
+      else if (badgeSel === "Ungu") badgeColor = "bg-purple-100 text-purple-800";
+      else if (badgeSel === "Kuning") badgeColor = "bg-amber-100 text-amber-800";
+
+      const id = DATA_PENGUMUMAN.length ? Math.max(...DATA_PENGUMUMAN.map(item => item.id)) + 1 : 1;
+      
+      DATA_PENGUMUMAN.push({ id, judul, tanggal, isi, kategori, badgeColor });
+      renderPengumuman();
+      formPengumuman.reset();
+      alert("Pengumuman berhasil ditambahkan!");
+      closeAdminModal();
+      setupScrollAnimation();
+    });
+  }
+
+  // Tab 2: Kegiatan
+  const formKegiatan = document.getElementById("admin-form-kegiatan");
+  if (formKegiatan) {
+    formKegiatan.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const judul = document.getElementById("admin-keg-judul").value.trim();
+      const kategori = document.getElementById("admin-keg-kategori").value;
+      const deskripsi = document.getElementById("admin-keg-deskripsi").value.trim();
+      const status = document.getElementById("admin-keg-status").value.trim();
+      const colorSel = document.getElementById("admin-keg-color").value;
+
+      let statusColor = "bg-emerald-500";
+      if (colorSel === "Kuning") statusColor = "bg-amber-500";
+      else if (colorSel === "Biru") statusColor = "bg-blue-500";
+
+      const kategoriLabel = kategori === "program" ? "Program Lingkungan" : "Kegiatan Koordinasi";
+
+      DATA_KEGIATAN.push({ judul, kategori, kategoriLabel, status, statusColor, deskripsi });
+      renderKegiatan("all");
+      formKegiatan.reset();
+      
+      // Reset filter button to 'all'
+      const filterBtns = document.querySelectorAll(".filter-btn");
+      filterBtns.forEach(b => {
+        if (b.getAttribute("data-filter") === "all") {
+          b.classList.add("active", "bg-primary-main", "text-white");
+          b.classList.remove("bg-white", "text-slate-700", "border-slate-200");
+        } else {
+          b.classList.remove("active", "bg-primary-main", "text-white");
+          b.classList.add("bg-white", "text-slate-700", "border-slate-200");
+        }
+      });
+
+      alert("Kegiatan berhasil ditambahkan!");
+      closeAdminModal();
+      setupScrollAnimation();
+    });
+  }
+
+  // Tab 3: Galeri
+  const formGaleri = document.getElementById("admin-form-galeri");
+  if (formGaleri) {
+    formGaleri.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const judul = document.getElementById("admin-gal-judul").value.trim();
+      const image = document.getElementById("admin-gal-url").value.trim();
+      const deskripsi = document.getElementById("admin-gal-deskripsi").value.trim();
+
+      DATA_GALERI.push({ judul, image, deskripsi });
+      renderGaleri();
+      formGaleri.reset();
+      alert("Galeri berhasil ditambahkan!");
+      closeAdminModal();
+      setupScrollAnimation();
+    });
+  }
+
+  // Tab 4: Jadwal Ronda
+  const formRonda = document.getElementById("admin-form-ronda");
+  if (formRonda) {
+    formRonda.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const hari = document.getElementById("admin-ron-hari").value;
+      const petugasText = document.getElementById("admin-ron-petugas").value.trim();
+
+      const match = DATA_RONDA.find(item => item.hari === hari);
+      if (match) {
+        match.petugas = petugasText.split(",").map(name => name.trim()).filter(name => name.length > 0);
+        renderJadwalRonda();
+        formRonda.reset();
+        alert("Jadwal ronda berhasil diperbarui!");
+        closeAdminModal();
+        setupScrollAnimation();
+      } else {
+        alert("Hari tidak ditemukan!");
+      }
+    });
+  }
+
+  // Tab 5: Prestasi
+  const formPrestasi = document.getElementById("admin-form-prestasi");
+  if (formPrestasi) {
+    formPrestasi.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const tahun = document.getElementById("admin-pres-tahun").value.trim();
+      const judul = document.getElementById("admin-pres-judul").value.trim();
+      const penyelenggara = document.getElementById("admin-pres-penyelenggara").value.trim();
+      const icon = document.getElementById("admin-pres-icon").value.trim();
+      const colorSel = document.getElementById("admin-pres-color").value;
+      const deskripsi = document.getElementById("admin-pres-deskripsi").value.trim();
+
+      let color = "bg-amber-100 text-amber-700";
+      if (colorSel === "Emerald") color = "bg-emerald-100 text-emerald-700";
+      else if (colorSel === "Blue") color = "bg-blue-100 text-blue-700";
+      else if (colorSel === "Indigo") color = "bg-indigo-100 text-indigo-700";
+
+      DATA_PRESTASI.push({ tahun, judul, penyelenggara, deskripsi, icon, color });
+      renderPrestasi();
+      formPrestasi.reset();
+      alert("Prestasi berhasil ditambahkan!");
+      closeAdminModal();
+      setupScrollAnimation();
+    });
+  }
+}
+
+// Make sure these are globally accessible for HTML onclick attributes
+window.triggerAdminLogin = triggerAdminLogin;
+window.openAdminModal = openAdminModal;
+window.closeAdminModal = closeAdminModal;
+window.switchAdminTab = switchAdminTab;
 
 // Akhir dari berkas script.js - Sinkronisasi Email Vercel
