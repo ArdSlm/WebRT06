@@ -387,11 +387,11 @@
             
             <!-- 1. PENASIHAT -->
             <div class="flex flex-col items-center mb-6">
-              <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-56 relative z-10">
+              <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-56 relative z-10 hover-card-trigger">
                 <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-base font-bold">
                   <i class="fas fa-user-tie"></i>
                 </div>
-                <h4 class="font-extrabold text-slate-800 text-base" id="nama-penasihat">H. Maimun</h4>
+                <h4 class="font-extrabold text-slate-800 text-base" id="nama-penasihat">Dede Sunarya</h4>
                 <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Penasihat</p>
               </div>
               <!-- Line Down -->
@@ -400,7 +400,7 @@
 
             <!-- 2. KETUA RT -->
             <div class="flex flex-col items-center mb-6">
-              <div class="organigram-card bg-gradient-to-br from-emerald-700 to-emerald-900 text-white rounded-2xl shadow-xl p-5 text-center w-60 relative z-10 ring-4 ring-emerald-100">
+              <div class="organigram-card bg-gradient-to-br from-emerald-700 to-emerald-900 text-white rounded-2xl shadow-xl p-5 text-center w-60 relative z-10 ring-4 ring-emerald-100 hover-card-trigger">
                 <div class="w-12 h-12 bg-white text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-xl font-bold">
                   <i class="fas fa-user-shield"></i>
                 </div>
@@ -413,87 +413,77 @@
 
             <!-- 3. WAKIL KETUA -->
             <div class="flex flex-col items-center w-full mb-6">
-              <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-56 relative z-10">
+              <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-56 relative z-10 hover-card-trigger">
                 <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-base font-bold">
                   <i class="fas fa-user-friends"></i>
                 </div>
-                <h4 class="font-extrabold text-slate-800 text-base" id="nama-wakilKetua">Asep Sunandar</h4>
+                <h4 class="font-extrabold text-slate-800 text-base" id="nama-wakilKetua">Jajat Sudrajat</h4>
                 <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Wakil Ketua</p>
               </div>
-              <!-- Line Down and Horizontal Branch on Desktop -->
+              <!-- Line Down -->
               <div class="w-0.5 h-6 bg-emerald-400"></div>
               
-              <!-- Desktop Horizontal Line -->
-              <div class="hidden md:block w-full max-w-4xl relative h-0.5 bg-emerald-400">
-                <!-- Drop line to Sekretaris (Left) -->
-                <div class="absolute top-0 left-[12%] w-0.5 h-6 bg-emerald-400"></div>
-                <!-- Drop line to Bendahara (Middle) -->
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-6 bg-emerald-400"></div>
-                <!-- Drop line to Seksi Bidang (Right) -->
-                <div class="absolute top-0 right-[12%] w-0.5 h-6 bg-emerald-400"></div>
-              </div>
+              <!-- Row 1 Horizontal Connection Line (desktop) -->
+              <div class="hidden md:block w-[66.67%] h-0.5 bg-emerald-400"></div>
             </div>
 
-            <!-- 4. SEKRETARIS, BENDAHARA, BIDANG -->
-            <div class="flex flex-row justify-between w-full max-w-5xl items-start gap-4">
+            <!-- 4. SEKRETARIS, BIDANG, BENDAHARA GRID -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl items-start mb-6">
               
               <!-- SEKRETARIS -->
-              <div class="flex flex-col items-center w-1/3">
-                <!-- Mobile-only vertical line -->
-                <div class="md:hidden w-0.5 h-6 bg-emerald-400"></div>
-                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-52 relative z-10">
+              <div class="flex flex-col items-center">
+                <div class="hidden md:block w-0.5 h-6 bg-emerald-400 mx-auto"></div>
+                <div class="md:hidden w-0.5 h-6 bg-emerald-400 mx-auto"></div>
+                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-52 relative z-10 hover-card-trigger">
                   <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-base font-bold">
                     <i class="fas fa-file-signature"></i>
                   </div>
-                  <h4 class="font-extrabold text-slate-800 text-sm" id="nama-sekretaris">Budi Santoso</h4>
+                  <h4 class="font-extrabold text-slate-800 text-sm" id="nama-sekretaris">Iis Ahyantini</h4>
                   <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Sekretaris</p>
                 </div>
               </div>
 
-              <!-- BENDAHARA -->
-              <div class="flex flex-col items-center w-1/3">
-                <!-- Mobile-only vertical line -->
-                <div class="md:hidden w-0.5 h-6 bg-emerald-400"></div>
-                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-52 relative z-10">
-                  <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-base font-bold">
-                    <i class="fas fa-wallet"></i>
-                  </div>
-                  <h4 class="font-extrabold text-slate-800 text-sm" id="nama-bendahara">Siti Rahma</h4>
-                  <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Bendahara</p>
-                </div>
-              </div>
-
-              <!-- BIDANG / DIVISI -->
-              <div class="flex flex-col items-center w-1/3">
-                <!-- Mobile-only vertical line -->
-                <div class="md:hidden w-0.5 h-6 bg-emerald-400"></div>
-                <div class="organigram-card bg-emerald-50 border-2 border-dashed border-emerald-400 rounded-2xl p-4 text-center w-52 relative z-10">
+              <!-- SEKSI BIDANG -->
+              <div class="flex flex-col items-center">
+                <div class="hidden md:block w-0.5 h-6 bg-emerald-400 mx-auto"></div>
+                <div class="md:hidden w-0.5 h-6 bg-emerald-400 mx-auto"></div>
+                <div class="organigram-card bg-emerald-50 border-2 border-dashed border-emerald-400 rounded-2xl p-4 text-center w-52 relative z-10 hover-card-trigger">
                   <div class="w-10 h-10 bg-emerald-200 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-base font-bold">
                     <i class="fas fa-users-cog"></i>
                   </div>
                   <h4 class="font-extrabold text-emerald-900 text-sm">Seksi Bidang</h4>
                   <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Divisi Kerja</p>
                 </div>
-                <!-- Line down from Bidang to subdivisions -->
-                <div class="w-0.5 h-6 bg-emerald-400"></div>
-                
-                <!-- Desktop Horizontal Line for subdivision branch -->
-                <div class="hidden md:block w-72 relative h-0.5 bg-emerald-400">
-                  <!-- Left: Keamanan -->
-                  <div class="absolute top-0 left-0 w-0.5 h-6 bg-emerald-400"></div>
-                  <!-- Right: Keagamaan -->
-                  <div class="absolute top-0 right-0 w-0.5 h-6 bg-emerald-400"></div>
+                <!-- Line down to Row 2 branch -->
+                <div class="w-0.5 h-8 bg-emerald-400 mx-auto"></div>
+              </div>
+
+              <!-- BENDAHARA -->
+              <div class="flex flex-col items-center">
+                <div class="hidden md:block w-0.5 h-6 bg-emerald-400 mx-auto"></div>
+                <div class="md:hidden w-0.5 h-6 bg-emerald-400 mx-auto"></div>
+                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-52 relative z-10 hover-card-trigger">
+                  <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-base font-bold">
+                    <i class="fas fa-wallet"></i>
+                  </div>
+                  <h4 class="font-extrabold text-slate-800 text-sm" id="nama-bendahara">Kodir</h4>
+                  <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Bendahara</p>
                 </div>
               </div>
 
             </div>
 
-            <!-- 5. SUBDIVISI / BIDANG KERJA (SEJAJAR DI BAWAH SEKSI BIDANG) -->
-            <div class="flex flex-wrap justify-center w-full max-w-5xl gap-4 mt-6">
+            <!-- Row 2 Horizontal Connection Line for Subdivisions (desktop) -->
+            <div class="hidden md:block w-[83.33%] h-0.5 bg-emerald-400"></div>
+
+            <!-- 5. SUBDIVISI / BIDANG KERJA GRID (6 COLUMNS) -->
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-4 w-full max-w-6xl mt-0">
               
               <!-- Keamanan -->
               <div class="flex flex-col items-center">
-                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-40 relative z-10 hover-card-trigger">
+                <div class="hidden md:block w-0.5 h-6 bg-emerald-400 mx-auto"></div>
+                <div class="md:hidden w-0.5 h-4 bg-emerald-400 mx-auto"></div>
+                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-full max-w-[150px] relative z-10 hover-card-trigger">
                   <div class="w-9 h-9 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">
                     <i class="fas fa-shield-alt"></i>
                   </div>
@@ -504,7 +494,9 @@
 
               <!-- Keagamaan -->
               <div class="flex flex-col items-center">
-                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-40 relative z-10 hover-card-trigger">
+                <div class="hidden md:block w-0.5 h-6 bg-emerald-400 mx-auto"></div>
+                <div class="md:hidden w-0.5 h-4 bg-emerald-400 mx-auto"></div>
+                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-full max-w-[150px] relative z-10 hover-card-trigger">
                   <div class="w-9 h-9 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">
                     <i class="fas fa-mosque"></i>
                   </div>
@@ -515,7 +507,9 @@
 
               <!-- Sosial -->
               <div class="flex flex-col items-center">
-                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-40 relative z-10 hover-card-trigger">
+                <div class="hidden md:block w-0.5 h-6 bg-emerald-400 mx-auto"></div>
+                <div class="md:hidden w-0.5 h-4 bg-emerald-400 mx-auto"></div>
+                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-full max-w-[150px] relative z-10 hover-card-trigger">
                   <div class="w-9 h-9 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">
                     <i class="fas fa-hand-holding-heart"></i>
                   </div>
@@ -526,7 +520,9 @@
 
               <!-- Pelayanan -->
               <div class="flex flex-col items-center">
-                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-40 relative z-10 hover-card-trigger">
+                <div class="hidden md:block w-0.5 h-6 bg-emerald-400 mx-auto"></div>
+                <div class="md:hidden w-0.5 h-4 bg-emerald-400 mx-auto"></div>
+                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-full max-w-[150px] relative z-10 hover-card-trigger">
                   <div class="w-9 h-9 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">
                     <i class="fas fa-concierge-bell"></i>
                   </div>
@@ -537,7 +533,9 @@
 
               <!-- Kepemudaan -->
               <div class="flex flex-col items-center">
-                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-40 relative z-10 hover-card-trigger">
+                <div class="hidden md:block w-0.5 h-6 bg-emerald-400 mx-auto"></div>
+                <div class="md:hidden w-0.5 h-4 bg-emerald-400 mx-auto"></div>
+                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-full max-w-[150px] relative z-10 hover-card-trigger">
                   <div class="w-9 h-9 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">
                     <i class="fas fa-running"></i>
                   </div>
@@ -548,7 +546,9 @@
 
               <!-- PKK -->
               <div class="flex flex-col items-center">
-                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-40 relative z-10 hover-card-trigger">
+                <div class="hidden md:block w-0.5 h-6 bg-emerald-400 mx-auto"></div>
+                <div class="md:hidden w-0.5 h-4 bg-emerald-400 mx-auto"></div>
+                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-full max-w-[150px] relative z-10 hover-card-trigger">
                   <div class="w-9 h-9 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">
                     <i class="fas fa-female"></i>
                   </div>
@@ -558,7 +558,6 @@
               </div>
 
             </div>
-
           </div>
         </div>
 
