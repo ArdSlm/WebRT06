@@ -327,26 +327,33 @@
                 </h4>
                 <p class="text-xs text-emerald-200 mt-1">Detail administratif rukun tetangga</p>
               </div>
-              <div class="divide-y divide-slate-100 text-sm">
-                <div class="flex justify-between p-4 bg-slate-50/50">
-                  <span class="font-bold text-slate-500">Rukun Tetangga</span>
-                  <span class="font-extrabold text-slate-800">RT 006</span>
+              
+              <!-- 2-Column Administrative Grid -->
+              <div class="p-6 grid grid-cols-2 gap-3 text-xs">
+                <!-- Rukun Tetangga -->
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 flex flex-col gap-1">
+                  <span class="text-slate-400 font-bold uppercase tracking-wider text-xxs">Rukun Tetangga</span>
+                  <span class="font-extrabold text-slate-800 text-sm">RT 006</span>
                 </div>
-                <div class="flex justify-between p-4">
-                  <span class="font-bold text-slate-500">Kampung</span>
-                  <span class="font-semibold text-slate-800">Warung Cikopi</span>
+                <!-- Kampung -->
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 flex flex-col gap-1">
+                  <span class="text-slate-400 font-bold uppercase tracking-wider text-xxs">Kampung</span>
+                  <span class="font-bold text-slate-800 text-sm">Warung Cikopi</span>
                 </div>
-                <div class="flex justify-between p-4 bg-slate-50/50">
-                  <span class="font-bold text-slate-500">Desa</span>
-                  <span class="font-semibold text-slate-800">Salebu</span>
+                <!-- Desa -->
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 flex flex-col gap-1">
+                  <span class="text-slate-400 font-bold uppercase tracking-wider text-xxs">Desa</span>
+                  <span class="font-bold text-slate-800 text-sm">Salebu</span>
                 </div>
-                <div class="flex justify-between p-4">
-                  <span class="font-bold text-slate-500">Kecamatan</span>
-                  <span class="font-semibold text-slate-800">Mangunreja</span>
+                <!-- Kecamatan -->
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 flex flex-col gap-1">
+                  <span class="text-slate-400 font-bold uppercase tracking-wider text-xxs">Kecamatan</span>
+                  <span class="font-bold text-slate-800 text-sm">Mangunreja</span>
                 </div>
-                <div class="flex justify-between p-4 bg-slate-50/50">
-                  <span class="font-bold text-slate-500">Kabupaten</span>
-                  <span class="font-semibold text-slate-800">Tasikmalaya</span>
+                <!-- Kabupaten -->
+                <div class="col-span-2 bg-slate-50 p-3 rounded-xl border border-slate-100 flex flex-col gap-1">
+                  <span class="text-slate-400 font-bold uppercase tracking-wider text-xxs">Kabupaten</span>
+                  <span class="font-bold text-slate-800 text-sm">Tasikmalaya</span>
                 </div>
               </div>
               
@@ -1147,6 +1154,6 @@
   </div>
 
   <!-- Main JS -->
-  <script src="assets/js/script.js?v=10"></script>
+  <script src="assets/js/script.js?v=11"></script>
 </body>
 </html>
