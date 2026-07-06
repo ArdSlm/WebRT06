@@ -276,7 +276,7 @@ const DATA_PRESTASI = JSON.parse(localStorage.getItem("DATA_PRESTASI")) || [
   {
     judul: "Peserta Kreatif Drama Kabaret",
     deskripsi: "RT 006 Warung Cikopi mendapatkan penghargaan sebagai peserta kreatif dalam kegiatan Drama Kabaret.",
-    tahun: "Tahun belum tersedia",
+    tahun: "2025",
     gambar: "assets/img/prestasi/prestasi-kabaret.jpg"
   },
   {
