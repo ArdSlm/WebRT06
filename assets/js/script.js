@@ -187,37 +187,37 @@ const DATA_RONDA = JSON.parse(localStorage.getItem("DATA_RONDA")) || [
   {
     hari: "Malam Senin",
     lokasi: "Pos Kamling RT 006",
-    petugas: ["Ahmad", "Budi", "Dedi", "Asep"]
+    petugas: ["ADE/UJU", "MAMAT R.", "ATANG", "SAMSI", "SUNDANA", "OPIK", "PEGI", "NONO S.", "APUD", "NUNU", "DUDI", "RIDWAN"]
   },
   {
     hari: "Malam Selasa",
     lokasi: "Pos Kamling RT 006",
-    petugas: ["Ujang", "Dadan", "Rudi", "Iwan"]
+    petugas: ["HADIMI", "OTONG", "YAYAT", "SARIPIN", "SOLIH", "TATA", "YUSEP", "YAMIN", "JAJANG R.", "SUGANDA", "RIPA", "ICANG"]
   },
   {
     hari: "Malam Rabu",
     lokasi: "Pos Kamling RT 006",
-    petugas: ["Agus", "Heri", "Jajang", "Yusuf"]
+    petugas: ["EDED", "SUNARYO", "ACENG", "ADE N.", "DEDE A.", "DEDI S.", "KODIR", "TUTUS", "MUMU A.", "LATIP", "ADE S.", "UDI L."]
   },
   {
     hari: "Malam Kamis",
     lokasi: "Pos Kamling RT 006",
-    petugas: ["Dani", "Rahmat", "Yana", "Eman"]
+    petugas: ["HAMID", "BUSTANDI", "ADE K.", "AMIM", "ITANG", "JIDIN", "IDAN", "ASEP U.", "SUTISNA", "ADI", "ENCENG", "JAJANG FM"]
   },
   {
     hari: "Malam Jumat",
     lokasi: "Pos Kamling RT 006",
-    petugas: ["Hendra", "Taufik", "Cecep", "Adit"]
+    petugas: ["TETE", "ASEP BQ", "SUBANA", "UDI A.", "IDAY", "NANANG", "MANSUR", "AJIB", "IMAT", "UTANG", "RIPAN", "SALMAN"]
   },
   {
     hari: "Malam Sabtu",
     lokasi: "Pos Kamling RT 006",
-    petugas: ["Rian", "Fajar", "Opik", "Diki"]
+    petugas: ["MUMU ASIR", "KOMAR", "HABIB", "UDIN H.", "SAEPULOH", "ASEP DN.", "RIAN", "NURYADIN", "HASAN", "IWAN", "DIAN", "KARIM"]
   },
   {
     hari: "Malam Minggu",
     lokasi: "Pos Kamling RT 006",
-    petugas: ["Wildan", "Sandi", "Roni", "Usep"]
+    petugas: ["ATENG", "HAYAT", "AMAR", "DANI", "AJAT", "TO'AT", "DEDE H.", "SODIK", "OLIN", "UJU T.", "YANA", "ECEP"]
   }
 ];
 
