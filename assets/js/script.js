@@ -267,25 +267,41 @@ const DATA_RONDA = JSON.parse(localStorage.getItem("DATA_RONDA")) || [
   }
 ];
 
-// ==========================================================================
-// 6. DATA PRESTASI & PENGHARGAAN
-// ==========================================================================
+// Clear stale mock data from localStorage if present
+if (localStorage.getItem("DATA_PRESTASI") && localStorage.getItem("DATA_PRESTASI").includes("Lingkungan Terbersih RW")) {
+  localStorage.removeItem("DATA_PRESTASI");
+}
+
 const DATA_PRESTASI = JSON.parse(localStorage.getItem("DATA_PRESTASI")) || [
   {
-    tahun: "2025",
-    judul: "Lingkungan Terbersih RW",
-    penyelenggara: "Kelurahan Salebu",
-    deskripsi: "RT 006 meraih penghargaan sebagai lingkungan terbersih tingkat RW.",
-    icon: "fas fa-trophy",
-    color: "bg-amber-100 text-amber-700"
+    judul: "Peserta Kreatif Drama Kabaret",
+    deskripsi: "RT 006 Warung Cikopi mendapatkan penghargaan sebagai peserta kreatif dalam kegiatan Drama Kabaret.",
+    tahun: "Tahun belum tersedia",
+    gambar: "assets/img/prestasi/prestasi-kabaret.jpg"
   },
   {
+    judul: "Juara III Lomba Jampana",
+    deskripsi: "RT 006 RW 005 Dusun Warung Cikopi meraih Juara III Lomba Jampana tingkat Desa Salebu dalam rangka HUT RI ke-79.",
     tahun: "2024",
-    judul: "Keamanan Lingkungan Terbaik",
-    penyelenggara: "Kecamatan Mangunreja",
-    deskripsi: "Penghargaan atas konsistensi ronda malam dan zero crime rate.",
-    icon: "fas fa-medal",
-    color: "bg-emerald-100 text-emerald-700"
+    gambar: "assets/img/prestasi/prestasi-hut79-jampana-kebersihan.jpg"
+  },
+  {
+    judul: "Juara I Lomba Kebersihan",
+    deskripsi: "RT 006 RW 005 Dusun Warung Cikopi meraih Juara I Lomba Kebersihan tingkat Desa Salebu dalam rangka HUT RI ke-79.",
+    tahun: "2024",
+    gambar: "assets/img/prestasi/prestasi-hut79-jampana-kebersihan.jpg"
+  },
+  {
+    judul: "Juara II Lomba Poskamling",
+    deskripsi: "RT 006 RW 005 Dusun Warung Cikopi meraih Juara II Lomba Poskamling tingkat Desa Salebu dalam rangka HUT RI ke-80.",
+    tahun: "2025",
+    gambar: "assets/img/prestasi/prestasi-hut80-poskamling-administrasi.jpg"
+  },
+  {
+    judul: "Juara Favorit Lomba Kebersihan, Kemeriahan, dan Administrasi RT",
+    deskripsi: "RT 006 RW 005 Dusun Warung Cikopi meraih Juara Favorit dalam lomba kebersihan, kemeriahan, dan administrasi RT tingkat Desa Salebu dalam rangka HUT RI ke-80.",
+    tahun: "2025",
+    gambar: "assets/img/prestasi/prestasi-hut80-poskamling-administrasi.jpg"
   }
 ];
 
@@ -848,24 +864,38 @@ function renderPrestasi() {
   container.innerHTML = "";
   
   DATA_PRESTASI.forEach(item => {
-    const cardHTML = `
-      <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-6 hover-card-trigger flex flex-col md:flex-row gap-5 items-start reveal">
-        <!-- Icon Container -->
-        <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-xl ${item.color}">
-          <i class="${item.icon}"></i>
-        </div>
-        <!-- Content Container -->
-        <div class="flex-grow">
-          <div class="flex items-center gap-2 mb-2">
-            <span class="px-2.5 py-0.5 rounded-full text-xxs font-extrabold bg-emerald-50 text-emerald-800 uppercase tracking-wide">
-              Tahun ${item.tahun}
-            </span>
-            <span class="text-slate-400 text-xs font-semibold">
-              <i class="fas fa-university mr-1"></i> ${item.penyelenggara}
-            </span>
+    let visualHtml = "";
+    if (item.gambar) {
+      visualHtml = `
+        <div class="w-full sm:w-40 h-48 sm:h-auto flex-shrink-0 relative overflow-hidden">
+          <img src="${item.gambar}" alt="${item.judul}" class="w-full h-full object-cover">
+          <div class="absolute top-3 left-3 bg-emerald-600 text-white text-xxs font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
+            ${item.tahun}
           </div>
-          <h4 class="text-lg font-bold text-slate-800 mb-1">${item.judul}</h4>
-          <p class="text-slate-600 text-sm leading-relaxed">${item.deskripsi}</p>
+        </div>
+      `;
+    } else {
+      // Fallback for admin panel additions or old structure
+      const colorClass = item.color || "bg-emerald-100 text-emerald-700";
+      const iconClass = item.icon || "fas fa-trophy";
+      visualHtml = `
+        <div class="w-full sm:w-40 h-32 sm:h-auto flex-shrink-0 relative flex items-center justify-center ${colorClass} text-3xl">
+          <i class="${iconClass}"></i>
+          <div class="absolute top-3 left-3 bg-emerald-600 text-white text-xxs font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
+            Tahun ${item.tahun}
+          </div>
+        </div>
+      `;
+    }
+
+    const cardHTML = `
+      <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden hover-card-trigger flex flex-col sm:flex-row gap-4 items-stretch reveal">
+        <!-- Visual Container -->
+        ${visualHtml}
+        <!-- Content Container -->
+        <div class="flex-grow p-5 flex flex-col justify-center">
+          <h4 class="text-lg font-bold text-slate-800 mb-2 leading-snug">${item.judul}</h4>
+          <p class="text-slate-600 text-sm leading-relaxed mb-1">${item.deskripsi}</p>
         </div>
       </div>
     `;
