@@ -4,6 +4,17 @@
 // Semua perubahan akan otomatis diterapkan ke tampilan HTML.
 // ==========================================================================
 
+// Version buster untuk mereset localStorage jika ada perubahan data bawaan di script.js
+const DATA_VERSION = "20260707_v1";
+if (localStorage.getItem("DATA_VERSION") !== DATA_VERSION) {
+  localStorage.removeItem("DATA_RONDA");
+  localStorage.removeItem("DATA_PENGUMUMAN");
+  localStorage.removeItem("DATA_KEGIATAN");
+  localStorage.removeItem("DATA_GALERI");
+  localStorage.removeItem("DATA_PRESTASI");
+  localStorage.setItem("DATA_VERSION", DATA_VERSION);
+}
+
 const RT_CONFIG = {
   namaRT: "RT 006 Warung Cikopi",
   alamatRT: "Kp. Warung Cikopi, Ds. Salebu, Kec. Mangunreja, Kab. Tasikmalaya",
