@@ -41,7 +41,6 @@ const DATA_PENGURUS = {
   ketua: {
     roleName: "Ketua RT",
     nama: "Kusdiana",
-    foto: "assets/img/pak-rt.png",
     icon: "fas fa-user-shield",
     tugas: "memimpin organisasi, mengoordinasikan kegiatan, menyalurkan aspirasi warga, dan melayani urusan administrasi"
   },
@@ -87,11 +86,11 @@ const DATA_PENGURUS = {
     icon: "fas fa-shield-alt",
     tugas: "mengoordinasikan ronda malam bergilir dan menjaga ketertiban lingkungan"
   },
-  pelatihan: {
-    roleName: "Seksi Pelatihan",
+  pelayanan: {
+    roleName: "Seksi Pelayanan",
     nama: ["Ibu Iner", "Bpk. Hasan"],
     icon: "fas fa-graduation-cap",
-    tugas: "mengoordinasikan program edukasi dan peningkatan keterampilan warga"
+    tugas: "mengoordinasikan pelayanan warga dan administrasi sosial lingkungan"
   },
   wirausaha: {
     roleName: "Seksi Wirausaha",
@@ -396,21 +395,6 @@ function renderOrganigram() {
       ? "text-amber-300 font-bold uppercase tracking-widest text-xs mt-1"
       : "text-emerald-700 font-bold uppercase tracking-wider text-xxs mt-0.5";
 
-    let photoHtml = "";
-    if (data.foto) {
-      photoHtml = `
-        <div class="w-20 h-20 rounded-full border-4 border-amber-400 shadow-md overflow-hidden mb-2 mx-auto">
-          <img src="${data.foto}" alt="${Array.isArray(data.nama) ? data.nama[0] : data.nama}" class="w-full h-full object-cover">
-        </div>
-      `;
-    } else {
-      photoHtml = `
-        <div class="w-10 h-10 ${iconClass} rounded-full flex items-center justify-center mb-2 text-base font-bold">
-          <i class="${data.icon}"></i>
-        </div>
-      `;
-    }
-
     let namesHtml = "";
     if (isMain) {
       if (Array.isArray(data.nama)) {
@@ -433,7 +417,9 @@ function renderOrganigram() {
     return `
       <div class="organigram-card ${cardClass} rounded-2xl p-5 text-center hover-card-trigger flex flex-col items-center justify-between h-full w-full">
         <div class="flex flex-col items-center w-full">
-          ${photoHtml}
+          <div class="w-10 h-10 ${iconClass} rounded-full flex items-center justify-center mb-2 text-base font-bold">
+            <i class="${data.icon}"></i>
+          </div>
           <p class="${titleClass}">${data.roleName}</p>
           ${namesHtml}
         </div>
@@ -486,7 +472,7 @@ function renderOrganigram() {
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full mt-4">
         <div>${createCard('keagamaan', DATA_PENGURUS.keagamaan)}</div>
         <div>${createCard('keamanan', DATA_PENGURUS.keamanan)}</div>
-        <div>${createCard('pelatihan', DATA_PENGURUS.pelatihan)}</div>
+        <div>${createCard('pelayanan', DATA_PENGURUS.pelayanan)}</div>
         <div>${createCard('wirausaha', DATA_PENGURUS.wirausaha)}</div>
         <div>${createCard('gotongRoyong', DATA_PENGURUS.gotongRoyong)}</div>
         <div>${createCard('kesejahteraan', DATA_PENGURUS.kesejahteraan)}</div>
