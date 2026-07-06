@@ -191,38 +191,24 @@ const DATA_KEGIATAN = JSON.parse(localStorage.getItem("DATA_KEGIATAN")) || [
 ];
 
 // 4. DATA GALERI FOTO RT 006
-// Silakan ganti nilai 'image' dengan path gambar lokal Anda apabila sudah ada, contoh: "assets/img/foto1.jpg"
-// Saat ini menggunakan Unsplash premium mockups untuk visual terbaik pada demo pertama.
 const DATA_GALERI = JSON.parse(localStorage.getItem("DATA_GALERI")) || [
   {
-    judul: "Logo RT 006",
-    image: "assets/img/logo-rt06.jpg",
-    deskripsi: "Logo resmi RT 006 Warung Cikopi, melambangkan keharmonisan warga."
+    judul: "Ronda Malam RT 006",
+    deskripsi: "Dokumentasi kegiatan ronda malam warga RT 006 dalam menjaga keamanan dan ketertiban lingkungan.",
+    kategori: "Keamanan Lingkungan",
+    gambar: "assets/img/galeri/ronda-malam-rt06.png"
   },
   {
-    judul: "Foto Pos Kamling",
-    image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&auto=format&fit=crop&q=80",
-    deskripsi: "Pos ronda utama RT 006 sebagai pusat keamanan warga."
+    judul: "Pos Kamling RT 006",
+    deskripsi: "Dokumentasi Pos Kamling RT 006 Warung Cikopi sebagai sarana ronda dan keamanan lingkungan warga.",
+    kategori: "Fasilitas Lingkungan",
+    gambar: "assets/img/galeri/pos-kamling-rt06.png"
   },
   {
-    judul: "Foto Kerja Bakti",
-    image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&auto=format&fit=crop&q=80",
-    deskripsi: "Kebersamaan warga saat melakukan gotong royong membersihkan saluran air."
-  },
-  {
-    judul: "Foto Ronda Malam",
-    image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=800&auto=format&fit=crop&q=80",
-    deskripsi: "Petugas ronda bersiap melakukan patroli keliling pemukiman."
-  },
-  {
-    judul: "Foto Rapat Warga",
-    image: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=800&auto=format&fit=crop&q=80",
-    deskripsi: "Musyawarah pengurus dan tokoh masyarakat membahas program lingkungan."
-  },
-  {
-    judul: "Foto Lingkungan RT",
-    image: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800&auto=format&fit=crop&q=80",
-    deskripsi: "Kondisi jalan lingkungan RT 006 Warung Cikopi yang asri."
+    judul: "Gotong Royong Warga",
+    deskripsi: "Kegiatan gotong royong warga RT 006 dalam menjaga kebersihan, kerapian, dan kenyamanan lingkungan.",
+    kategori: "Kegiatan Warga",
+    gambar: "assets/img/galeri/gotong-royong-rt06.jpg"
   }
 ];
 
@@ -270,6 +256,9 @@ const DATA_RONDA = JSON.parse(localStorage.getItem("DATA_RONDA")) || [
 // Clear stale mock data from localStorage if present
 if (localStorage.getItem("DATA_PRESTASI") && localStorage.getItem("DATA_PRESTASI").includes("Lingkungan Terbersih RW")) {
   localStorage.removeItem("DATA_PRESTASI");
+}
+if (localStorage.getItem("DATA_GALERI") && (localStorage.getItem("DATA_GALERI").includes("unsplash.com") || localStorage.getItem("DATA_GALERI").includes("logo-rt06"))) {
+  localStorage.removeItem("DATA_GALERI");
 }
 
 const DATA_PRESTASI = JSON.parse(localStorage.getItem("DATA_PRESTASI")) || [
@@ -581,9 +570,16 @@ function renderGaleri() {
   container.innerHTML = "";
   
   DATA_GALERI.forEach((item, index) => {
+    const imgSrc = item.gambar || item.image;
+    const categoryBadge = item.kategori ? `
+      <div class="absolute top-4 left-4 bg-emerald-600/90 text-white text-xxs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm z-10">
+        ${item.kategori}
+      </div>
+    ` : "";
     const cardHTML = `
       <div class="group relative overflow-hidden rounded-2xl shadow-md cursor-pointer reveal" onclick="openLightbox(${index})">
-        <img src="${item.image}" alt="${item.judul}" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=600&auto=format&fit=crop&q=80';">
+        ${categoryBadge}
+        <img src="${imgSrc}" alt="${item.judul}" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=600&auto=format&fit=crop&q=80';">
         <div class="absolute inset-0 bg-gradient-to-t from-primary-dark via-transparent to-transparent opacity-90 transition-opacity duration-300"></div>
         <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
           <h4 class="font-bold text-lg leading-tight mb-1 text-white">${item.judul}</h4>
@@ -655,7 +651,7 @@ function openLightbox(index) {
   if (!modal || !modalImg || !modalCaption) return;
   
   activeImageIndex = index;
-  modalImg.src = DATA_GALERI[index].image;
+  modalImg.src = DATA_GALERI[index].gambar || DATA_GALERI[index].image;
   // Fallback image in case
   modalImg.onerror = function() {
     this.src = 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&auto=format&fit=crop&q=80';
@@ -687,7 +683,7 @@ function changeLightboxImage(direction) {
   const modalCaption = document.getElementById("lightboxCaption");
   
   if (modalImg && modalCaption) {
-    modalImg.src = DATA_GALERI[activeImageIndex].image;
+    modalImg.src = DATA_GALERI[activeImageIndex].gambar || DATA_GALERI[activeImageIndex].image;
     modalCaption.textContent = DATA_GALERI[activeImageIndex].judul + " - " + DATA_GALERI[activeImageIndex].deskripsi;
   }
 }
