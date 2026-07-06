@@ -33,48 +33,94 @@ const RT_CONFIG = {
 // Note: Nama-nama di bawah ini dihubungkan langsung ke elemen organigram.
 const DATA_PENGURUS = {
   penasihat: {
-    nama: "Dede Sunarya",
-    tugas: "memberikan arahan dan masukan kepada pengurus RT"
+    roleName: "Penasihat",
+    nama: ["A.J. Hasanudin", "A.J. Aep", "Ust. Dede", "Bpk. Udi"],
+    icon: "fas fa-user-tie",
+    tugas: "memberikan arahan, saran, dan pertimbangan kepada pengurus RT untuk kebaikan lingkungan"
   },
   ketua: {
+    roleName: "Ketua RT",
     nama: "Kusdiana",
-    tugas: "memimpin dan mengoordinasikan kegiatan warga serta pelayanan administrasi"
+    icon: "fas fa-user-shield",
+    tugas: "memimpin organisasi, mengoordinasikan kegiatan, menyalurkan aspirasi warga, dan melayani urusan administrasi"
   },
   wakilKetua: {
-    nama: "Jajat Sudrajat",
+    roleName: "Wakil Ketua RT",
+    nama: "Belum tersedia",
+    icon: "fas fa-user-friends",
     tugas: "membantu tugas Ketua RT dan mewakili jika berhalangan"
   },
   sekretaris: {
-    nama: "Iis Ahyantini",
-    tugas: "mengelola persuratan, notulensi rapat, dan arsip data kependudukan"
+    roleName: "Sekretaris",
+    nama: "Ibu Iis",
+    icon: "fas fa-file-signature",
+    tugas: "mengelola persuratan, notulen rapat, pencatatan data kependudukan warga, dan arsip administrasi"
   },
   bendahara: {
-    nama: "Kodir",
-    tugas: "mengelola kas, keuangan pembangunan, dan laporan berkala warga"
+    roleName: "Bendahara",
+    nama: "Bpk. Odir",
+    icon: "fas fa-wallet",
+    tugas: "mengelola kas, keuangan pembangunan, dan laporan keuangan warga secara berkala"
+  },
+  humasInternal: {
+    roleName: "Humas Internal",
+    nama: ["Bpk. Ateng", "Bpk. Tete"],
+    icon: "fas fa-bullhorn",
+    tugas: "menghubungkan warga dan pengurus serta menyebarkan informasi lingkungan"
+  },
+  humasEksternal: {
+    roleName: "Humas Eksternal",
+    nama: ["Bpk. Ahim", "Bpk. Mumu"],
+    icon: "fas fa-comments",
+    tugas: "membantu koordinasi hubungan masyarakat di lingkungan RT"
+  },
+  phbi: {
+    roleName: "Seksi Keagamaan",
+    nama: ["Ust. Ana", "Ust. Iwan", "Bpk. Amar"],
+    icon: "fas fa-calendar-alt",
+    tugas: "mengoordinasikan kegiatan ibadah dan peringatan hari besar keagamaan (PHBI)"
   },
   keamanan: {
-    nama: "Eded",
-    tugas: "mengoordinasikan ronda malam dan menjaga ketertiban lingkungan"
-  },
-  keagamaan: {
-    nama: "Ust. Ana Sutisna",
-    tugas: "mengoordinasikan kegiatan ibadah dan pembinaan kerukunan warga"
-  },
-  sosial: {
-    nama: "Dede Suherlan",
-    tugas: "mengoordinasikan kegiatan kepedulian sosial, gotong royong, dan duka cita"
+    roleName: "Seksi Keamanan",
+    nama: ["Bpk. Eded", "Bpk. Amang S.", "Bpk. Iday"],
+    icon: "fas fa-shield-alt",
+    tugas: "mengoordinasikan ronda malam bergilir dan menjaga ketertiban lingkungan"
   },
   pelayanan: {
-    nama: "Hasan Anshori",
-    tugas: "membantu pelayanan administrasi umum dan kebutuhan informasi warga"
+    roleName: "Seksi Pelayanan",
+    nama: ["Ibu Iner", "Bpk. Hasan"],
+    icon: "fas fa-graduation-cap",
+    tugas: "mengoordinasikan program edukasi and peningkatan keterampilan warga"
   },
-  kepemudaan: {
-    nama: "Bunyamin",
+  wirausaha: {
+    roleName: "Seksi Wirausaha",
+    nama: ["Bpk. Vigi", "Bpk. Asep"],
+    icon: "fas fa-store",
+    tugas: "mengoordinasikan pengembangan ekonomi dan wirausaha warga"
+  },
+  gotongRoyong: {
+    roleName: "Seksi Gotong Royong",
+    nama: ["Bpk. Itang", "Bpk. Opik", "Saepuloh"],
+    icon: "fas fa-hands-helping",
+    tugas: "mengoordinasikan kerja bakti, kebersihan, dan gotong royong warga"
+  },
+  kesejahteraan: {
+    roleName: "Seksi Kesejahteraan",
+    nama: ["Ibu Lilis", "Ibu Mimin"],
+    icon: "fas fa-hand-holding-heart",
+    tugas: "mengoordinasikan kepedulian sosial dan program kesejahteraan warga"
+  },
+  pemuda: {
+    roleName: "Seksi Pemuda",
+    nama: ["Aben", "Ripandi"],
+    icon: "fas fa-running",
     tugas: "mewadahi kegiatan olahraga, kreativitas pemuda, dan Karang Taruna"
   },
   pkk: {
-    nama: "Yuni Maesaroh",
-    tugas: "mengoordinasikan pembinaan kesejahteraan keluarga dan kesehatan ibu/anak"
+    roleName: "Seksi PKK",
+    nama: ["Yuni", "Nursani", "Dede"],
+    icon: "fas fa-female",
+    tugas: "mengoordinasikan pembinaan kesejahteraan keluarga dan program PKK"
   }
 };
 
@@ -268,23 +314,42 @@ function renderInfoUmum() {
   document.querySelectorAll(".rt-ketua-name").forEach(el => el.textContent = RT_CONFIG.namaKetuaRT);
   
   // Stats Beranda
-  document.getElementById("stat-kk-hero").textContent = RT_CONFIG.statistik.jumlahKK + " KK";
-  document.getElementById("stat-warga-hero").textContent = RT_CONFIG.statistik.jumlahWarga + " Jiwa";
-  document.getElementById("stat-pos-hero").textContent = RT_CONFIG.statistik.posKamling + " Unit";
-  document.getElementById("stat-status-hero").textContent = RT_CONFIG.statistik.statusProgram;
-  document.getElementById("stat-program-hero").textContent = RT_CONFIG.statistik.programUtama;
+  const statKkHero = document.getElementById("stat-kk-hero");
+  if (statKkHero) statKkHero.textContent = RT_CONFIG.statistik.jumlahKK + " KK";
+  const statWargaHero = document.getElementById("stat-warga-hero");
+  if (statWargaHero) statWargaHero.textContent = RT_CONFIG.statistik.jumlahWarga + " Jiwa";
+  const statPosHero = document.getElementById("stat-pos-hero");
+  if (statPosHero) statPosHero.textContent = RT_CONFIG.statistik.posKamling + " Unit";
+  const statStatusHero = document.getElementById("stat-status-hero");
+  if (statStatusHero) statStatusHero.textContent = RT_CONFIG.statistik.statusProgram;
+  
+  // New Stats in Hero Panel
+  const heroStatWarga = document.getElementById("hero-stat-warga");
+  if (heroStatWarga) heroStatWarga.textContent = RT_CONFIG.statistik.jumlahWarga + " Jiwa";
+  const heroStatKk = document.getElementById("hero-stat-kk");
+  if (heroStatKk) heroStatKk.textContent = RT_CONFIG.statistik.jumlahKK + " KK";
+  const heroStatStatus = document.getElementById("hero-stat-status");
+  if (heroStatStatus) heroStatStatus.textContent = RT_CONFIG.statistik.statusProgram;
 
   // Stats Profil
-  document.getElementById("stat-kk-profil").textContent = RT_CONFIG.statistik.jumlahKK + " KK";
-  document.getElementById("stat-warga-profil").textContent = RT_CONFIG.statistik.jumlahWarga + " Jiwa";
-  document.getElementById("stat-rumah-profil").textContent = RT_CONFIG.statistik.jumlahRumah + " Rumah";
-  document.getElementById("stat-pos-profil").textContent = RT_CONFIG.statistik.posKamling + " Unit";
+  const statKkProfil = document.getElementById("stat-kk-profil");
+  if (statKkProfil) statKkProfil.textContent = RT_CONFIG.statistik.jumlahKK + " KK";
+  const statWargaProfil = document.getElementById("stat-warga-profil");
+  if (statWargaProfil) statWargaProfil.textContent = RT_CONFIG.statistik.jumlahWarga + " Jiwa";
+  const statRumahProfil = document.getElementById("stat-rumah-profil");
+  if (statRumahProfil) statRumahProfil.textContent = RT_CONFIG.statistik.jumlahRumah + " Rumah";
+  const statPosProfil = document.getElementById("stat-pos-profil");
+  if (statPosProfil) statPosProfil.textContent = RT_CONFIG.statistik.posKamling + " Unit";
   
   // Kontak di footer/kontak
-  document.getElementById("kontak-alamat").textContent = RT_CONFIG.alamatRT;
-  document.getElementById("kontak-ketua").textContent = RT_CONFIG.namaKetuaRT;
-  document.getElementById("kontak-sekretaris").textContent = RT_CONFIG.kontak.namaSekretaris;
-  document.getElementById("kontak-bendahara").textContent = RT_CONFIG.kontak.namaBendahara;
+  const kontakAlamat = document.getElementById("kontak-alamat");
+  if (kontakAlamat) kontakAlamat.textContent = RT_CONFIG.alamatRT;
+  const kontakKetua = document.getElementById("kontak-ketua");
+  if (kontakKetua) kontakKetua.textContent = RT_CONFIG.namaKetuaRT;
+  const kontakSekretaris = document.getElementById("kontak-sekretaris");
+  if (kontakSekretaris) kontakSekretaris.textContent = RT_CONFIG.kontak.namaSekretaris;
+  const kontakBendahara = document.getElementById("kontak-bendahara");
+  if (kontakBendahara) kontakBendahara.textContent = RT_CONFIG.kontak.namaBendahara;
   
   // Link WhatsApp langsung di tombol-tombol
   document.querySelectorAll('a[href*="wa.me/"]').forEach(link => {
@@ -294,19 +359,130 @@ function renderInfoUmum() {
 
 // B. RENDER ORGANIGRAM (PENGURUS)
 function renderOrganigram() {
-  // Memasukkan nama dan tugas ke masing-masing posisi
-  const roles = ["penasihat", "ketua", "wakilKetua", "sekretaris", "bendahara", "keamanan", "keagamaan", "sosial", "pelayanan", "kepemudaan", "pkk"];
-  
-  roles.forEach(roleKey => {
-    // Cari elemen berdasarkan ID
-    const nameEl = document.getElementById(`nama-${roleKey}`);
-    const taskEl = document.getElementById(`tugas-${roleKey}`);
-    
-    if (DATA_PENGURUS[roleKey]) {
-      if (nameEl) nameEl.textContent = DATA_PENGURUS[roleKey].nama;
-      if (taskEl) taskEl.textContent = DATA_PENGURUS[roleKey].tugas;
+  const container = document.getElementById("organigram-root");
+  if (!container) return;
+
+  // Helper function to format names
+  const formatNames = (names) => {
+    if (Array.isArray(names)) {
+      return `
+        <ul class="text-xs font-semibold text-slate-700 mt-2 flex flex-col gap-1 items-center">
+          ${names.map(name => {
+            if (name === "Belum terbaca" || name === "Belum tersedia") {
+              return `<li class="text-slate-400 italic font-normal">${name}</li>`;
+            }
+            return `<li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>${name}</li>`;
+          }).join('')}
+        </ul>
+      `;
+    } else {
+      if (names === "Belum tersedia" || names === "Belum terbaca") {
+        return `<span class="text-slate-400 italic font-normal text-xs block mt-2">${names}</span>`;
+      }
+      return `<span class="text-slate-700 font-semibold text-sm block mt-2">${names}</span>`;
     }
-  });
+  };
+
+  // Helper function to create card HTML
+  const createCard = (key, data, isMain = false) => {
+    const cardClass = isMain 
+      ? "bg-gradient-to-br from-emerald-700 to-emerald-900 text-white shadow-xl ring-4 ring-emerald-100/50" 
+      : "bg-white border-2 border-emerald-600/70 shadow-md";
+    const iconClass = isMain
+      ? "bg-white text-emerald-800"
+      : "bg-emerald-50 text-emerald-800";
+    const titleClass = isMain
+      ? "text-amber-300 font-bold uppercase tracking-widest text-xs mt-1"
+      : "text-emerald-700 font-bold uppercase tracking-wider text-xxs mt-0.5";
+
+    let namesHtml = "";
+    if (isMain) {
+      if (Array.isArray(data.nama)) {
+        namesHtml = `
+          <ul class="text-xs font-semibold text-emerald-100 mt-2 flex flex-col gap-1 items-center">
+            ${data.nama.map(name => `<li class="flex items-center gap-1.5">${name}</li>`).join('')}
+          </ul>
+        `;
+      } else {
+        if (data.nama === "Belum tersedia" || data.nama === "Belum terbaca") {
+          namesHtml = `<span class="text-emerald-300 italic font-normal text-xs block mt-2">${data.nama}</span>`;
+        } else {
+          namesHtml = `<span class="text-white font-extrabold text-base block mt-2">${data.nama}</span>`;
+        }
+      }
+    } else {
+      namesHtml = formatNames(data.nama);
+    }
+
+    return `
+      <div class="organigram-card ${cardClass} rounded-2xl p-5 text-center hover-card-trigger flex flex-col items-center justify-between h-full w-full">
+        <div class="flex flex-col items-center w-full">
+          <div class="w-10 h-10 ${iconClass} rounded-full flex items-center justify-center mb-2 text-base font-bold">
+            <i class="${data.icon}"></i>
+          </div>
+          <p class="${titleClass}">${data.roleName}</p>
+          ${namesHtml}
+        </div>
+      </div>
+    `;
+  };
+
+  let html = `
+    <div class="flex flex-col items-center gap-6 w-full">
+      <!-- LEVEL 1: PENASIHAT -->
+      <div class="w-full max-w-sm">
+        ${createCard('penasihat', DATA_PENGURUS.penasihat)}
+      </div>
+
+      <!-- Arrow down to Ketua -->
+      <div class="w-0.5 h-6 bg-emerald-400"></div>
+
+      <!-- LEVEL 2: KETUA & WAKIL KETUA -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl">
+        ${createCard('ketua', DATA_PENGURUS.ketua, true)}
+        ${createCard('wakilKetua', DATA_PENGURUS.wakilKetua)}
+      </div>
+
+      <!-- Arrow down to Sekretaris & Bendahara -->
+      <div class="w-0.5 h-6 bg-emerald-400"></div>
+
+      <!-- LEVEL 3: SEKRETARIS & BENDAHARA -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl">
+        ${createCard('sekretaris', DATA_PENGURUS.sekretaris)}
+        ${createCard('bendahara', DATA_PENGURUS.bendahara)}
+      </div>
+
+      <!-- Arrow down to Humas -->
+      <div class="w-0.5 h-6 bg-emerald-400"></div>
+
+      <!-- LEVEL 4: HUMAS & HUMAS TAMBAHAN -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl">
+        ${createCard('humas', DATA_PENGURUS.humas)}
+        ${createCard('humasTambahan', DATA_PENGURUS.humasTambahan)}
+      </div>
+
+      <!-- Divider / Section Title for Seksi-Seksi -->
+      <div class="w-full text-center mt-6">
+        <div class="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 px-4 py-2 rounded-full text-xs font-bold text-emerald-800">
+          <i class="fas fa-users-cog"></i> SEKSI / DIVISI KERJA
+        </div>
+      </div>
+
+      <!-- LEVEL 5: SEKSI-SEKSI GRID -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full mt-4">
+        <div>${createCard('phbi', DATA_PENGURUS.phbi)}</div>
+        <div>${createCard('keamanan', DATA_PENGURUS.keamanan)}</div>
+        <div>${createCard('pelatihan', DATA_PENGURUS.pelatihan)}</div>
+        <div>${createCard('wirausaha', DATA_PENGURUS.wirausaha)}</div>
+        <div>${createCard('gotongRoyong', DATA_PENGURUS.gotongRoyong)}</div>
+        <div>${createCard('kesejahteraan', DATA_PENGURUS.kesejahteraan)}</div>
+        <div>${createCard('pemuda', DATA_PENGURUS.pemuda)}</div>
+        <div>${createCard('pkk', DATA_PENGURUS.pkk)}</div>
+      </div>
+    </div>
+  `;
+
+  container.innerHTML = html;
 }
 
 // C. RENDER PENGUMUMAN

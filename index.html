@@ -155,23 +155,29 @@
         
         <!-- Kolom Kanan: Logo / Banner & Info Cepat -->
         <div class="lg:col-span-5 flex flex-col gap-6 w-full max-w-md mx-auto lg:max-w-none">
-          <!-- Logo Display Card -->
-          <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-3xl p-6 shadow-2xl flex items-center gap-5">
-            <img src="assets/img/logo-rt06.jpg" alt="Logo RT 006" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-amber-400 shadow-lg" onerror="this.src='https://images.unsplash.com/photo-1590490360182-c33d57733427?w=200&auto=format&fit=crop&q=80';">
-            <div>
-              <h3 class="font-bold text-lg text-white">RT 006 Warung Cikopi</h3>
-              <p class="text-xs text-emerald-200 mt-1 leading-relaxed">Kp. Warung Cikopi, Ds. Salebu, Kec. Mangunreja, Kab. Tasikmalaya</p>
+          <!-- Logo & Stats Display Card -->
+          <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-3xl p-6 shadow-2xl flex flex-col gap-6">
+            <div class="flex items-center gap-5">
+              <img src="assets/img/logo-rt06.jpg" alt="Logo RT 006" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-amber-400 shadow-lg" onerror="this.src='https://images.unsplash.com/photo-1590490360182-c33d57733427?w=200&auto=format&fit=crop&q=80';">
+              <div>
+                <h3 class="font-bold text-lg text-white">RT 006 Warung Cikopi</h3>
+                <p class="text-xs text-emerald-200 mt-1 leading-relaxed">Kp. Warung Cikopi, Ds. Salebu, Kec. Mangunreja, Kab. Tasikmalaya</p>
+              </div>
             </div>
-          </div>
-
-          <!-- Highlight Program Utama -->
-          <div class="bg-gradient-to-r from-amber-500 to-yellow-500 rounded-3xl p-6 shadow-lg text-emerald-950 flex gap-4 items-start">
-            <div class="bg-white/20 p-3 rounded-2xl text-xl mt-1 text-emerald-900">
-              <i class="fas fa-lightbulb"></i>
-            </div>
-            <div>
-              <span class="text-xs font-extrabold uppercase tracking-wider text-emerald-900/80">Program Utama Lingkungan</span>
-              <h4 class="font-extrabold text-base sm:text-lg mt-1" id="stat-program-hero">Pengadaan KWh Listrik untuk Pos Kamling</h4>
+            
+            <div class="grid grid-cols-3 gap-3 pt-4 border-t border-white/10 text-center">
+              <div>
+                <span class="text-xxs text-emerald-300 uppercase tracking-wider font-bold block">Warga</span>
+                <span class="block text-sm font-extrabold text-white mt-0.5" id="hero-stat-warga">245 Jiwa</span>
+              </div>
+              <div>
+                <span class="text-xxs text-emerald-300 uppercase tracking-wider font-bold block">Keluarga</span>
+                <span class="block text-sm font-extrabold text-white mt-0.5" id="hero-stat-kk">75 KK</span>
+              </div>
+              <div>
+                <span class="text-xxs text-emerald-300 uppercase tracking-wider font-bold block">Status RT</span>
+                <span class="block text-sm font-extrabold text-amber-400 mt-0.5" id="hero-stat-status">Aktif</span>
+              </div>
             </div>
           </div>
         </div>
@@ -381,184 +387,8 @@
         </div>
 
         <!-- Desktop & Mobile Responsive Organigram Tree -->
-        <!-- container overflow-x agar tidak rusak di layar sangat kecil, scrollable ke samping dengan indikator visual -->
-        <div class="w-full overflow-x-auto pb-8 mb-12">
-          <div class="min-w-[760px] lg:min-w-0 flex flex-col items-center p-4">
-            
-            <!-- 1. PENASIHAT -->
-            <div class="flex flex-col items-center mb-6">
-              <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-56 relative z-10 hover-card-trigger">
-                <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-base font-bold">
-                  <i class="fas fa-user-tie"></i>
-                </div>
-                <h4 class="font-extrabold text-slate-800 text-base" id="nama-penasihat">Dede Sunarya</h4>
-                <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Penasihat</p>
-              </div>
-              <!-- Line Down -->
-              <div class="w-0.5 h-6 bg-emerald-400"></div>
-            </div>
-
-            <!-- 2. KETUA RT -->
-            <div class="flex flex-col items-center mb-6">
-              <div class="organigram-card bg-gradient-to-br from-emerald-700 to-emerald-900 text-white rounded-2xl shadow-xl p-5 text-center w-60 relative z-10 ring-4 ring-emerald-100 hover-card-trigger">
-                <div class="w-12 h-12 bg-white text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-xl font-bold">
-                  <i class="fas fa-user-shield"></i>
-                </div>
-                <h4 class="font-extrabold text-white text-lg" id="nama-ketua">Kusdiana</h4>
-                <p class="text-xs font-bold text-amber-300 uppercase tracking-widest mt-0.5">Ketua RT</p>
-              </div>
-              <!-- Line Down -->
-              <div class="w-0.5 h-6 bg-emerald-400"></div>
-            </div>
-
-            <!-- 3. WAKIL KETUA -->
-            <div class="flex flex-col items-center w-full mb-6">
-              <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-56 relative z-10 hover-card-trigger">
-                <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-base font-bold">
-                  <i class="fas fa-user-friends"></i>
-                </div>
-                <h4 class="font-extrabold text-slate-800 text-base" id="nama-wakilKetua">Jajat Sudrajat</h4>
-                <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Wakil Ketua</p>
-              </div>
-              <!-- Line Down -->
-              <div class="w-0.5 h-6 bg-emerald-400"></div>
-              
-              <!-- Row 1 Horizontal Connection Line (desktop) -->
-              <div class="hidden md:block w-[66.67%] h-0.5 bg-emerald-400"></div>
-            </div>
-
-            <!-- 4. SEKRETARIS, BIDANG, BENDAHARA GRID -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl items-start mb-6">
-              
-              <!-- SEKRETARIS -->
-              <div class="flex flex-col items-center">
-                <div class="hidden md:block w-0.5 h-6 bg-emerald-400 mx-auto"></div>
-                <div class="md:hidden w-0.5 h-6 bg-emerald-400 mx-auto"></div>
-                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-52 relative z-10 hover-card-trigger">
-                  <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-base font-bold">
-                    <i class="fas fa-file-signature"></i>
-                  </div>
-                  <h4 class="font-extrabold text-slate-800 text-sm" id="nama-sekretaris">Iis Ahyantini</h4>
-                  <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Sekretaris</p>
-                </div>
-              </div>
-
-              <!-- SEKSI BIDANG -->
-              <div class="flex flex-col items-center">
-                <div class="hidden md:block w-0.5 h-6 bg-emerald-400 mx-auto"></div>
-                <div class="md:hidden w-0.5 h-6 bg-emerald-400 mx-auto"></div>
-                <div class="organigram-card bg-emerald-50 border-2 border-dashed border-emerald-400 rounded-2xl p-4 text-center w-52 relative z-10 hover-card-trigger">
-                  <div class="w-10 h-10 bg-emerald-200 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-base font-bold">
-                    <i class="fas fa-users-cog"></i>
-                  </div>
-                  <h4 class="font-extrabold text-emerald-900 text-sm">Seksi Bidang</h4>
-                  <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Divisi Kerja</p>
-                </div>
-                <!-- Line down to Row 2 branch -->
-                <div class="w-0.5 h-8 bg-emerald-400 mx-auto"></div>
-              </div>
-
-              <!-- BENDAHARA -->
-              <div class="flex flex-col items-center">
-                <div class="hidden md:block w-0.5 h-6 bg-emerald-400 mx-auto"></div>
-                <div class="md:hidden w-0.5 h-6 bg-emerald-400 mx-auto"></div>
-                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-52 relative z-10 hover-card-trigger">
-                  <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-base font-bold">
-                    <i class="fas fa-wallet"></i>
-                  </div>
-                  <h4 class="font-extrabold text-slate-800 text-sm" id="nama-bendahara">Kodir</h4>
-                  <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Bendahara</p>
-                </div>
-              </div>
-
-            </div>
-
-            <!-- Row 2 Horizontal Connection Line for Subdivisions (desktop) -->
-            <div class="hidden md:block w-[83.33%] h-0.5 bg-emerald-400"></div>
-
-            <!-- 5. SUBDIVISI / BIDANG KERJA GRID (6 COLUMNS) -->
-            <div class="grid grid-cols-2 md:grid-cols-6 gap-4 w-full max-w-6xl mt-0">
-              
-              <!-- Keamanan -->
-              <div class="flex flex-col items-center">
-                <div class="hidden md:block w-0.5 h-6 bg-emerald-400 mx-auto"></div>
-                <div class="md:hidden w-0.5 h-4 bg-emerald-400 mx-auto"></div>
-                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-full max-w-[150px] relative z-10 hover-card-trigger">
-                  <div class="w-9 h-9 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">
-                    <i class="fas fa-shield-alt"></i>
-                  </div>
-                  <h4 class="font-extrabold text-slate-800 text-xs" id="nama-keamanan">Eded</h4>
-                  <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Keamanan</p>
-                </div>
-              </div>
-
-              <!-- Keagamaan -->
-              <div class="flex flex-col items-center">
-                <div class="hidden md:block w-0.5 h-6 bg-emerald-400 mx-auto"></div>
-                <div class="md:hidden w-0.5 h-4 bg-emerald-400 mx-auto"></div>
-                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-full max-w-[150px] relative z-10 hover-card-trigger">
-                  <div class="w-9 h-9 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">
-                    <i class="fas fa-mosque"></i>
-                  </div>
-                  <h4 class="font-extrabold text-slate-800 text-xs" id="nama-keagamaan">Ust. Ana Sutisna</h4>
-                  <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Keagamaan</p>
-                </div>
-              </div>
-
-              <!-- Sosial -->
-              <div class="flex flex-col items-center">
-                <div class="hidden md:block w-0.5 h-6 bg-emerald-400 mx-auto"></div>
-                <div class="md:hidden w-0.5 h-4 bg-emerald-400 mx-auto"></div>
-                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-full max-w-[150px] relative z-10 hover-card-trigger">
-                  <div class="w-9 h-9 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">
-                    <i class="fas fa-hand-holding-heart"></i>
-                  </div>
-                  <h4 class="font-extrabold text-slate-800 text-xs" id="nama-sosial">Dede Suherlan</h4>
-                  <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Sosial</p>
-                </div>
-              </div>
-
-              <!-- Pelayanan -->
-              <div class="flex flex-col items-center">
-                <div class="hidden md:block w-0.5 h-6 bg-emerald-400 mx-auto"></div>
-                <div class="md:hidden w-0.5 h-4 bg-emerald-400 mx-auto"></div>
-                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-full max-w-[150px] relative z-10 hover-card-trigger">
-                  <div class="w-9 h-9 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">
-                    <i class="fas fa-concierge-bell"></i>
-                  </div>
-                  <h4 class="font-extrabold text-slate-800 text-xs" id="nama-pelayanan">Hasan Anshori</h4>
-                  <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Pelayanan</p>
-                </div>
-              </div>
-
-              <!-- Kepemudaan -->
-              <div class="flex flex-col items-center">
-                <div class="hidden md:block w-0.5 h-6 bg-emerald-400 mx-auto"></div>
-                <div class="md:hidden w-0.5 h-4 bg-emerald-400 mx-auto"></div>
-                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-full max-w-[150px] relative z-10 hover-card-trigger">
-                  <div class="w-9 h-9 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">
-                    <i class="fas fa-running"></i>
-                  </div>
-                  <h4 class="font-extrabold text-slate-800 text-xs" id="nama-kepemudaan">Bunyamin</h4>
-                  <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">Kepemudaan</p>
-                </div>
-              </div>
-
-              <!-- PKK -->
-              <div class="flex flex-col items-center">
-                <div class="hidden md:block w-0.5 h-6 bg-emerald-400 mx-auto"></div>
-                <div class="md:hidden w-0.5 h-4 bg-emerald-400 mx-auto"></div>
-                <div class="organigram-card bg-white border-2 border-emerald-600 rounded-2xl shadow-md p-4 text-center w-full max-w-[150px] relative z-10 hover-card-trigger">
-                  <div class="w-9 h-9 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">
-                    <i class="fas fa-female"></i>
-                  </div>
-                  <h4 class="font-extrabold text-slate-800 text-xs" id="nama-pkk">Yuni Maesaroh</h4>
-                  <p class="text-xxs font-bold text-emerald-700 uppercase tracking-wider mt-0.5">PKK</p>
-                </div>
-              </div>
-
-            </div>
-          </div>
+        <div class="w-full pb-8 mb-12" id="organigram-root">
+          <!-- Dinamis di-render oleh JavaScript -->
         </div>
 
         <!-- Rincian Tugas Pengurus -->
@@ -614,7 +444,17 @@
               </div>
               <div>
                 <h4 class="font-bold text-slate-800">Bendahara</h4>
-                <p class="text-slate-500 text-xs mt-1">Mengelola pemasukan, pengeluaran kas pembangunan, menyusun laporan keuangan kegiatan warga secara berkala.</p>
+                <p class="text-slate-500 text-xs mt-1">Mengelola kas, keuangan pembangunan, dan laporan keuangan warga secara berkala.</p>
+              </div>
+            </div>
+            <!-- Humas -->
+            <div class="flex gap-3 items-start">
+              <div class="bg-emerald-50 text-emerald-700 rounded-xl p-2.5 mt-0.5">
+                <i class="fas fa-bullhorn"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-800">Humas & Humas Tambahan</h4>
+                <p class="text-slate-500 text-xs mt-1">Menghubungkan warga dan pengurus, menyebarkan informasi, serta membantu koordinasi hubungan masyarakat di lingkungan RT.</p>
               </div>
             </div>
             <!-- Keamanan -->
@@ -623,47 +463,67 @@
                 <i class="fas fa-shield-alt"></i>
               </div>
               <div>
-                <h4 class="font-bold text-slate-800">Keamanan</h4>
+                <h4 class="font-bold text-slate-800">Seksi Keamanan</h4>
                 <p class="text-slate-500 text-xs mt-1">Mengoordinasikan ronda malam bergilir, memantau keamanan wilayah, dan menjaga ketertiban lingkungan.</p>
               </div>
             </div>
-            <!-- Keagamaan -->
+            <!-- PHBI -->
             <div class="flex gap-3 items-start">
               <div class="bg-emerald-50 text-emerald-700 rounded-xl p-2.5 mt-0.5">
                 <i class="fas fa-mosque"></i>
               </div>
               <div>
-                <h4 class="font-bold text-slate-800">Keagamaan</h4>
-                <p class="text-slate-500 text-xs mt-1">Mengoordinasikan kegiatan ibadah, peringatan hari besar keagamaan, serta memelihara kerukunan antarumat beragama.</p>
+                <h4 class="font-bold text-slate-800">Seksi PHBI</h4>
+                <p class="text-slate-500 text-xs mt-1">Mengoordinasikan kegiatan ibadah, peringatan hari besar keagamaan (PHBI), serta memelihara kerukunan antarwarga.</p>
               </div>
             </div>
-            <!-- Bidang Sosial -->
+            <!-- Pelatihan -->
+            <div class="flex gap-3 items-start">
+              <div class="bg-emerald-50 text-emerald-700 rounded-xl p-2.5 mt-0.5">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-800">Seksi Pelatihan</h4>
+                <p class="text-slate-500 text-xs mt-1">Mengoordinasikan program edukasi, peningkatan keterampilan warga, dan pelatihan bermanfaat.</p>
+              </div>
+            </div>
+            <!-- Wirausaha -->
+            <div class="flex gap-3 items-start">
+              <div class="bg-emerald-50 text-emerald-700 rounded-xl p-2.5 mt-0.5">
+                <i class="fas fa-store"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-800">Seksi Wirausaha</h4>
+                <p class="text-slate-500 text-xs mt-1">Mengoordinasikan pengembangan ekonomi, pembinaan usaha kecil, dan wirausaha warga.</p>
+              </div>
+            </div>
+            <!-- Gotong Royong -->
+            <div class="flex gap-3 items-start">
+              <div class="bg-emerald-50 text-emerald-700 rounded-xl p-2.5 mt-0.5">
+                <i class="fas fa-hands-helping"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-800">Seksi Gotong Royong</h4>
+                <p class="text-slate-500 text-xs mt-1">Mengoordinasikan kerja bakti, kebersihan, dan pemeliharaan fasilitas umum di lingkungan RT.</p>
+              </div>
+            </div>
+            <!-- Kesejahteraan -->
             <div class="flex gap-3 items-start">
               <div class="bg-emerald-50 text-emerald-700 rounded-xl p-2.5 mt-0.5">
                 <i class="fas fa-hand-holding-heart"></i>
               </div>
               <div>
-                <h4 class="font-bold text-slate-800">Bidang Sosial</h4>
-                <p class="text-slate-500 text-xs mt-1">Mengoordinasikan kepedulian sosial warga, santunan duka cita, aksi gotong royong, dan bantuan kemanusiaan.</p>
+                <h4 class="font-bold text-slate-800">Seksi Kesejahteraan</h4>
+                <p class="text-slate-500 text-xs mt-1">Mengoordinasikan kepedulian sosial warga, program kesejahteraan, dan bantuan sosial.</p>
               </div>
             </div>
-            <!-- Bidang Pelayanan -->
-            <div class="flex gap-3 items-start">
-              <div class="bg-emerald-50 text-emerald-700 rounded-xl p-2.5 mt-0.5">
-                <i class="fas fa-concierge-bell"></i>
-              </div>
-              <div>
-                <h4 class="font-bold text-slate-800">Bidang Pelayanan</h4>
-                <p class="text-slate-500 text-xs mt-1">Membantu kebutuhan administrasi warga, penyebaran informasi umum, serta fasilitas umum lingkungan RT.</p>
-              </div>
-            </div>
-            <!-- Kepemudaan -->
+            <!-- Pemuda -->
             <div class="flex gap-3 items-start">
               <div class="bg-emerald-50 text-emerald-700 rounded-xl p-2.5 mt-0.5">
                 <i class="fas fa-running"></i>
               </div>
               <div>
-                <h4 class="font-bold text-slate-800">Kepemudaan</h4>
+                <h4 class="font-bold text-slate-800">Seksi Pemuda</h4>
                 <p class="text-slate-500 text-xs mt-1">Membina kegiatan kepemudaan, Karang Taruna, kegiatan olahraga, seni budaya, serta partisipasi aktif pemuda.</p>
               </div>
             </div>
@@ -673,8 +533,8 @@
                 <i class="fas fa-female"></i>
               </div>
               <div>
-                <h4 class="font-bold text-slate-800">PKK (Pemberdayaan Kesejahteraan Keluarga)</h4>
-                <p class="text-slate-500 text-xs mt-1">Mengoordinasikan pembinaan kesejahteraan keluarga, kegiatan Posyandu, kesehatan ibu dan anak, arisan PKK, serta pemberdayaan perempuan di RT.</p>
+                <h4 class="font-bold text-slate-800">Seksi PKK</h4>
+                <p class="text-slate-500 text-xs mt-1">Mengoordinasikan pembinaan kesejahteraan keluarga, kegiatan Posyandu, kesehatan ibu dan anak, serta arisan PKK.</p>
               </div>
             </div>
           </div>
