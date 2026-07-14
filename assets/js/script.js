@@ -8,7 +8,7 @@ const RT_CONFIG = {
   namaRT: "RT 006 Warung Cikopi",
   alamatRT: "Kp. Warung Cikopi, Ds. Salebu, Kec. Mangunreja, Kab. Tasikmalaya",
   namaKetuaRT: "Kusdiana",
-  
+
   // Statistik RT (Akan terupdate di Beranda & Profil)
   statistik: {
     jumlahKK: 105,
@@ -18,7 +18,7 @@ const RT_CONFIG = {
     statusProgram: "Aktif",
     programUtama: "Pengadaan KWh Listrik untuk Pos Kamling"
   },
-  
+
   // Kontak Pengurus untuk WhatsApp dan Tampilan
   kontak: {
     noWaKetua: "6282218222557", // Ganti dengan nomor WA Ketua RT (awali dengan kode negara 62, tanpa tanda + atau spasi)
@@ -46,7 +46,7 @@ const DATA_PENGURUS = {
   },
   wakilKetua: {
     roleName: "Wakil Ketua RT",
-    nama: "Belum tersedia",
+    nama: "Ajat Sudrajat",
     icon: "fas fa-user-friends",
     tugas: "membantu tugas Ketua RT dan mewakili jika berhalangan"
   },
@@ -317,7 +317,7 @@ function renderInfoUmum() {
   document.querySelectorAll(".rt-title").forEach(el => el.textContent = RT_CONFIG.namaRT);
   document.querySelectorAll(".rt-address").forEach(el => el.textContent = RT_CONFIG.alamatRT);
   document.querySelectorAll(".rt-ketua-name").forEach(el => el.textContent = RT_CONFIG.namaKetuaRT);
-  
+
   // Stats Beranda
   const statKkHero = document.getElementById("stat-kk-hero");
   if (statKkHero) statKkHero.textContent = RT_CONFIG.statistik.jumlahKK + " KK";
@@ -327,7 +327,7 @@ function renderInfoUmum() {
   if (statPosHero) statPosHero.textContent = RT_CONFIG.statistik.posKamling + " Unit";
   const statStatusHero = document.getElementById("stat-status-hero");
   if (statStatusHero) statStatusHero.textContent = RT_CONFIG.statistik.statusProgram;
-  
+
   // New Stats in Hero Panel
   const heroStatWarga = document.getElementById("hero-stat-warga");
   if (heroStatWarga) heroStatWarga.textContent = RT_CONFIG.statistik.jumlahWarga + " Jiwa";
@@ -345,7 +345,7 @@ function renderInfoUmum() {
   if (statRumahProfil) statRumahProfil.textContent = RT_CONFIG.statistik.jumlahRumah + " Rumah";
   const statPosProfil = document.getElementById("stat-pos-profil");
   if (statPosProfil) statPosProfil.textContent = RT_CONFIG.statistik.posKamling + " Unit";
-  
+
   // Kontak di footer/kontak
   const kontakAlamat = document.getElementById("kontak-alamat");
   if (kontakAlamat) kontakAlamat.textContent = RT_CONFIG.alamatRT;
@@ -355,7 +355,7 @@ function renderInfoUmum() {
   if (kontakSekretaris) kontakSekretaris.textContent = RT_CONFIG.kontak.namaSekretaris;
   const kontakBendahara = document.getElementById("kontak-bendahara");
   if (kontakBendahara) kontakBendahara.textContent = RT_CONFIG.kontak.namaBendahara;
-  
+
   // Link WhatsApp langsung di tombol-tombol
   document.querySelectorAll('a[href*="wa.me/"]').forEach(link => {
     link.href = `https://wa.me/${RT_CONFIG.kontak.noWaKetua}`;
@@ -373,11 +373,11 @@ function renderOrganigram() {
       return `
         <ul class="text-xs font-semibold text-slate-700 mt-2 flex flex-col gap-1 items-center">
           ${names.map(name => {
-            if (name === "Belum terbaca" || name === "Belum tersedia") {
-              return `<li class="text-slate-400 italic font-normal">${name}</li>`;
-            }
-            return `<li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>${name}</li>`;
-          }).join('')}
+        if (name === "Belum terbaca" || name === "Belum tersedia") {
+          return `<li class="text-slate-400 italic font-normal">${name}</li>`;
+        }
+        return `<li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>${name}</li>`;
+      }).join('')}
         </ul>
       `;
     } else {
@@ -390,8 +390,8 @@ function renderOrganigram() {
 
   // Helper function to create card HTML
   const createCard = (key, data, isMain = false) => {
-    const cardClass = isMain 
-      ? "bg-gradient-to-br from-emerald-700 to-emerald-900 text-white shadow-xl ring-4 ring-emerald-100/50" 
+    const cardClass = isMain
+      ? "bg-gradient-to-br from-emerald-700 to-emerald-900 text-white shadow-xl ring-4 ring-emerald-100/50"
       : "bg-white border-2 border-emerald-600/70 shadow-md";
     const iconClass = isMain
       ? "bg-white text-emerald-800"
@@ -494,9 +494,9 @@ function renderOrganigram() {
 function renderPengumuman() {
   const container = document.getElementById("pengumuman-grid");
   if (!container) return;
-  
+
   container.innerHTML = "";
-  
+
   DATA_PENGUMUMAN.forEach(item => {
     const cardHTML = `
       <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-6 hover-card-trigger reveal">
@@ -520,13 +520,13 @@ function renderPengumuman() {
 function renderKegiatan(filterCategory = "all") {
   const container = document.getElementById("kegiatan-grid");
   if (!container) return;
-  
+
   container.innerHTML = "";
-  
-  const filteredData = filterCategory === "all" 
-    ? DATA_KEGIATAN 
+
+  const filteredData = filterCategory === "all"
+    ? DATA_KEGIATAN
     : DATA_KEGIATAN.filter(item => item.kategori === filterCategory);
-    
+
   if (filteredData.length === 0) {
     container.innerHTML = `
       <div class="col-span-full text-center py-8 text-slate-400">
@@ -535,7 +535,7 @@ function renderKegiatan(filterCategory = "all") {
     `;
     return;
   }
-  
+
   filteredData.forEach(item => {
     const cardHTML = `
       <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-6 hover-card-trigger flex flex-col justify-between reveal">
@@ -566,9 +566,9 @@ function renderKegiatan(filterCategory = "all") {
 function renderGaleri() {
   const container = document.getElementById("galeri-grid");
   if (!container) return;
-  
+
   container.innerHTML = "";
-  
+
   DATA_GALERI.forEach((item, index) => {
     const imgSrc = item.gambar || item.image;
     const categoryBadge = item.kategori ? `
@@ -598,9 +598,9 @@ function renderGaleri() {
 function renderJadwalRonda() {
   const container = document.getElementById("ronda-grid");
   if (!container) return;
-  
+
   container.innerHTML = "";
-  
+
   DATA_RONDA.forEach(item => {
     // Generate list of names
     const listHTML = item.petugas.map(nama => `
@@ -609,7 +609,7 @@ function renderJadwalRonda() {
         <span class="font-medium">${nama}</span>
       </li>
     `).join("");
-    
+
     const cardHTML = `
       <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-5 hover-card-trigger flex flex-col justify-between reveal">
         <div>
@@ -647,17 +647,17 @@ function openLightbox(index) {
   const modal = document.getElementById("lightboxModal");
   const modalImg = document.getElementById("lightboxImage");
   const modalCaption = document.getElementById("lightboxCaption");
-  
+
   if (!modal || !modalImg || !modalCaption) return;
-  
+
   activeImageIndex = index;
   modalImg.src = DATA_GALERI[index].gambar || DATA_GALERI[index].image;
   // Fallback image in case
-  modalImg.onerror = function() {
+  modalImg.onerror = function () {
     this.src = 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&auto=format&fit=crop&q=80';
   };
   modalCaption.textContent = DATA_GALERI[index].judul + " - " + DATA_GALERI[index].deskripsi;
-  
+
   modal.style.display = "flex";
   document.body.style.overflow = "hidden"; // Disable background scrolling
 }
@@ -678,10 +678,10 @@ function changeLightboxImage(direction) {
   } else if (activeImageIndex < 0) {
     activeImageIndex = DATA_GALERI.length - 1;
   }
-  
+
   const modalImg = document.getElementById("lightboxImage");
   const modalCaption = document.getElementById("lightboxCaption");
-  
+
   if (modalImg && modalCaption) {
     modalImg.src = DATA_GALERI[activeImageIndex].gambar || DATA_GALERI[activeImageIndex].image;
     modalCaption.textContent = DATA_GALERI[activeImageIndex].judul + " - " + DATA_GALERI[activeImageIndex].deskripsi;
@@ -692,12 +692,12 @@ function setupEventListeners() {
   // 1. Mobile Menu Toggle
   const menuToggle = document.getElementById("menu-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
-  
+
   if (menuToggle && mobileMenu) {
     menuToggle.addEventListener("click", () => {
       mobileMenu.classList.toggle("hidden");
     });
-    
+
     // Close mobile menu when clicking link
     mobileMenu.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", () => {
@@ -705,24 +705,24 @@ function setupEventListeners() {
       });
     });
   }
-  
+
   // 2. Navbar Styling on Scroll
   window.addEventListener("scroll", () => {
     const navbar = document.getElementById("navbar");
     const backToTop = document.getElementById("back-to-top");
-    
+
     if (navbar) {
       if (window.scrollY > 50) {
         navbar.classList.add("glass-nav-scrolled", "text-white");
         navbar.classList.remove("glass-nav", "text-slate-800");
-        
+
         // Update logo border / styling if needed
       } else {
         navbar.classList.add("glass-nav", "text-slate-800");
         navbar.classList.remove("glass-nav-scrolled", "text-white");
       }
     }
-    
+
     // Back to top
     if (backToTop) {
       if (window.scrollY > 400) {
@@ -732,7 +732,7 @@ function setupEventListeners() {
       }
     }
   });
-  
+
   // 3. Kegiatan Filter Button Click
   const filterBtns = document.querySelectorAll(".filter-btn");
   filterBtns.forEach(btn => {
@@ -740,14 +740,14 @@ function setupEventListeners() {
       // Remove active class from all
       filterBtns.forEach(b => b.classList.remove("active", "bg-primary-main", "text-white"));
       filterBtns.forEach(b => b.classList.add("bg-white", "text-slate-700", "border-slate-200"));
-      
+
       // Add active to current
       e.target.classList.add("active", "bg-primary-main", "text-white");
       e.target.classList.remove("bg-white", "text-slate-700", "border-slate-200");
-      
+
       const filter = e.target.getAttribute("data-filter");
       renderKegiatan(filter);
-      
+
       // Re-trigger scroll animations for newly rendered elements
       setupScrollAnimation();
     });
@@ -758,26 +758,26 @@ function setupEventListeners() {
   if (contactForm) {
     contactForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      
+
       const name = document.getElementById("form-nama").value.trim();
       const phone = document.getElementById("form-wa").value.trim();
       const message = document.getElementById("form-pesan").value.trim();
-      
+
       if (!name || !phone || !message) {
         alert("Semua data wajib diisi dengan benar.");
         return;
       }
-      
+
       // Buat template text
       const introText = `Halo Ketua RT 006 Warung Cikopi (Bapak Kusdiana),\nSaya ingin menyampaikan pesan/laporan warga.\n\n`;
       const payloadText = `*Nama:* ${name}\n*No. WhatsApp:* ${phone}\n*Pesan:*\n${message}`;
       const encodedMessage = encodeURIComponent(introText + payloadText);
-      
+
       const whatsappURL = `https://wa.me/${RT_CONFIG.kontak.noWaKetua}?text=${encodedMessage}`;
-      
+
       // Buka link WhatsApp di tab baru
       window.open(whatsappURL, "_blank");
-      
+
       // Reset form setelah mengirim
       contactForm.reset();
     });
@@ -788,7 +788,7 @@ function setupEventListeners() {
   if (closeBtn) {
     closeBtn.addEventListener("click", closeLightbox);
   }
-  
+
   // Close lightbox by clicking backdrop
   const modal = document.getElementById("lightboxModal");
   if (modal) {
@@ -831,7 +831,7 @@ function setupEventListeners() {
 // F. ANIMATION ON SCROLL (REVEAL ELEMENTS)
 function setupScrollAnimation() {
   const reveals = document.querySelectorAll(".reveal");
-  
+
   const revealCallback = (entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -856,9 +856,9 @@ function setupScrollAnimation() {
 function renderPrestasi() {
   const container = document.getElementById("prestasi-grid");
   if (!container) return;
-  
+
   container.innerHTML = "";
-  
+
   DATA_PRESTASI.forEach(item => {
     let visualHtml = "";
     if (item.gambar) {
@@ -912,7 +912,7 @@ function triggerAdminLogin() {
 function openAdminModal() {
   const modal = document.getElementById("adminModal");
   if (!modal) return;
-  
+
   modal.classList.remove("hidden");
   document.body.style.overflow = "hidden"; // Disable background scrolling
 
@@ -946,7 +946,7 @@ function closeAdminModal() {
 function switchAdminTab(tabIndex) {
   const tabs = document.querySelectorAll(".admin-tab-btn");
   const contents = document.querySelectorAll(".admin-tab-content");
-  
+
   tabs.forEach((tab, index) => {
     if (index === tabIndex) {
       tab.classList.remove("text-slate-500", "border-transparent");
@@ -956,7 +956,7 @@ function switchAdminTab(tabIndex) {
       tab.classList.add("text-slate-500", "border-transparent");
     }
   });
-  
+
   contents.forEach((content, index) => {
     if (index === tabIndex) {
       content.classList.remove("hidden");
@@ -1011,14 +1011,14 @@ function setupAdminPanel() {
       const isi = document.getElementById("admin-ann-isi").value.trim();
       const kategori = document.getElementById("admin-ann-kategori").value.trim();
       const badgeSel = document.getElementById("admin-ann-badge").value;
-      
+
       let badgeColor = "bg-emerald-100 text-emerald-800";
       if (badgeSel === "Biru") badgeColor = "bg-blue-100 text-blue-800";
       else if (badgeSel === "Ungu") badgeColor = "bg-purple-100 text-purple-800";
       else if (badgeSel === "Kuning") badgeColor = "bg-amber-100 text-amber-800";
 
       const id = DATA_PENGUMUMAN.length ? Math.max(...DATA_PENGUMUMAN.map(item => item.id)) + 1 : 1;
-      
+
       DATA_PENGUMUMAN.push({ id, judul, tanggal, isi, kategori, badgeColor });
       saveLocalStorageData();
       renderPengumuman();
@@ -1050,7 +1050,7 @@ function setupAdminPanel() {
       saveLocalStorageData();
       renderKegiatan("all");
       formKegiatan.reset();
-      
+
       // Reset filter button to 'all'
       const filterBtns = document.querySelectorAll(".filter-btn");
       filterBtns.forEach(b => {
@@ -1082,7 +1082,7 @@ function setupAdminPanel() {
         const file = fileInput.files[0];
         const reader = new FileReader();
 
-        reader.onload = function(event) {
+        reader.onload = function (event) {
           const imageBase64 = event.target.result;
           DATA_GALERI.push({ judul, image: imageBase64, deskripsi });
           saveLocalStorageData();
