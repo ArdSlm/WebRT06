@@ -161,6 +161,29 @@ const DATA_PENGUMUMAN = JSON.parse(localStorage.getItem("DATA_PENGUMUMAN")) || [
   }
 ];
 
+const KARNAVAL_KEGIATAN = {
+  judul: "Semarak Karnaval HUT Kemerdekaan RI ke-79",
+  kategori: "program",
+  kategoriLabel: "Kegiatan Warga",
+  gambar: "assets/img/galeri/karnaval-hut-ri-79-01.jpg",
+  deskripsi: "Warga RT 006 Warung Cikopi turut memeriahkan Karnaval HUT Kemerdekaan Republik Indonesia ke-79 melalui kreativitas, kebersamaan, dan partisipasi warga."
+};
+
+const KARNAVAL_GALERI = [
+  {
+    judul: "Karnaval HUT RI ke-79",
+    deskripsi: "Kebersamaan warga RT 006 dalam Karnaval HUT Kemerdekaan RI ke-79.",
+    kategori: "Karnaval HUT RI ke-79",
+    gambar: "assets/img/galeri/karnaval-hut-ri-79-01.jpg"
+  },
+  {
+    judul: "Karnaval HUT RI ke-79",
+    deskripsi: "Partisipasi generasi muda dalam memeriahkan Hari Kemerdekaan Republik Indonesia.",
+    kategori: "Karnaval HUT RI ke-79",
+    gambar: "assets/img/galeri/karnaval-hut-ri-79-02.jpg"
+  }
+];
+
 // 3. DATA KEGIATAN & PROGRAM RT 006
 // Kategori yang tersedia: "rutin" (Kegiatan Rutin), "program" (Program Lingkungan), "koordinasi" (Kegiatan Koordinasi)
 const DATA_KEGIATAN = JSON.parse(localStorage.getItem("DATA_KEGIATAN")) || [
@@ -187,7 +210,8 @@ const DATA_KEGIATAN = JSON.parse(localStorage.getItem("DATA_KEGIATAN")) || [
     status: "Musyawarah",
     statusColor: "bg-blue-500",
     deskripsi: "Pertemuan musyawarah berkala antara warga dan jajaran pengurus untuk menampung masukan dan evaluasi program."
-  }
+  },
+  { ...KARNAVAL_KEGIATAN }
 ];
 
 // 4. DATA GALERI FOTO RT 006
@@ -209,8 +233,27 @@ const DATA_GALERI = JSON.parse(localStorage.getItem("DATA_GALERI")) || [
     deskripsi: "Kegiatan gotong royong warga RT 006 dalam menjaga kebersihan, kerapian, dan kenyamanan lingkungan.",
     kategori: "Kegiatan Warga",
     gambar: "assets/img/galeri/gotong-royong-rt06.jpg"
-  }
+  },
+  ...KARNAVAL_GALERI
 ];
+
+// Migrasi non-destruktif agar dokumentasi baru juga muncul bagi warga yang
+// sudah memiliki DATA_KEGIATAN atau DATA_GALERI lama di localStorage.
+if (!DATA_KEGIATAN.some(item => item.gambar === KARNAVAL_KEGIATAN.gambar)) {
+  DATA_KEGIATAN.push({ ...KARNAVAL_KEGIATAN });
+  localStorage.setItem("DATA_KEGIATAN", JSON.stringify(DATA_KEGIATAN));
+}
+
+let galeriKarnavalDiperbarui = false;
+KARNAVAL_GALERI.forEach(foto => {
+  if (!DATA_GALERI.some(item => (item.gambar || item.image) === foto.gambar)) {
+    DATA_GALERI.push({ ...foto });
+    galeriKarnavalDiperbarui = true;
+  }
+});
+if (galeriKarnavalDiperbarui) {
+  localStorage.setItem("DATA_GALERI", JSON.stringify(DATA_GALERI));
+}
 
 // ==========================================================================
 // 5. DATA JADWAL RONDA RT 006
@@ -313,10 +356,9 @@ function arrangeSectionsByNavigation() {
 
   const navigationOrder = [
     "beranda",
-    "akses-cepat",
+    "sambutan",
     "statistik",
     "profil",
-    "sambutan",
     "pengurus",
     "pengumuman",
     "kegiatan",
@@ -365,8 +407,7 @@ function renderInfoUmum() {
 
   const waUrl = (message = "") => `https://wa.me/${RT_CONFIG.kontak.noWaKetua}${message ? `?text=${encodeURIComponent(message)}` : ""}`;
   const waLinks = {
-    "wa-btn-header": "", "mobile-wa-btn": "", "hero-btn-wa": "", "akses-hubungi-wa": "", "kontak-ketua-wa": "",
-    "akses-aspirasi-wa": "Halo Bapak Ketua RT 006, saya ingin menyampaikan aspirasi terkait lingkungan.",
+    "wa-btn-header": "", "mobile-wa-btn": "", "hero-btn-wa": "", "kontak-ketua-wa": "",
     "layanan-surat-wa": "Halo Bapak Ketua RT 006, saya ingin mengajukan permohonan surat pengantar.",
     "layanan-aspirasi-wa": "Halo Bapak Ketua RT 006, saya ingin menyampaikan aspirasi terkait lingkungan.",
     "layanan-laporan-wa": "Halo Bapak Ketua RT 006, saya ingin melaporkan masalah keamanan atau lingkungan."
@@ -512,21 +553,6 @@ function renderPengumuman() {
 
   container.innerHTML = "";
 
-  const latest = DATA_PENGUMUMAN[DATA_PENGUMUMAN.length - 1];
-  const heroContainer = document.getElementById("hero-announcement-card-container");
-  if (heroContainer && latest) {
-    heroContainer.innerHTML = `
-      <article class="hero-announcement-card">
-        <div class="flex items-center justify-between gap-3 mb-4">
-          <span class="hero-announcement-label"><i class="fas fa-bullhorn" aria-hidden="true"></i> Pengumuman terbaru</span>
-          <span class="text-xs text-white/75">${latest.tanggal}</span>
-        </div>
-        <h2 class="text-xl font-extrabold text-white leading-snug">${latest.judul}</h2>
-        <p class="mt-2 text-sm text-white/85 leading-relaxed line-clamp-3">${latest.isi}</p>
-        <a href="#pengumuman" class="inline-flex items-center gap-2 mt-5 text-sm font-bold text-white hover:text-brand-gold">Baca selengkapnya <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      </article>`;
-  }
-
   [...DATA_PENGUMUMAN].reverse().forEach(item => {
     const cardHTML = `
       <article class="announcement-card reveal">
@@ -581,10 +607,11 @@ function renderKegiatan(filterCategory = "all") {
             <span class="text-xs font-semibold tracking-wider text-brand-green uppercase">
               ${item.kategoriLabel}
             </span>
-            <span class="inline-flex items-center text-xs font-medium text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded-full">
-              <span class="w-2 h-2 mr-1.5 rounded-full ${item.statusColor}"></span>
-              ${item.status}
-            </span>
+            ${item.status ? `
+              <span class="inline-flex items-center text-xs font-medium text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded-full">
+                <span class="w-2 h-2 mr-1.5 rounded-full ${item.statusColor || "bg-brand-green"}"></span>
+                ${item.status}
+              </span>` : ""}
           </div>
           <h3 class="text-xl font-bold text-brand-navy mb-2">${item.judul}</h3>
           <p class="text-slate-600 text-sm leading-relaxed mb-4">${item.deskripsi}</p>

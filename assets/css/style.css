@@ -140,28 +140,6 @@ h3 {
   box-shadow: 0 8px 24px rgba(3, 44, 91, 0.1);
 }
 
-.hero-announcement-card {
-  padding: clamp(1.25rem, 3vw, 1.75rem);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: 16px;
-  background: rgba(3, 36, 72, 0.78);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
-}
-
-.hero-announcement-label {
-  display: inline-flex;
-  align-items: center;
-  gap: .5rem;
-  color: var(--brand-navy);
-  background: #f3d891;
-  padding: .35rem .65rem;
-  border-radius: 6px;
-  font-size: .7rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .04em;
-}
-
 .announcement-card,
 .activity-card,
 .ronda-card {
@@ -193,7 +171,7 @@ h3 {
   position: relative;
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 14px;
   background: var(--brand-navy);
@@ -373,10 +351,6 @@ h3 {
     padding-bottom: 4.5rem;
   }
 
-  .hero-announcement-card {
-    background: rgba(3, 36, 72, .9);
-  }
-
   .lightbox-modal > div {
     padding-inline: .5rem;
     gap: .25rem;
@@ -418,15 +392,6 @@ h3 {
     opacity: 1 !important;
     transform: translateY(0) !important;
   }
-}
-
-/* Custom indicator dot */
-.bullet-indicator {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--brand-green);
-  display: inline-block;
 }
 
 /* Accessibility Focus State outline */
