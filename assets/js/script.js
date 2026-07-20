@@ -253,14 +253,6 @@ const DATA_RONDA = JSON.parse(localStorage.getItem("DATA_RONDA")) || [
   }
 ];
 
-// Clear stale mock data from localStorage if present
-if (localStorage.getItem("DATA_PRESTASI") && localStorage.getItem("DATA_PRESTASI").includes("Lingkungan Terbersih RW")) {
-  localStorage.removeItem("DATA_PRESTASI");
-}
-if (localStorage.getItem("DATA_GALERI") && (localStorage.getItem("DATA_GALERI").includes("unsplash.com") || localStorage.getItem("DATA_GALERI").includes("logo-rt06"))) {
-  localStorage.removeItem("DATA_GALERI");
-}
-
 const DATA_PRESTASI = JSON.parse(localStorage.getItem("DATA_PRESTASI")) || [
   {
     judul: "Peserta Kreatif Drama Kabaret",
@@ -299,6 +291,7 @@ const DATA_PRESTASI = JSON.parse(localStorage.getItem("DATA_PRESTASI")) || [
 // ==========================================================================
 
 document.addEventListener("DOMContentLoaded", () => {
+  arrangeSectionsByNavigation();
   renderInfoUmum();
   renderOrganigram();
   renderPengumuman();
@@ -309,7 +302,36 @@ document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
   setupScrollAnimation();
   setupAdminPanel();
+  document.getElementById("dynamic-year").textContent = new Date().getFullYear();
 });
+
+// Menyamakan alur halaman dengan kelompok menu pada navbar tanpa mengubah
+// konten, ID anchor, atau renderer data yang sudah digunakan panel admin.
+function arrangeSectionsByNavigation() {
+  const main = document.querySelector("main");
+  if (!main) return;
+
+  const navigationOrder = [
+    "beranda",
+    "akses-cepat",
+    "statistik",
+    "profil",
+    "sambutan",
+    "pengurus",
+    "pengumuman",
+    "kegiatan",
+    "jadwal-ronda",
+    "prestasi",
+    "galeri",
+    "layanan",
+    "kontak"
+  ];
+
+  navigationOrder.forEach(id => {
+    const section = document.getElementById(id);
+    if (section?.parentElement === main) main.appendChild(section);
+  });
+}
 
 // A. RENDER INFO UMUM & STATISTIK
 function renderInfoUmum() {
@@ -328,23 +350,8 @@ function renderInfoUmum() {
   const statStatusHero = document.getElementById("stat-status-hero");
   if (statStatusHero) statStatusHero.textContent = RT_CONFIG.statistik.statusProgram;
 
-  // New Stats in Hero Panel
-  const heroStatWarga = document.getElementById("hero-stat-warga");
-  if (heroStatWarga) heroStatWarga.textContent = RT_CONFIG.statistik.jumlahWarga + " Jiwa";
-  const heroStatKk = document.getElementById("hero-stat-kk");
-  if (heroStatKk) heroStatKk.textContent = RT_CONFIG.statistik.jumlahKK + " KK";
-  const heroStatStatus = document.getElementById("hero-stat-status");
-  if (heroStatStatus) heroStatStatus.textContent = RT_CONFIG.statistik.statusProgram;
-
-  // Stats Profil
-  const statKkProfil = document.getElementById("stat-kk-profil");
-  if (statKkProfil) statKkProfil.textContent = RT_CONFIG.statistik.jumlahKK + " KK";
-  const statWargaProfil = document.getElementById("stat-warga-profil");
-  if (statWargaProfil) statWargaProfil.textContent = RT_CONFIG.statistik.jumlahWarga + " Jiwa";
   const statRumahProfil = document.getElementById("stat-rumah-profil");
   if (statRumahProfil) statRumahProfil.textContent = RT_CONFIG.statistik.jumlahRumah + " Rumah";
-  const statPosProfil = document.getElementById("stat-pos-profil");
-  if (statPosProfil) statPosProfil.textContent = RT_CONFIG.statistik.posKamling + " Unit";
 
   // Kontak di footer/kontak
   const kontakAlamat = document.getElementById("kontak-alamat");
@@ -356,9 +363,17 @@ function renderInfoUmum() {
   const kontakBendahara = document.getElementById("kontak-bendahara");
   if (kontakBendahara) kontakBendahara.textContent = RT_CONFIG.kontak.namaBendahara;
 
-  // Link WhatsApp langsung di tombol-tombol
-  document.querySelectorAll('a[href*="wa.me/"]').forEach(link => {
-    link.href = `https://wa.me/${RT_CONFIG.kontak.noWaKetua}`;
+  const waUrl = (message = "") => `https://wa.me/${RT_CONFIG.kontak.noWaKetua}${message ? `?text=${encodeURIComponent(message)}` : ""}`;
+  const waLinks = {
+    "wa-btn-header": "", "mobile-wa-btn": "", "hero-btn-wa": "", "akses-hubungi-wa": "", "kontak-ketua-wa": "",
+    "akses-aspirasi-wa": "Halo Bapak Ketua RT 006, saya ingin menyampaikan aspirasi terkait lingkungan.",
+    "layanan-surat-wa": "Halo Bapak Ketua RT 006, saya ingin mengajukan permohonan surat pengantar.",
+    "layanan-aspirasi-wa": "Halo Bapak Ketua RT 006, saya ingin menyampaikan aspirasi terkait lingkungan.",
+    "layanan-laporan-wa": "Halo Bapak Ketua RT 006, saya ingin melaporkan masalah keamanan atau lingkungan."
+  };
+  Object.entries(waLinks).forEach(([id, message]) => {
+    const link = document.getElementById(id);
+    if (link) link.href = waUrl(message);
   });
 }
 
@@ -497,9 +512,24 @@ function renderPengumuman() {
 
   container.innerHTML = "";
 
-  DATA_PENGUMUMAN.forEach(item => {
+  const latest = DATA_PENGUMUMAN[DATA_PENGUMUMAN.length - 1];
+  const heroContainer = document.getElementById("hero-announcement-card-container");
+  if (heroContainer && latest) {
+    heroContainer.innerHTML = `
+      <article class="hero-announcement-card">
+        <div class="flex items-center justify-between gap-3 mb-4">
+          <span class="hero-announcement-label"><i class="fas fa-bullhorn" aria-hidden="true"></i> Pengumuman terbaru</span>
+          <span class="text-xs text-white/75">${latest.tanggal}</span>
+        </div>
+        <h2 class="text-xl font-extrabold text-white leading-snug">${latest.judul}</h2>
+        <p class="mt-2 text-sm text-white/85 leading-relaxed line-clamp-3">${latest.isi}</p>
+        <a href="#pengumuman" class="inline-flex items-center gap-2 mt-5 text-sm font-bold text-white hover:text-brand-gold">Baca selengkapnya <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+      </article>`;
+  }
+
+  [...DATA_PENGUMUMAN].reverse().forEach(item => {
     const cardHTML = `
-      <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-6 hover-card-trigger reveal">
+      <article class="announcement-card reveal">
         <div class="flex items-center justify-between mb-4">
           <span class="px-3 py-1 rounded-full text-xs font-semibold ${item.badgeColor}">
             ${item.kategori}
@@ -508,9 +538,9 @@ function renderPengumuman() {
             <i class="far fa-calendar-alt mr-1"></i> ${item.tanggal}
           </span>
         </div>
-        <h4 class="text-lg font-bold text-slate-800 mb-2">${item.judul}</h4>
+        <h3 class="text-lg font-bold text-brand-navy mb-2">${item.judul}</h3>
         <p class="text-slate-600 text-sm leading-relaxed">${item.isi}</p>
-      </div>
+      </article>
     `;
     container.innerHTML += cardHTML;
   });
@@ -537,11 +567,18 @@ function renderKegiatan(filterCategory = "all") {
   }
 
   filteredData.forEach(item => {
+    const activityImages = {
+      "Ronda Malam": "assets/img/galeri/ronda-malam-rt06.png",
+      "Kerja Bakti": "assets/img/galeri/gotong-royong-rt06.jpg",
+      "Rapat Warga": "assets/img/pos-kamling-bersih.png"
+    };
+    const image = item.gambar || activityImages[item.judul] || "assets/img/pos-kamling-bersih.png";
     const cardHTML = `
-      <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-6 hover-card-trigger flex flex-col justify-between reveal">
-        <div>
+      <article class="activity-card reveal">
+        <img src="${image}" alt="${item.judul} RT 006 Warung Cikopi" loading="lazy" width="640" height="360">
+        <div class="p-5 flex flex-col flex-grow">
           <div class="flex items-center justify-between mb-4">
-            <span class="text-xs font-semibold tracking-wider text-primary-700 uppercase">
+            <span class="text-xs font-semibold tracking-wider text-brand-green uppercase">
               ${item.kategoriLabel}
             </span>
             <span class="inline-flex items-center text-xs font-medium text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded-full">
@@ -549,14 +586,14 @@ function renderKegiatan(filterCategory = "all") {
               ${item.status}
             </span>
           </div>
-          <h4 class="text-xl font-bold text-slate-800 mb-2">${item.judul}</h4>
+          <h3 class="text-xl font-bold text-brand-navy mb-2">${item.judul}</h3>
           <p class="text-slate-600 text-sm leading-relaxed mb-4">${item.deskripsi}</p>
         </div>
         <div class="pt-4 border-t border-slate-50 flex items-center justify-between">
-          <span class="text-xs text-primary-600 font-semibold">RT 006 Warung Cikopi</span>
-          <i class="fas fa-check-circle text-primary-600 text-lg"></i>
+          <span class="text-xs text-brand-green font-semibold">RT 006 Warung Cikopi</span>
+          <i class="fas fa-check-circle text-brand-green text-lg" aria-hidden="true"></i>
         </div>
-      </div>
+      </article>
     `;
     container.innerHTML += cardHTML;
   });
@@ -577,10 +614,10 @@ function renderGaleri() {
       </div>
     ` : "";
     const cardHTML = `
-      <div class="group relative overflow-hidden rounded-2xl shadow-md cursor-pointer reveal" onclick="openLightbox(${index})">
+      <button type="button" class="gallery-card group reveal" onclick="openLightbox(${index})" aria-label="Buka foto ${item.judul}">
         ${categoryBadge}
-        <img src="${imgSrc}" alt="${item.judul}" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=600&auto=format&fit=crop&q=80';">
-        <div class="absolute inset-0 bg-gradient-to-t from-primary-dark via-transparent to-transparent opacity-90 transition-opacity duration-300"></div>
+        <img src="${imgSrc}" alt="${item.judul}" loading="lazy" width="640" height="480" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300">
+        <div class="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-transparent opacity-90 transition-opacity duration-300"></div>
         <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
           <h4 class="font-bold text-lg leading-tight mb-1 text-white">${item.judul}</h4>
           <p class="text-xs text-emerald-200 line-clamp-2">${item.deskripsi}</p>
@@ -588,7 +625,7 @@ function renderGaleri() {
         <div class="absolute top-4 right-4 bg-white/20 backdrop-blur-md rounded-full p-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <i class="fas fa-search-plus"></i>
         </div>
-      </div>
+      </button>
     `;
     container.innerHTML += cardHTML;
   });
@@ -611,7 +648,7 @@ function renderJadwalRonda() {
     `).join("");
 
     const cardHTML = `
-      <div class="bg-white rounded-2xl shadow-md border border-slate-100 p-5 hover-card-trigger flex flex-col justify-between reveal">
+      <article class="ronda-card reveal">
         <div>
           <!-- Header Card: Hari & Icon -->
           <div class="flex items-center justify-between mb-3">
@@ -631,7 +668,7 @@ function renderJadwalRonda() {
             ${listHTML}
           </ul>
         </div>
-      </div>
+      </article>
     `;
     container.innerHTML += cardHTML;
   });
@@ -652,10 +689,8 @@ function openLightbox(index) {
 
   activeImageIndex = index;
   modalImg.src = DATA_GALERI[index].gambar || DATA_GALERI[index].image;
-  // Fallback image in case
-  modalImg.onerror = function () {
-    this.src = 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&auto=format&fit=crop&q=80';
-  };
+  modalImg.onerror = null;
+  modal.setAttribute("aria-hidden", "false");
   modalCaption.textContent = DATA_GALERI[index].judul + " - " + DATA_GALERI[index].deskripsi;
 
   modal.style.display = "flex";
@@ -666,6 +701,7 @@ function closeLightbox() {
   const modal = document.getElementById("lightboxModal");
   if (modal) {
     modal.style.display = "none";
+    modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "auto"; // Re-enable scrolling
   }
 }
@@ -691,19 +727,54 @@ function changeLightboxImage(direction) {
 function setupEventListeners() {
   // 1. Mobile Menu Toggle
   const menuToggle = document.getElementById("menu-toggle");
-  const mobileMenu = document.getElementById("mobile-menu");
-
-  if (menuToggle && mobileMenu) {
-    menuToggle.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
+  const mobileMenu = document.getElementById("mobile-menu-panel");
+  const mobileOverlay = document.getElementById("mobile-menu-overlay");
+  const mobileClose = document.getElementById("mobile-menu-close");
+  const setMobileMenu = (open) => {
+    if (!menuToggle || !mobileMenu || !mobileOverlay) return;
+    mobileMenu.classList.toggle("hidden", !open);
+    mobileOverlay.classList.toggle("hidden", !open);
+    requestAnimationFrame(() => {
+      mobileMenu.classList.toggle("open", open);
+      mobileOverlay.classList.toggle("opacity-0", !open);
     });
+    menuToggle.setAttribute("aria-expanded", String(open));
+    document.body.classList.toggle("menu-open", open);
+    if (open) mobileClose?.focus();
+  };
+  menuToggle?.addEventListener("click", () => setMobileMenu(true));
+  mobileClose?.addEventListener("click", () => setMobileMenu(false));
+  mobileOverlay?.addEventListener("click", () => setMobileMenu(false));
+  mobileMenu?.querySelectorAll("a").forEach(link => link.addEventListener("click", () => setMobileMenu(false)));
+  document.querySelectorAll(".mobile-accordion-btn").forEach(button => {
+    button.setAttribute("aria-expanded", "false");
+    button.addEventListener("click", () => {
+      const content = button.nextElementSibling;
+      const expanded = button.getAttribute("aria-expanded") === "true";
+      button.setAttribute("aria-expanded", String(!expanded));
+      content?.classList.toggle("hidden", expanded);
+      content?.classList.toggle("flex", !expanded);
+      button.querySelector("i")?.classList.toggle("rotate-180", !expanded);
+    });
+  });
+  document.querySelectorAll(".dropdown-parent > button").forEach(button => {
+    button.addEventListener("click", () => {
+      const expanded = button.getAttribute("aria-expanded") === "true";
+      document.querySelectorAll(".dropdown-parent > button").forEach(other => other.setAttribute("aria-expanded", "false"));
+      button.setAttribute("aria-expanded", String(!expanded));
+    });
+  });
 
-    // Close mobile menu when clicking link
-    mobileMenu.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        mobileMenu.classList.add("hidden");
+  const observedSections = document.querySelectorAll("main section[id]");
+  const navLinks = document.querySelectorAll(".nav-link");
+  if ("IntersectionObserver" in window) {
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(link => link.classList.toggle("active", link.getAttribute("href") === `#${entry.target.id}`));
       });
-    });
+    }, { rootMargin: "-35% 0px -55%", threshold: 0 });
+    observedSections.forEach(section => sectionObserver.observe(section));
   }
 
   // 2. Navbar Styling on Scroll
@@ -713,13 +784,11 @@ function setupEventListeners() {
 
     if (navbar) {
       if (window.scrollY > 50) {
-        navbar.classList.add("glass-nav-scrolled", "text-white");
-        navbar.classList.remove("glass-nav", "text-slate-800");
+        navbar.classList.add("navbar-scrolled");
 
         // Update logo border / styling if needed
       } else {
-        navbar.classList.add("glass-nav", "text-slate-800");
-        navbar.classList.remove("glass-nav-scrolled", "text-white");
+        navbar.classList.remove("navbar-scrolled");
       }
     }
 
@@ -737,15 +806,16 @@ function setupEventListeners() {
   const filterBtns = document.querySelectorAll(".filter-btn");
   filterBtns.forEach(btn => {
     btn.addEventListener("click", (e) => {
+      const currentButton = e.currentTarget;
       // Remove active class from all
       filterBtns.forEach(b => b.classList.remove("active", "bg-primary-main", "text-white"));
       filterBtns.forEach(b => b.classList.add("bg-white", "text-slate-700", "border-slate-200"));
 
       // Add active to current
-      e.target.classList.add("active", "bg-primary-main", "text-white");
-      e.target.classList.remove("bg-white", "text-slate-700", "border-slate-200");
+      currentButton.classList.add("active", "text-white");
+      currentButton.classList.remove("bg-white", "text-slate-700", "border-slate-200");
 
-      const filter = e.target.getAttribute("data-filter");
+      const filter = currentButton.getAttribute("data-filter");
       renderKegiatan(filter);
 
       // Re-trigger scroll animations for newly rendered elements
@@ -811,6 +881,7 @@ function setupEventListeners() {
 
   // Escape key close lightbox or admin modal
   document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && mobileMenu?.classList.contains("open")) setMobileMenu(false);
     if (modal && modal.style.display === "flex") {
       if (e.key === "Escape") {
         closeLightbox();
@@ -974,6 +1045,8 @@ function setupAdminPanel() {
     localStorage.setItem("DATA_RONDA", JSON.stringify(DATA_RONDA));
     localStorage.setItem("DATA_PRESTASI", JSON.stringify(DATA_PRESTASI));
   };
+  window.saveRTData = saveLocalStorageData;
+  renderAdminDataLists();
 
   // Admin Login Form Submit
   const loginForm = document.getElementById("admin-login-form");
@@ -1022,6 +1095,7 @@ function setupAdminPanel() {
       DATA_PENGUMUMAN.push({ id, judul, tanggal, isi, kategori, badgeColor });
       saveLocalStorageData();
       renderPengumuman();
+      renderAdminDataLists();
       formPengumuman.reset();
       alert("Pengumuman berhasil ditambahkan!");
       closeAdminModal();
@@ -1049,6 +1123,7 @@ function setupAdminPanel() {
       DATA_KEGIATAN.push({ judul, kategori, kategoriLabel, status, statusColor, deskripsi });
       saveLocalStorageData();
       renderKegiatan("all");
+      renderAdminDataLists();
       formKegiatan.reset();
 
       // Reset filter button to 'all'
@@ -1087,6 +1162,7 @@ function setupAdminPanel() {
           DATA_GALERI.push({ judul, image: imageBase64, deskripsi });
           saveLocalStorageData();
           renderGaleri();
+          renderAdminDataLists();
           formGaleri.reset();
           alert("Galeri berhasil ditambahkan!");
           closeAdminModal();
@@ -1113,6 +1189,7 @@ function setupAdminPanel() {
         match.petugas = petugasText.split(",").map(name => name.trim()).filter(name => name.length > 0);
         saveLocalStorageData();
         renderJadwalRonda();
+        renderAdminDataLists();
         formRonda.reset();
         alert("Jadwal ronda berhasil diperbarui!");
         closeAdminModal();
@@ -1143,6 +1220,7 @@ function setupAdminPanel() {
       DATA_PRESTASI.push({ tahun, judul, penyelenggara, deskripsi, icon, color });
       saveLocalStorageData();
       renderPrestasi();
+      renderAdminDataLists();
       formPrestasi.reset();
       alert("Prestasi berhasil ditambahkan!");
       closeAdminModal();
@@ -1151,10 +1229,84 @@ function setupAdminPanel() {
   }
 }
 
+function renderAdminDataLists() {
+  const configs = [
+    ["admin-form-pengumuman", "pengumuman", DATA_PENGUMUMAN, item => item.judul],
+    ["admin-form-kegiatan", "kegiatan", DATA_KEGIATAN, item => item.judul],
+    ["admin-form-galeri", "galeri", DATA_GALERI, item => item.judul],
+    ["admin-form-ronda", "ronda", DATA_RONDA, item => item.hari],
+    ["admin-form-prestasi", "prestasi", DATA_PRESTASI, item => item.judul]
+  ];
+  configs.forEach(([formId, type, data, label]) => {
+    const form = document.getElementById(formId);
+    if (!form) return;
+    let list = form.querySelector(".admin-data-list");
+    if (!list) {
+      list = document.createElement("div");
+      list.className = "admin-data-list mt-5 pt-5 border-t border-slate-200";
+      form.appendChild(list);
+    }
+    list.innerHTML = `<h4 class="font-extrabold text-brand-navy mb-3">Data tersimpan (${data.length})</h4>` + data.map((item, index) => `
+      <div class="admin-data-row">
+        <span>${label(item)}</span>
+        <div class="flex gap-2 flex-shrink-0">
+          <button type="button" onclick="editAdminItem('${type}', ${index})" class="admin-edit-btn"><i class="fas fa-pen" aria-hidden="true"></i> Edit</button>
+          ${type === "ronda" ? "" : `<button type="button" onclick="deleteAdminItem('${type}', ${index})" class="admin-delete-btn"><i class="fas fa-trash" aria-hidden="true"></i> Hapus</button>`}
+        </div>
+      </div>`).join("");
+  });
+}
+
+function getAdminDataset(type) {
+  return { pengumuman: DATA_PENGUMUMAN, kegiatan: DATA_KEGIATAN, galeri: DATA_GALERI, ronda: DATA_RONDA, prestasi: DATA_PRESTASI }[type];
+}
+
+function editAdminItem(type, index) {
+  const data = getAdminDataset(type);
+  const item = data?.[index];
+  if (!item) return;
+  if (type === "ronda") {
+    const value = prompt(`Petugas ${item.hari} (pisahkan dengan koma):`, item.petugas.join(", "));
+    if (value === null) return;
+    item.petugas = value.split(",").map(name => name.trim()).filter(Boolean);
+  } else {
+    const title = prompt("Judul / nama:", item.judul || "");
+    if (title === null) return;
+    const descriptionKey = type === "pengumuman" ? "isi" : "deskripsi";
+    const description = prompt("Isi / deskripsi:", item[descriptionKey] || "");
+    if (description === null) return;
+    item.judul = title.trim();
+    item[descriptionKey] = description.trim();
+  }
+  window.saveRTData?.();
+  refreshPortalData();
+}
+
+function deleteAdminItem(type, index) {
+  const data = getAdminDataset(type);
+  const item = data?.[index];
+  if (!item || !confirm(`Hapus data “${item.judul || item.hari}”?`)) return;
+  data.splice(index, 1);
+  window.saveRTData?.();
+  refreshPortalData();
+}
+
+function refreshPortalData() {
+  renderPengumuman();
+  renderKegiatan("all");
+  renderJadwalRonda();
+  renderGaleri();
+  renderPrestasi();
+  renderAdminDataLists();
+  setupScrollAnimation();
+}
+
 // Make sure these are globally accessible for HTML onclick attributes
 window.triggerAdminLogin = triggerAdminLogin;
 window.openAdminModal = openAdminModal;
 window.closeAdminModal = closeAdminModal;
 window.switchAdminTab = switchAdminTab;
+window.editAdminItem = editAdminItem;
+window.deleteAdminItem = deleteAdminItem;
 
 // Akhir dari berkas script.js - Sinkronisasi Email Vercel

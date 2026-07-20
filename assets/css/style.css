@@ -1,19 +1,67 @@
 /* ==========================================================================
-   STYLE SHEET - WEBSITE RESMI RT 006 WARUNG CIKOPI
-   Menggunakan font modern, palet warna hijau-emas premium, dan transisi halus.
+   STYLE SHEET - PORTAL RESMI WARUNG CIKOPI RT 006
+   Konsep: Modern Civic Community Portal
+   Warna diambil langsung dari Logo RT 006
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --color-primary-dark: #0f2e1e;   /* Hijau Gelap Islami/Resmi */
-  --color-primary-main: #166534;   /* Hijau Utama RT */
-  --color-primary-light: #22c55e;  /* Hijau Terang */
-  --color-accent-gold: #eab308;    /* Aksen Emas/Kuning */
-  --color-accent-gold-dark: #ca8a04;
-  --color-neutral-bg: #f8fafc;     /* Background Slate Ringan */
-  --color-neutral-text: #1e293b;   /* Slate Gelap */
-  --color-card-bg: #ffffff;
+  --brand-navy: #032C5B;
+  --brand-navy-hover: #052448;
+  --brand-green: #0F5B24;
+  --brand-green-hover: #0A481B;
+  --brand-gold: #CB9727;
+  --brand-gold-hover: #B97A00;
+  --brand-ivory: #F9F7EF;
+  --surface-white: #FFFFFF;
+  --text-main: #1F2937;
+  --text-secondary: #64748B;
+  --border-color: #DDE3DF;
+  --surface-blue-light: #EAF1F8;
+  --surface-green-light: #EAF4ED;
+  --error-color: #B42318;
+
+  /* CSS Variable compatibility mapping for backward-compatibility if any old styles rely on them */
+  --color-primary-dark: var(--brand-navy);
+  --color-primary-main: var(--brand-green);
+  --color-primary-light: var(--brand-green-hover);
+  --color-accent-gold: var(--brand-gold);
+  --color-accent-gold-dark: var(--brand-gold-hover);
+  --color-neutral-bg: var(--brand-ivory);
+  --color-neutral-text: var(--text-main);
+  --color-card-bg: var(--surface-white);
+}
+
+/* Base resets & global styles */
+html {
+  scroll-behavior: smooth;
+  scroll-margin-top: 120px; /* offset for sticky header */
+}
+
+/* Add scroll margin to sections dynamically based on anchor */
+section {
+  scroll-margin-top: 90px;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--brand-ivory);
+  color: var(--text-main);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+}
+
+button, a, input, select, textarea {
+  overflow-wrap: anywhere;
 }
 
 /* Custom Scrollbar */
@@ -21,117 +69,228 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: var(--brand-ivory);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-primary-main);
+  background: var(--brand-navy);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary-dark);
+  background: var(--brand-navy-hover);
 }
 
-/* Base Styles */
-html {
-  scroll-behavior: smooth;
+/* Typography Fluid sizing utilities */
+h1 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+}
+h2 {
+  font-size: clamp(1.6rem, 4vw, 2.25rem);
+}
+h3 {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
 }
 
-body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background-color: var(--color-neutral-bg);
-  color: var(--color-neutral-text);
-  overflow-x: hidden;
-}
-
-/* Glassmorphism Classes */
-.glass-nav {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.glass-nav-scrolled {
-  background: rgba(15, 46, 30, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
-}
-
-/* Back to Top Button */
-#back-to-top {
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.4s ease;
-}
-
-#back-to-top.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Micro Animations & Hover Effects */
-.btn-gold {
-  background: linear-gradient(135deg, var(--color-accent-gold) 0%, var(--color-accent-gold-dark) 100%);
-  color: var(--color-primary-dark);
-  box-shadow: 0 4px 14px 0 rgba(234, 179, 8, 0.35);
-  transition: all 0.3s ease;
-}
-
-.btn-gold:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px 0 rgba(234, 179, 8, 0.5);
-}
-
-.btn-outline-green {
-  border: 2px solid var(--color-primary-light);
-  color: var(--color-primary-light);
-  transition: all 0.3s ease;
-}
-
-.btn-outline-green:hover {
-  background-color: var(--color-primary-light);
-  color: white;
-  transform: translateY(-2px);
-}
-
-/* Custom Card Layouts */
-.hover-card-trigger {
+/* Soft card styling */
+.civic-card {
+  background-color: var(--surface-white);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+.civic-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(3, 44, 91, 0.08), 0 4px 6px -2px rgba(3, 44, 91, 0.04);
+}
 
-.hover-card-trigger:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+/* Dynamic active state under-lines for menus */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--brand-green);
+  transition: width 0.2s ease;
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Dropdown Menu Styles */
+.dropdown-menu {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.2s ease;
+}
+.dropdown-parent:hover .dropdown-menu,
+.dropdown-parent:focus-within .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#navbar.navbar-scrolled {
+  box-shadow: 0 8px 24px rgba(3, 44, 91, 0.1);
+}
+
+.hero-announcement-card {
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 16px;
+  background: rgba(3, 36, 72, 0.78);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+}
+
+.hero-announcement-label {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  color: var(--brand-navy);
+  background: #f3d891;
+  padding: .35rem .65rem;
+  border-radius: 6px;
+  font-size: .7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.announcement-card,
+.activity-card,
+.ronda-card {
+  min-width: 0;
+  background: var(--surface-white);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  box-shadow: 0 3px 12px rgba(3, 44, 91, .06);
+}
+
+.announcement-card,
+.ronda-card {
+  padding: 1.25rem;
+}
+
+.activity-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.activity-card > img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.gallery-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--brand-navy);
+  text-align: left;
+  box-shadow: 0 3px 12px rgba(3, 44, 91, .1);
+}
+
+.ronda-card li,
+.ronda-card span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.admin-data-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: .75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  margin-top: .5rem;
+  background: #f8fafc;
+}
+
+.admin-data-row > span {
+  min-width: 0;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.admin-edit-btn,
+.admin-delete-btn {
+  min-height: 36px;
+  padding: .4rem .65rem;
+  border-radius: 7px;
+  font-weight: 800;
+}
+
+.admin-edit-btn {
+  color: var(--brand-navy);
+  background: var(--surface-blue-light);
+}
+
+.admin-delete-btn {
+  color: var(--error-color);
+  background: #fef3f2;
+}
+
+/* Custom buttons */
+.btn-brand-green {
+  background-color: var(--brand-green);
+  color: var(--surface-white);
+  font-weight: 700;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+.btn-brand-green:hover {
+  background-color: var(--brand-green-hover);
+  transform: translateY(-1px);
+}
+.btn-brand-green:focus {
+  outline: 2px solid var(--brand-green);
+  outline-offset: 2px;
+}
+
+.btn-brand-outline-navy {
+  border: 2px solid var(--brand-navy);
+  color: var(--brand-navy);
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+.btn-brand-outline-navy:hover {
+  background-color: var(--brand-navy);
+  color: var(--surface-white);
+  transform: translateY(-1px);
+}
+
+.btn-brand-gold {
+  background-color: var(--brand-gold);
+  color: var(--brand-navy);
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+.btn-brand-gold:hover {
+  background-color: var(--brand-gold-hover);
+  transform: translateY(-1px);
 }
 
 /* Organigram Tree Lines & Design */
 .organigram-card {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--border-color);
 }
-
 .organigram-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 25px -5px rgba(22, 101, 52, 0.15), 0 10px 10px -5px rgba(22, 101, 52, 0.08);
-}
-
-/* Timeline/Roadmap styling for mobile organigram */
-@media (max-width: 767px) {
-  .organigram-container {
-    position: relative;
-    padding-left: 1.5rem;
-  }
-  
-  .organigram-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 7px;
-    width: 2px;
-    background-color: var(--color-primary-light);
-    opacity: 0.3;
-  }
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(3, 44, 91, 0.1);
 }
 
 /* Lightbox Modal styles */
@@ -143,52 +302,139 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(15, 46, 30, 0.95);
+  background-color: rgba(3, 44, 91, 0.95);
   backdrop-filter: blur(8px);
 }
 
 .lightbox-content {
   margin: auto;
   display: block;
-  width: 80%;
-  max-width: 700px;
-  max-height: 80vh;
+  width: calc(100% - 32px);
+  max-width: 800px;
+  max-height: 75vh;
   object-fit: contain;
   border-radius: 8px;
-  border: 4px solid white;
+  border: 4px solid var(--surface-white);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+#back-to-top {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+}
+
+#back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 /* Category Filter Active */
 .filter-btn {
   transition: all 0.3s ease;
 }
-
 .filter-btn.active {
-  background-color: var(--color-primary-main);
-  color: white;
+  background-color: var(--brand-green);
+  color: var(--surface-white);
+  border-color: var(--brand-green);
 }
 
-/* Fade In On Scroll placeholder (handled via JS IntersectionObserver) */
+/* Scroll Animations */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .reveal.active {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Ronda Card Bullet Hover Animation */
-.ronda-card-bullet {
-  transition: transform 0.2s ease, color 0.2s ease;
+/* Responsive constraints */
+@media (max-width: 1023px) {
+  #mobile-menu-panel {
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  #mobile-menu-panel.open {
+    transform: translateX(0);
+  }
 }
 
-.ronda-card-bullet:hover {
-  transform: translateX(4px);
+@media (max-width: 639px) {
+  section {
+    scroll-margin-top: 76px;
+  }
+
+  #beranda {
+    min-height: 0;
+    padding-top: 3rem;
+    padding-bottom: 4.5rem;
+  }
+
+  .hero-announcement-card {
+    background: rgba(3, 36, 72, .9);
+  }
+
+  .lightbox-modal > div {
+    padding-inline: .5rem;
+    gap: .25rem;
+  }
+
+  .lightbox-modal > div > button {
+    flex: 0 0 44px;
+    font-size: 1.25rem;
+  }
+
+  #adminModal {
+    padding: 1rem;
+  }
+
+  #adminModal > div {
+    width: calc(100% - 0px);
+    max-height: calc(100vh - 32px);
+  }
+
+  #organigram-root .grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-data-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
 
-.ronda-card-bullet:hover span.font-medium {
-  color: var(--color-primary-main);
+/* Pre-loaded motion optimizations */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+}
+
+/* Custom indicator dot */
+.bullet-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--brand-green);
+  display: inline-block;
+}
+
+/* Accessibility Focus State outline */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--brand-green);
+  outline-offset: 2px;
 }
