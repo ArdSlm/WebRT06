@@ -234,7 +234,25 @@ const DATA_GALERI = JSON.parse(localStorage.getItem("DATA_GALERI")) || [
     kategori: "Kegiatan Warga",
     gambar: "assets/img/galeri/gotong-royong-rt06.jpg"
   },
-  ...KARNAVAL_GALERI
+  ...KARNAVAL_GALERI,
+  {
+    judul: "Gotong Royong Ngebenteng Jalan",
+    deskripsi: "Kegiatan gotong royong warga RT 006 dalam memperbaiki dan menguatkan jalan lingkungan.",
+    kategori: "Kegiatan Warga",
+    gambar: "assets/img/galeri/gotongroyong ngebentengjalan1.jpeg"
+  },
+  {
+    judul: "Gotong Royong Ibu-Ibu RT 006",
+    deskripsi: "Partisipasi ibu-ibu warga RT 006 dalam kegiatan gotong royong lingkungan.",
+    kategori: "Kegiatan Warga",
+    gambar: "assets/img/galeri/gotongroyongibuibu.jpeg"
+  },
+  {
+    judul: "Hasil Gotong Royong Ngebenteng Jalan",
+    deskripsi: "Hasil kegiatan gotong royong warga RT 006 dalam memperbaiki jalan lingkungan.",
+    kategori: "Kegiatan Warga",
+    gambar: "assets/img/galeri/hasilgotongroyong ngebentengjalan1.jpeg"
+  }
 ];
 
 // Migrasi non-destruktif agar dokumentasi baru juga muncul bagi warga yang
@@ -633,7 +651,10 @@ function renderGaleri() {
 
   container.innerHTML = "";
 
-  DATA_GALERI.forEach((item, index) => {
+  const reversedGaleri = [...DATA_GALERI].reverse();
+
+  reversedGaleri.forEach((item, reversedIndex) => {
+    const originalIndex = DATA_GALERI.length - 1 - reversedIndex;
     const imgSrc = item.gambar || item.image;
     const categoryBadge = item.kategori ? `
       <div class="absolute top-4 left-4 bg-emerald-600/90 text-white text-xxs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm z-10">
@@ -641,7 +662,7 @@ function renderGaleri() {
       </div>
     ` : "";
     const cardHTML = `
-      <button type="button" class="gallery-card group reveal" onclick="openLightbox(${index})" aria-label="Buka foto ${item.judul}">
+      <button type="button" class="gallery-card group reveal" onclick="openLightbox(${originalIndex})" aria-label="Buka foto ${item.judul}">
         ${categoryBadge}
         <img src="${imgSrc}" alt="${item.judul}" loading="lazy" width="640" height="480" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300">
         <div class="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-transparent opacity-90 transition-opacity duration-300"></div>
