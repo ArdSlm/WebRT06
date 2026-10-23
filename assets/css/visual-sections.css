@@ -1,0 +1,115 @@
+/* Shared photographic surfaces. Intentionally excludes #jadwal-ronda. */
+:is(#profil, #pengumuman, #kegiatan, #layanan).photo-section {
+  --scene: linear-gradient(135deg, #29392E, #776044);
+  --veil: linear-gradient(110deg, rgba(41,57,46,.72), rgba(41,57,46,.38));
+  background-color: #29392E;
+  background-image: var(--veil), var(--scene);
+  background-position: center, var(--scene-position, center);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+main > .photo-section {
+  max-width: none;
+  padding-inline: max(24px, calc((100% - 1184px) / 2));
+}
+.photo-section .photo-heading { margin-bottom: 40px; }
+.photo-section .photo-heading h2 { color: #FAF7F0; font-size: clamp(2rem,4vw,3.3rem); line-height: 1.1; }
+.photo-section .photo-heading > span { color: #EEE1C8; }
+.photo-section .photo-heading > div { background: #C7A77B; }
+.photo-section .photo-heading > p { color: #FAF7F0; }
+
+/* Profil: one editorial reading surface over the village lane. */
+#profil.photo-section {
+  --scene: url('../img/backgrounds/profil-1600.webp');
+  --veil: linear-gradient(110deg, rgba(41,57,46,.70), rgba(41,57,46,.24));
+  --scene-position: center 35%;
+}
+#profil .photo-heading { min-height: 220px; justify-content: center; max-width: 700px; }
+#profil .profile-story-panel {
+  background: rgba(250,247,240,.91);
+  padding: clamp(24px,4vw,48px);
+  border: 1px solid rgba(238,225,200,.6);
+  border-radius: 6px;
+  gap: 40px;
+}
+#profil .profile-story-panel > div > img { border-radius: 3px; }
+#profil .profile-story-panel li { background: transparent; border: 0; border-bottom: 1px solid #D8CFBD; border-radius: 0; padding: 12px 0; line-height: 1.8; }
+#profil .profile-story-panel li > span:first-child { background: transparent; color: #776044; font-size: .9rem; }
+#profil #wilayah > div { background: transparent; border: 0; }
+#profil .profile-story-panel p, #profil .profile-story-panel li { color: #465044; }
+#profil #wilayah .bg-brand-navy p { color: #EEE1C8; }
+#profil .profile-story-panel h3 { font-size: 1.75rem; }
+
+/* Informasi: bright imagery, quiet uninterrupted announcement column. */
+#pengumuman.photo-section {
+  --scene: url('../img/backgrounds/informasi-1600.webp');
+  --veil: linear-gradient(100deg, rgba(238,225,200,.84), rgba(238,225,200,.60));
+  --scene-position: center 62%;
+}
+#pengumuman .photo-heading h2 { color: #29392E; }
+#pengumuman .photo-heading > span { color: #604B33; }
+#pengumuman-grid { background: rgba(250,247,240,.92); border-radius: 6px; padding: 8px clamp(24px,4vw,48px); }
+#pengumuman .announcement-card:first-child { border-top: 0; }
+#pengumuman .announcement-card { padding-block: 28px; }
+#pengumuman .announcement-card > div > span:first-child { background: transparent; color: #776044; border-radius: 0; padding-inline: 0; }
+#pengumuman .announcement-card > div > span:last-child { color: #62533F; }
+
+/* Kegiatan: a distinct working-together scene and spacious photo stories. */
+#kegiatan.photo-section {
+  --scene: url('../img/backgrounds/kegiatan-1600.webp');
+  --veil: linear-gradient(105deg, rgba(41,57,46,.82), rgba(41,57,46,.48));
+  --scene-position: center 55%;
+}
+#kegiatan .filter-btn { min-height: 44px; border-radius: 3px; }
+#kegiatan .filter-btn.active { background: #EEE1C8; color: #29392E; border-color: #EEE1C8; }
+#kegiatan-grid { align-items: start; gap: 32px; }
+#kegiatan .activity-card { background: rgba(250,247,240,.91); border: 1px solid rgba(238,225,200,.4); border-radius: 5px; overflow: hidden; }
+#kegiatan .activity-card > div { padding: 24px; }
+#kegiatan .activity-card > div:last-child { padding-block: 14px; border-color: #D8CFBD; }
+#kegiatan .activity-card h3 { color: #29392E; }
+#kegiatan .activity-card p { color: #465044; }
+#kegiatan-grid > .text-center { background: rgba(250,247,240,.91); color: #29392E; }
+
+/* Gallery stays light: photography only supports the heading. */
+#galeri { background: #FAF7F0; border: 0; }
+#galeri .gallery-scene-heading {
+  background: linear-gradient(90deg,rgba(41,57,46,.85),rgba(41,57,46,.20)), url('../img/backgrounds/galeri-1600.webp') center 38% / cover;
+  padding: clamp(28px,5vw,64px);
+  min-height: 300px;
+  justify-content: center;
+  border-radius: 4px;
+  margin-bottom: 40px;
+}
+#galeri .gallery-scene-heading h2 { color: #FAF7F0; max-width: 550px; }
+#galeri .gallery-scene-heading > span { color: #EEE1C8; }
+#galeri .gallery-scene-heading > div { background: #C7A77B; }
+
+/* Contact: restrained facility photo; retain the simplified two-column flow. */
+#layanan.photo-section {
+  --scene: url('../img/backgrounds/layanan-1600.webp');
+  --veil: linear-gradient(105deg,rgba(238,225,200,.84),rgba(238,225,200,.72));
+  --scene-position: center 45%;
+}
+#layanan .resident-services-heading, #layanan #kontak { padding-inline: 0; }
+#layanan .resident-contact-layout { background: rgba(250,247,240,.90); padding: clamp(24px,4vw,48px); border: 1px solid rgba(250,247,240,.6); border-radius: 6px; }
+#layanan .resident-location { background: rgba(250,247,240,.90); margin-top: 20px; padding: 20px 24px; border: 0; border-radius: 4px; }
+#layanan .resident-services-heading p { color: #29392E; }
+
+/* Smaller supporting sections use the same palette without repeating photos. */
+#sambutan { background: linear-gradient(120deg,#FAF7F0,#EEE1C8); border: 0; }
+#statistik { background: linear-gradient(100deg,#EEE1C8,#E2D2B4); }
+#pengurus { background: linear-gradient(160deg,#FAF7F0 45%,#EEE1C8); }
+#prestasi { background: linear-gradient(150deg,#FAF7F0,#F1EBDD); }
+footer { border-top-color: #C7A77B; }
+
+@media (max-width: 767px) {
+  #profil.photo-section { --scene: url('../img/backgrounds/profil-800.webp'); --scene-position: 65% top; }
+  #pengumuman.photo-section { --scene: url('../img/backgrounds/informasi-800.webp'); --scene-position: 60% center; }
+  #kegiatan.photo-section { --scene: url('../img/backgrounds/kegiatan-800.webp'); --scene-position: 48% center; }
+  #layanan.photo-section { --scene: url('../img/backgrounds/layanan-800.webp'); --scene-position: 55% center; }
+  #galeri .gallery-scene-heading { background-image: linear-gradient(90deg,rgba(41,57,46,.82),rgba(41,57,46,.40)),url('../img/backgrounds/galeri-800.webp'); min-height: 260px; }
+  #profil .photo-heading { min-height: 180px; }
+  #profil .profile-story-panel { padding: 24px 20px; gap: 28px; }
+  #layanan .resident-contact-layout { padding: 24px 20px; gap: 32px; }
+  #kegiatan .activity-card > div { padding-inline: 20px; }
+}
