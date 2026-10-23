@@ -497,3 +497,66 @@ button, input, select { min-height: 44px; }
 #navbar { padding-inline: 16px; }
 }
 @media(max-width:430px) { .editorial-gallery.full-gallery { grid-template-columns: 1fr; } .hero-actions { flex-direction: column; align-items: stretch; } }
+
+/* Scoped revision: night patrol and resident contact only. */
+#jadwal-ronda {
+  background: linear-gradient(rgba(41,57,46,.38), rgba(41,57,46,.52)),
+    url('../img/galeri/ronda-malam-rt06.png') center center / cover no-repeat;
+  border: 0;
+}
+#jadwal-ronda > .container { max-width: 1248px; padding-inline: 24px; }
+#jadwal-ronda .text-center { margin-bottom: 32px; }
+#jadwal-ronda .text-center h2 { color: #FAF7F0; }
+#jadwal-ronda .text-center > span { color: #EEE1C8; }
+#jadwal-ronda .text-center > p { color: #FAF7F0; max-width: 760px; font-size: 1rem; }
+#jadwal-ronda .text-center > div { background: #C7A77B; }
+#ronda-grid { max-width: 1200px; grid-template-columns: minmax(0,1fr); gap: 20px; align-items: start; }
+#jadwal-ronda .ronda-card {
+  background: rgba(250,247,240,.90);
+  border: 1px solid rgba(238,225,200,.75);
+  border-radius: 8px;
+  padding: 22px;
+  box-shadow: 0 6px 24px rgba(18,30,21,.12);
+}
+#jadwal-ronda .ronda-card li { font-size: 1rem; line-height: 1.65; color: #29392E; padding-block: 5px; border-color: rgba(119,96,68,.15); align-items: baseline; }
+#jadwal-ronda .ronda-card li > span:first-child { background: #776044; flex-shrink: 0; }
+#jadwal-ronda .ronda-card .inline-flex { color: #29392E; background: #EEE1C8; font-size: 1rem; }
+#jadwal-ronda .ronda-card .uppercase { color: #62533F; font-size: .8rem; line-height: 1.6; }
+#jadwal-ronda .ronda-card i { color: #776044; }
+#layanan { background: #F5EFE3; border: 0; }
+#layanan .resident-services-heading, #layanan #kontak { max-width: 1200px; margin-inline: auto; padding-inline: 24px; }
+#layanan .resident-services-heading { margin-bottom: 40px; }
+#layanan .resident-eyebrow { display: block; color: #776044; font-size: .75rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 12px; }
+#layanan h2, #layanan h3 { color: #29392E; }
+#layanan h3 { font-size: clamp(1.75rem,3vw,2.25rem); line-height: 1.2; margin-bottom: 16px; }
+#layanan .resident-services-heading p { margin-top: 18px; color: #62533F; font-size: 1rem; }
+#layanan #kontak { padding-top: 0; padding-bottom: 0; }
+#kontak .resident-contact-layout { display: grid; grid-template-columns: minmax(0,1fr); gap: 40px; }
+#kontak .resident-contact-intro > p, #kontak .resident-contact-form > p { color: #62533F; font-size: 1rem; margin-bottom: 24px; max-width: 460px; }
+#kontak .resident-contact-button { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 48px; background: #29392E; color: #FAF7F0; padding: 14px 22px; border-radius: 4px; font-weight: 700; }
+#kontak .resident-contact-button:hover { background: #1D2B22; }
+#kontak .resident-service-links { display: grid; margin-top: 28px; max-width: 400px; }
+#kontak .resident-service-links a { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 16px; min-height: 48px; border-bottom: 1px solid #D8CFBD; color: #29392E; font-size: .9375rem; }
+#kontak .resident-service-links a:hover, #kontak .resident-location a:hover { color: #776044; text-decoration: underline; text-underline-offset: 4px; }
+#kontak #warga-contact-form { gap: 20px; font-size: 1rem; }
+#kontak #warga-contact-form label { font-size: .875rem; text-transform: none; color: #29392E; margin-bottom: 5px; }
+#kontak #warga-contact-form input, #kontak #warga-contact-form textarea { font-size: 1rem; background: #FFFCF7; border: 1px solid #9C8F78; border-radius: 4px; line-height: 1.6; }
+#kontak #warga-contact-form textarea { resize: vertical; min-height: 132px; }
+#kontak #warga-contact-form input::placeholder, #kontak #warga-contact-form textarea::placeholder { color: #706454; opacity: 1; }
+#kontak #warga-contact-form button { background: #B7804D; color: #17241B; border-radius: 4px; box-shadow: none; font-size: .9375rem; min-height: 50px; padding-inline: 16px; }
+#kontak #warga-contact-form button:hover { background: #C7A77B; }
+#kontak .resident-location { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; padding-top: 24px; border-top: 1px solid #C7A77B; }
+#kontak .resident-location p { color: #62533F; font-size: .9375rem; }
+#kontak .resident-location .resident-eyebrow { margin-bottom: 4px; }
+#kontak .resident-location a { display: inline-flex; align-items: center; gap: 16px; min-height: 48px; color: #29392E; font-weight: 700; flex-shrink: 0; }
+@media (min-width: 640px) {
+  #ronda-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media (min-width: 960px) {
+  #ronda-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  #kontak .resident-contact-layout { grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: 64px; }
+  #kontak .resident-location { flex-direction: row; justify-content: space-between; align-items: center; }
+}
+@media (min-width: 1200px) {
+  #ronda-grid { grid-template-columns: repeat(4,minmax(0,1fr)); }
+}

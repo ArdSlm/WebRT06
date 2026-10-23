@@ -395,64 +395,11 @@
     </section>
 
     <!-- ==================== LAYANAN WARGA ==================== -->
-    <section id="layanan" class="py-16 md:py-24 bg-[#EEE1C8] border-y border-[#DDE3DF]">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-12 max-w-7xl">
-        <div class="text-center max-w-2xl mx-auto mb-12 flex flex-col gap-2">
-          <span class="text-xs font-bold text-brand-navy uppercase tracking-widest">Pusat Layanan Warga</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-navy">Layanan Administrasi & Laporan</h2>
-          <div class="w-16 h-1 bg-brand-green mx-auto rounded-full mt-1.5"></div>
-          <p class="text-[#64748B] text-xs sm:text-sm mt-3">Silakan pilih jenis layanan di bawah ini, tautan akan langsung meneruskan pesan ke WhatsApp Ketua RT.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <!-- Layanan 1: Surat Pengantar -->
-          <div class="bg-white border border-[#DDE3DF] rounded-2xl p-6 shadow-sm flex flex-col justify-between hover:translate-y-[-4px] transition-all">
-            <div class="flex flex-col gap-3">
-              <div class="w-10 h-10 bg-[#F1EBDD] text-brand-green rounded-xl flex items-center justify-center text-lg shadow-sm">
-                <i class="fas fa-file-alt"></i>
-              </div>
-              <h4 class="font-extrabold text-sm text-[#1F2937]">Permohonan Surat Pengantar</h4>
-              <p class="text-xs text-[#64748B] leading-relaxed">
-                Pengurusan surat pengantar RT untuk keperluan administrasi kependudukan (KTP, KK, Surat Pindah, SKTM, dll) ke Desa.
-              </p>
-            </div>
-            <a id="layanan-surat-wa" href="#" target="_blank" rel="noopener noreferrer" class="mt-6 w-full bg-brand-green hover:bg-brand-green-hover text-white text-center font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-brand-green transition-all shadow-sm">
-              Ajukan Surat <i class="fab fa-whatsapp text-sm"></i>
-            </a>
-          </div>
-
-          <!-- Layanan 2: Aspirasi Warga -->
-          <div class="bg-white border border-[#DDE3DF] rounded-2xl p-6 shadow-sm flex flex-col justify-between hover:translate-y-[-4px] transition-all">
-            <div class="flex flex-col gap-3">
-              <div class="w-10 h-10 bg-[#F1EBDD] text-brand-green rounded-xl flex items-center justify-center text-lg shadow-sm">
-                <i class="fas fa-comments"></i>
-              </div>
-              <h4 class="font-extrabold text-sm text-[#1F2937]">Sampaikan Aspirasi Warga</h4>
-              <p class="text-xs text-[#64748B] leading-relaxed">
-                Penyampaian usulan program pembangunan, keluhan lingkungan, saran sarana prasarana, atau masukan untuk pengurus.
-              </p>
-            </div>
-            <a id="layanan-aspirasi-wa" href="#" target="_blank" rel="noopener noreferrer" class="mt-6 w-full bg-brand-green hover:bg-brand-green-hover text-white text-center font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-brand-green transition-all shadow-sm">
-              Kirim Aspirasi <i class="fab fa-whatsapp text-sm"></i>
-            </a>
-          </div>
-
-          <!-- Layanan 3: Laporan Keamanan -->
-          <div class="bg-white border border-[#DDE3DF] rounded-2xl p-6 shadow-sm flex flex-col justify-between hover:translate-y-[-4px] transition-all">
-            <div class="flex flex-col gap-3">
-              <div class="w-10 h-10 bg-red-50 text-[#B42318] rounded-xl flex items-center justify-center text-lg shadow-sm">
-                <i class="fas fa-shield-alt"></i>
-              </div>
-              <h4 class="font-extrabold text-sm text-[#1F2937]">Laporan Keamanan / Lingkungan</h4>
-              <p class="text-xs text-[#64748B] leading-relaxed">
-                Pelaporan gangguan keamanan, ketertiban lingkungan, kecurigaan tindak kriminal, atau masalah mendesak di wilayah RT 006.
-              </p>
-            </div>
-            <a id="layanan-laporan-wa" href="#" target="_blank" rel="noopener noreferrer" class="mt-6 w-full bg-[#B42318] hover:bg-[#961b12] text-white text-center font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#B42318] transition-all shadow-sm">
-              Laporkan Bahaya <i class="fab fa-whatsapp text-sm"></i>
-            </a>
-          </div>
-        </div>
+    <section id="layanan" aria-labelledby="layanan-title">
+      <div class="resident-services-heading">
+        <span class="resident-eyebrow">Pusat Layanan Warga</span>
+        <h2 id="layanan-title">Layanan &amp; Kontak Warga</h2>
+        <p>Aya nu badé ditepikeun? Kami siap ngadangukeun.</p>
       </div>
     </section>
 
@@ -487,78 +434,22 @@
     </section>
 
     <!-- ==================== KONTAK & LOKASI ==================== -->
-    <section id="kontak" class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-      <div class="text-center max-w-2xl mx-auto mb-12 flex flex-col gap-2">
-        <span class="text-xs font-bold text-brand-green uppercase tracking-widest">Kontak Kami</span>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-navy">Hubungi Pengurus & Lokasi</h2>
-        <div class="w-16 h-1 bg-brand-gold mx-auto rounded-full mt-1.5"></div>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-5xl mx-auto items-stretch">
-        <!-- Kiri: Informasi Kontak Detail -->
-        <div class="lg:col-span-5 bg-white rounded-2xl p-6 shadow-sm border border-[#DDE3DF] flex flex-col justify-between">
-          <div class="flex flex-col gap-5 text-xs">
-            <h3 class="text-base font-extrabold text-brand-navy">Informasi Sekretariat RT</h3>
-            <p class="text-[#64748B] leading-relaxed">
-              Anda dapat menghubungi kami melalui pesan form di samping atau berkunjung langsung ke alamat resmi pengurus kami.
-            </p>
-
-            <div class="flex flex-col gap-4 text-xs">
-              <!-- Alamat -->
-              <div class="flex gap-3.5 items-start">
-                <div class="w-8 h-8 bg-brand-ivory text-brand-navy border border-[#DDE3DF] rounded-lg flex items-center justify-center flex-shrink-0 text-sm">
-                  <i class="fas fa-map-marker-alt"></i>
-                </div>
-                <div>
-                  <h4 class="font-bold text-[#1F2937]">Alamat Wilayah</h4>
-                  <p class="text-[#64748B] text-xxs mt-0.5" id="kontak-alamat">Kp. Warung Cikopi, Ds. Salebu, Kec. Mangunreja, Kab. Tasikmalaya</p>
-                </div>
-              </div>
-              <!-- Ketua RT -->
-              <div class="flex gap-3.5 items-start">
-                <div class="w-8 h-8 bg-brand-ivory text-brand-navy border border-[#DDE3DF] rounded-lg flex items-center justify-center flex-shrink-0 text-sm">
-                  <i class="fas fa-user-shield"></i>
-                </div>
-                <div>
-                  <h4 class="font-bold text-[#1F2937]">Ketua RT</h4>
-                  <p class="text-[#64748B] text-xxs mt-0.5" id="kontak-ketua">Kusdiana</p>
-                </div>
-              </div>
-              <!-- Sekretaris -->
-              <div class="flex gap-3.5 items-start">
-                <div class="w-8 h-8 bg-brand-ivory text-brand-navy border border-[#DDE3DF] rounded-lg flex items-center justify-center flex-shrink-0 text-sm">
-                  <i class="fas fa-file-signature"></i>
-                </div>
-                <div>
-                  <h4 class="font-bold text-[#1F2937]">Sekretaris</h4>
-                  <p class="text-[#64748B] text-xxs mt-0.5" id="kontak-sekretaris">Iis Ahyantini</p>
-                </div>
-              </div>
-              <!-- Bendahara -->
-              <div class="flex gap-3.5 items-start">
-                <div class="w-8 h-8 bg-brand-ivory text-brand-navy border border-[#DDE3DF] rounded-lg flex items-center justify-center flex-shrink-0 text-sm">
-                  <i class="fas fa-wallet"></i>
-                </div>
-                <div>
-                  <h4 class="font-bold text-[#1F2937]">Bendahara</h4>
-                  <p class="text-[#64748B] text-xxs mt-0.5" id="kontak-bendahara">Kodir</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="pt-5 border-t border-[#DDE3DF] mt-6">
-            <a id="kontak-ketua-wa" href="https://wa.me/6282218222557" target="_blank" rel="noopener noreferrer" class="w-full bg-[#776044] hover:bg-[#604B33] text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-sm text-xs focus:outline-none focus:ring-2 focus:ring-[#776044]">
-              <i class="fab fa-whatsapp text-sm"></i> Chat WhatsApp Ketua RT
-            </a>
-          </div>
+    <section id="kontak" aria-label="Kontak pengurus dan aspirasi warga">
+      <div class="resident-contact-layout">
+        <div class="resident-contact-intro">
+          <span class="resident-eyebrow">Urang silih tulungan</span>
+          <h3>Hubungi Pengurus</h3>
+          <p>Hubungi pengurus untuk bantuan administrasi, aspirasi, atau laporan lingkungan.</p>
+          <a id="kontak-ketua-wa" href="https://wa.me/6282218222557" target="_blank" rel="noopener noreferrer" class="resident-contact-button"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Pengurus</a>
+          <nav class="resident-service-links" aria-label="Pilihan layanan WhatsApp">
+            <a id="layanan-surat-wa" href="#" target="_blank" rel="noopener noreferrer">Ajukan surat pengantar <span aria-hidden="true">↗</span></a>
+            <a id="layanan-aspirasi-wa" href="#" target="_blank" rel="noopener noreferrer">Kirim aspirasi langsung <span aria-hidden="true">↗</span></a>
+            <a id="layanan-laporan-wa" href="#" target="_blank" rel="noopener noreferrer">Laporan keamanan / lingkungan <span aria-hidden="true">↗</span></a>
+          </nav>
         </div>
-
-        <!-- Kanan: Form Aspirasi Warga -->
-        <div class="lg:col-span-7 bg-white rounded-2xl p-6 shadow-sm border border-[#DDE3DF]">
-          <h3 class="text-base font-extrabold text-brand-navy mb-1.5">Kirim Aspirasi & Laporan</h3>
-          <p class="text-xs text-[#64748B] mb-5">Tuliskan pesan Anda di bawah ini untuk dikirim secara instan ke WhatsApp Ketua RT.</p>
-
+        <div class="resident-contact-form">
+          <h3>Sampaikan Aspirasi</h3>
+          <p>Isi formulir untuk meneruskan pesan ke WhatsApp pengurus.</p>
           <form id="warga-contact-form" class="flex flex-col gap-4 text-xs">
             <!-- Nama -->
             <div class="flex flex-col gap-1">
@@ -595,63 +486,9 @@
           </form>
         </div>
       </div>
-
-      <!-- Google Maps Lokasi -->
-      <div class="mt-8 max-w-5xl mx-auto">
-        <div class="bg-white rounded-2xl shadow-sm border border-[#DDE3DF] overflow-hidden grid grid-cols-1 md:grid-cols-12 items-stretch">
-          <!-- Kolom Map (Iframe) -->
-          <div class="md:col-span-7 w-full h-[280px] md:h-auto min-h-[250px]">
-            <iframe
-              src="https://www.google.com/maps?q=-7.3739143,108.0621371&z=18&output=embed"
-              width="100%"
-              height="100%"
-              style="border:0; min-height: 250px; height: 100%;"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              title="Lokasi Masjid Al-Muhajirin RT 006">
-            </iframe>
-          </div>
-
-          <!-- Kolom Deskripsi Peta -->
-          <div class="md:col-span-5 p-6 flex flex-col justify-between gap-4 bg-white text-xs text-[#1F2937]">
-            <div class="flex flex-col gap-2.5">
-              <span class="text-[10px] font-bold text-brand-green uppercase tracking-wider text-left">Peta Wilayah</span>
-              <h3 class="text-base font-extrabold text-brand-navy text-left">Pusat Wilayah RT 006</h3>
-              <div class="w-10 h-0.5 bg-brand-green rounded-full"></div>
-
-              <div class="flex gap-2.5 items-start text-xs mt-3">
-                <div class="w-7 h-7 bg-brand-ivory text-brand-navy rounded-lg flex items-center justify-center flex-shrink-0">
-                  <i class="fas fa-mosque"></i>
-                </div>
-                <div class="text-left">
-                  <h4 class="font-bold text-[#1F2937]">Titik Pusat</h4>
-                  <p class="text-[#64748B] text-xxs mt-0.5">Pusat berkumpul warga berada di sekitar Masjid Al-Muhajirin 06.</p>
-                </div>
-              </div>
-
-              <div class="flex gap-2.5 items-start text-xs">
-                <div class="w-7 h-7 bg-brand-ivory text-brand-navy rounded-lg flex items-center justify-center flex-shrink-0">
-                  <i class="fas fa-map-marker-alt"></i>
-                </div>
-                <div class="text-left">
-                  <h4 class="font-bold text-[#1F2937]">Alamat</h4>
-                  <p class="text-[#64748B] text-xxs mt-0.5">RT 006, Kp. Warung Cikopi, Ds. Salebu, Kec. Mangunreja, Tasikmalaya.</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Button Buka di Maps -->
-            <div class="pt-3 border-t border-[#DDE3DF] text-left">
-              <a href="https://www.google.com/maps/place/Masjid+Al-Muhajirin+06/@-7.3751902,108.0624973,19z/data=!4m9!1m2!2m1!1sRT+006+Warung+Cikopi+Kp.+Warung+Cikopi+Ds.+Salebu+Kec.+Mangunreja+Kab.+Tasikmalaya!3m5!1s0x2e6f5579b26e1da3:0x53301c9c8e102a00!8m2!3d-7.3739143!4d108.0621371!16s%2Fg%2F11j7xy4tmp?entry=ttu"
-                 target="_blank"
-                 rel="noopener noreferrer"
-                 class="bg-brand-navy hover:bg-brand-navy-hover text-brand-ivory inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl font-bold text-xxs shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-navy">
-                <i class="fas fa-external-link-alt"></i> Buka di Google Maps
-              </a>
-            </div>
-          </div>
-        </div>
+      <div class="resident-location">
+        <div><span class="resident-eyebrow">Lokasi RT 006</span><p id="kontak-alamat">Kp. Warung Cikopi, Ds. Salebu, Kec. Mangunreja, Kab. Tasikmalaya</p></div>
+        <a href="https://www.google.com/maps/place/Masjid+Al-Muhajirin+06/@-7.3751902,108.0624973,19z/data=!4m9!1m2!2m1!1sRT+006+Warung+Cikopi+Kp.+Warung+Cikopi+Ds.+Salebu+Kec.+Mangunreja+Kab.+Tasikmalaya!3m5!1s0x2e6f5579b26e1da3:0x53301c9c8e102a00!8m2!3d-7.3739143!4d108.0621371!16s%2Fg%2F11j7xy4tmp?entry=ttu" target="_blank" rel="noopener noreferrer">Buka Google Maps <span aria-hidden="true">↗</span></a>
       </div>
     </section>
 
