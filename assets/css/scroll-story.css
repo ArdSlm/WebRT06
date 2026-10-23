@@ -1,0 +1,11 @@
+body > header { margin-bottom:-76px; }
+#navbar { background:rgba(41,57,46,.78); backdrop-filter:blur(8px); transition:background 300ms,color 300ms; }
+#navbar .nav-link, #navbar .text-brand-navy, #menu-toggle, #navbar .text-xxs { color:#FAF7F0; }
+.story-scrolled #navbar { background:rgba(41,57,46,.96); }
+.hero-story { padding-top:110px; }
+#sambutan { background:linear-gradient(100deg,rgba(238,225,200,.92),rgba(238,225,200,.80)),url('../img/backgrounds/informasi-1600.webp') center/cover; }
+#statistik { background:linear-gradient(rgba(238,225,200,.88),rgba(238,225,200,.92)),url('../img/backgrounds/profil-800.webp') center/cover; }
+#pengurus { background:linear-gradient(rgba(250,247,240,.88),rgba(238,225,200,.85)),url('../img/backgrounds/galeri-1600.webp') center/cover; }
+#pengurus .organigram-card:not(.text-white) { background:rgba(250,247,240,.90); }
+@media(min-width:1024px) and (prefers-reduced-motion:no-preference) { #profil #wilayah { position:sticky; top:100px; } }
+@media(prefers-reduced-motion:reduce) { .hero-photo { transform:none!important; } #profil #wilayah { position:static; } }
