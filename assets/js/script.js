@@ -971,26 +971,7 @@ function setupEventListeners() {
 
 // F. ANIMATION ON SCROLL (REVEAL ELEMENTS)
 function setupScrollAnimation() {
-  const reveals = document.querySelectorAll(".reveal");
-
-  const revealCallback = (entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("active");
-        observer.unobserve(entry.target); // Hanya animasi satu kali saat scroll down
-      }
-    });
-  };
-
-  const revealObserver = new IntersectionObserver(revealCallback, {
-    root: null,
-    threshold: 0.15, // Memicu animasi ketika 15% elemen terlihat
-    rootMargin: "0px 0px -50px 0px"
-  });
-
-  reveals.forEach(reveal => {
-    revealObserver.observe(reveal);
-  });
+  // Reveal lifecycle is owned by scroll-story.js; retain admin/filter compatibility.
 }
 
 // G. RENDER PRESTASI & PENGHARGAAN
