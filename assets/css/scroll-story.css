@@ -1,3 +1,5 @@
+.story-quote, #statistik p[lang="su"], #prestasi p[lang="su"], #jadwal-ronda .text-center > p { font-family:'Newsreader',Georgia,serif; font-size:clamp(1.15rem,2vw,1.5rem); line-height:1.6; font-weight:400; text-transform:none; letter-spacing:normal; }
+#kontak .resident-contact-form > .story-quote, #layanan .resident-services-heading > .story-quote { font-size:clamp(1.15rem,2vw,1.5rem); }
 body > header { margin-bottom:-76px; }
 #navbar { background:rgba(41,57,46,.78); backdrop-filter:blur(8px); transition:background 300ms,color 300ms; }
 #navbar .nav-link, #navbar .text-brand-navy, #menu-toggle, #navbar .text-xxs { color:#FAF7F0; }
