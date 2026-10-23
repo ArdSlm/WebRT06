@@ -391,6 +391,9 @@ function arrangeSectionsByNavigation() {
     const section = document.getElementById(id);
     if (section?.parentElement === main) main.appendChild(section);
   });
+  const services = document.getElementById('layanan');
+  const contact = document.getElementById('kontak');
+  if (services && contact) services.appendChild(contact);
 }
 
 // A. RENDER INFO UMUM & STATISTIK
@@ -425,7 +428,7 @@ function renderInfoUmum() {
 
   const waUrl = (message = "") => `https://wa.me/${RT_CONFIG.kontak.noWaKetua}${message ? `?text=${encodeURIComponent(message)}` : ""}`;
   const waLinks = {
-    "wa-btn-header": "", "mobile-wa-btn": "", "hero-btn-wa": "", "kontak-ketua-wa": "",
+    "wa-btn-header": "", "mobile-wa-btn": "", "kontak-ketua-wa": "",
     "layanan-surat-wa": "Halo Bapak Ketua RT 006, saya ingin mengajukan permohonan surat pengantar.",
     "layanan-aspirasi-wa": "Halo Bapak Ketua RT 006, saya ingin menyampaikan aspirasi terkait lingkungan.",
     "layanan-laporan-wa": "Halo Bapak Ketua RT 006, saya ingin melaporkan masalah keamanan atau lingkungan."
@@ -571,6 +574,10 @@ function renderPengumuman() {
 
   container.innerHTML = "";
 
+  if (!DATA_PENGUMUMAN.length) {
+    container.innerHTML = '<p class="text-slate-600">Belum ada pengumuman terbaru.</p>';
+    return;
+  }
   [...DATA_PENGUMUMAN].reverse().forEach(item => {
     const cardHTML = `
       <article class="announcement-card reveal">
@@ -645,38 +652,39 @@ function renderKegiatan(filterCategory = "all") {
 }
 
 // E. RENDER GALERI
+let showAllDocumentation = false;
 function renderGaleri() {
   const container = document.getElementById("galeri-grid");
   if (!container) return;
-
-  container.innerHTML = "";
-
-  const reversedGaleri = [...DATA_GALERI].reverse();
-
-  reversedGaleri.forEach((item, reversedIndex) => {
-    const originalIndex = DATA_GALERI.length - 1 - reversedIndex;
-    const imgSrc = item.gambar || item.image;
-    const categoryBadge = item.kategori ? `
-      <div class="absolute top-4 left-4 bg-emerald-600/90 text-white text-xxs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm z-10">
-        ${item.kategori}
-      </div>
-    ` : "";
-    const cardHTML = `
-      <button type="button" class="gallery-card group reveal" onclick="openLightbox(${originalIndex})" aria-label="Buka foto ${item.judul}">
-        ${categoryBadge}
-        <img src="${imgSrc}" alt="${item.judul}" loading="lazy" width="640" height="480" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300">
-        <div class="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-transparent opacity-90 transition-opacity duration-300"></div>
-        <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
-          <h4 class="font-bold text-lg leading-tight mb-1 text-white">${item.judul}</h4>
-          <p class="text-xs text-emerald-200 line-clamp-2">${item.deskripsi}</p>
-        </div>
-        <div class="absolute top-4 right-4 bg-white/20 backdrop-blur-md rounded-full p-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <i class="fas fa-search-plus"></i>
-        </div>
-      </button>
-    `;
-    container.innerHTML += cardHTML;
+  container.className = showAllDocumentation ? "editorial-gallery full-gallery" : "editorial-gallery";
+  container.replaceChildren();
+  const visible = showAllDocumentation ? DATA_GALERI : DATA_GALERI.slice(0, 4);
+  visible.forEach((item, index) => {
+    const figure = document.createElement("figure");
+    const button = document.createElement("button");
+    button.type = "button";
+    button.setAttribute("aria-label", "Perbesar foto: " + item.judul);
+    const img = document.createElement("img");
+    img.src = item.gambar || item.image;
+    img.alt = item.deskripsi || item.judul;
+    img.loading = "lazy"; img.width = 1600; img.height = 900;
+    button.append(img);
+    button.addEventListener("click", () => openLightbox(index));
+    const caption = document.createElement("figcaption");
+    caption.textContent = item.judul;
+    figure.append(button, caption); container.append(figure);
   });
+  if (!visible.length) container.textContent = "Dokumentasi warga belum tersedia.";
+  let toggle = document.getElementById("gallery-toggle");
+  if (!toggle) {
+    toggle = document.createElement("button"); toggle.id = "gallery-toggle";
+    toggle.className = "heritage-button gallery-toggle";
+    toggle.addEventListener("click", () => { showAllDocumentation = !showAllDocumentation; renderGaleri(); });
+    container.after(toggle);
+  }
+  toggle.hidden = DATA_GALERI.length <= 4;
+  toggle.textContent = showAllDocumentation ? "Tampilkan pilihan dokumentasi" : "Lihat Semua Dokumentasi";
+  toggle.setAttribute("aria-expanded", String(showAllDocumentation));
 }
 
 // F. RENDER JADWAL RONDA
@@ -727,6 +735,7 @@ function renderJadwalRonda() {
 // ==========================================================================
 
 let activeImageIndex = 0;
+let lightboxTrigger = null;
 
 function openLightbox(index) {
   const modal = document.getElementById("lightboxModal");
@@ -736,13 +745,16 @@ function openLightbox(index) {
   if (!modal || !modalImg || !modalCaption) return;
 
   activeImageIndex = index;
+  lightboxTrigger = document.activeElement;
   modalImg.src = DATA_GALERI[index].gambar || DATA_GALERI[index].image;
+  modalImg.alt = DATA_GALERI[index].deskripsi || DATA_GALERI[index].judul;
   modalImg.onerror = null;
   modal.setAttribute("aria-hidden", "false");
   modalCaption.textContent = DATA_GALERI[index].judul + " - " + DATA_GALERI[index].deskripsi;
 
   modal.style.display = "flex";
   document.body.style.overflow = "hidden"; // Disable background scrolling
+  document.getElementById('lightboxClose')?.focus();
 }
 
 function closeLightbox() {
@@ -751,6 +763,7 @@ function closeLightbox() {
     modal.style.display = "none";
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "auto"; // Re-enable scrolling
+    lightboxTrigger?.focus();
   }
 }
 
@@ -768,6 +781,7 @@ function changeLightboxImage(direction) {
 
   if (modalImg && modalCaption) {
     modalImg.src = DATA_GALERI[activeImageIndex].gambar || DATA_GALERI[activeImageIndex].image;
+    modalImg.alt = DATA_GALERI[activeImageIndex].deskripsi || DATA_GALERI[activeImageIndex].judul;
     modalCaption.textContent = DATA_GALERI[activeImageIndex].judul + " - " + DATA_GALERI[activeImageIndex].deskripsi;
   }
 }
@@ -789,6 +803,7 @@ function setupEventListeners() {
     menuToggle.setAttribute("aria-expanded", String(open));
     document.body.classList.toggle("menu-open", open);
     if (open) mobileClose?.focus();
+    else menuToggle.focus();
   };
   menuToggle?.addEventListener("click", () => setMobileMenu(true));
   mobileClose?.addEventListener("click", () => setMobileMenu(false));
@@ -929,6 +944,13 @@ function setupEventListeners() {
 
   // Escape key close lightbox or admin modal
   document.addEventListener("keydown", (e) => {
+    const activeDialog = modal?.style.display === 'flex' ? modal : mobileMenu?.classList.contains('open') ? mobileMenu : null;
+    if (e.key === 'Tab' && activeDialog) {
+      const controls = [...activeDialog.querySelectorAll('a[href], button, input, select, textarea, [tabindex="0"]')].filter(el => el.getClientRects().length);
+      const first = controls[0], last = controls[controls.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
+    }
     if (e.key === "Escape" && mobileMenu?.classList.contains("open")) setMobileMenu(false);
     if (modal && modal.style.display === "flex") {
       if (e.key === "Escape") {
