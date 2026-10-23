@@ -99,7 +99,11 @@ main > .photo-section {
 #sambutan { background: linear-gradient(120deg,#FAF7F0,#EEE1C8); border: 0; }
 #statistik { background: linear-gradient(100deg,#EEE1C8,#E2D2B4); }
 #pengurus { background: linear-gradient(160deg,#FAF7F0 45%,#EEE1C8); }
-#prestasi { background: linear-gradient(150deg,#FAF7F0,#F1EBDD); }
+#prestasi { background: linear-gradient(110deg,rgba(41,57,46,.76),rgba(41,57,46,.50)),url('../img/prestasi/prestasi-hut79-jampana-kebersihan.jpg') center / cover; }
+#prestasi > .text-center h2, #prestasi > .text-center p { color: #FAF7F0; }
+#prestasi > .text-center > span { color: #EEE1C8; }
+#prestasi > .text-center p { max-width: 760px; }
+#prestasi-grid > article, #prestasi-grid > div { background-color: rgba(250,247,240,.92); }
 footer { border-top-color: #C7A77B; }
 
 @media (max-width: 767px) {

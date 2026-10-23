@@ -7,12 +7,12 @@
     observer.unobserve(target);
     if (!reduced.matches) target.animate([
       {opacity:.3,transform:'translateY(20px)'}, {opacity:1,transform:'translateY(0)'}
-    ], {duration:650,easing:'cubic-bezier(.22,1,.36,1)',delay:Number(target.dataset.storyDelay || 0)});
+    ], {duration:target.matches('.activity-card, .editorial-gallery figure, #sambutan .max-w-4xl') ? 1200 : 900,easing:'cubic-bezier(.22,1,.36,1)',delay:Number(target.dataset.storyDelay || 0)});
   }), {threshold:.12});
   function register() {
     document.querySelectorAll('.photo-heading, .hero-story, #sambutan .max-w-4xl, #statistik .grid > div, .organigram-card, .activity-card, .ronda-card, .editorial-gallery figure, .resident-services-heading').forEach((el,i) => {
       if (seen.has(el)) return;
-      seen.add(el); el.dataset.storyDelay = (i % 3)*90; observer.observe(el);
+      seen.add(el); el.dataset.storyDelay = (i % 3)*150; observer.observe(el);
     });
   }
   let frame=0;
