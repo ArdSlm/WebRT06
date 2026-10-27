@@ -530,6 +530,7 @@
       <div class="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3 max-w-7xl font-semibold">
         <p>&copy; <span id="dynamic-year">2026</span> RT 006 Warung Cikopi. Hak Cipta Dilindungi.</p>
         <p class="flex items-center gap-1"><i class="fas fa-shield-alt text-[#776044]"></i> Portal Informasi Resmi Warga</p>
+        <button id="admin-floating-btn" onclick="triggerAdminLogin()" class="footer-admin" type="button">Editor lokal</button>
       </div>
     </div>
   </footer>
@@ -567,9 +568,6 @@
   </div>
 
   <!-- ==================== FLOATING ADMIN BUTTON ==================== -->
-  <button id="admin-floating-btn" onclick="triggerAdminLogin()" class="fixed bottom-6 left-6 z-40 w-11 h-11 rounded-xl shadow-lg flex items-center justify-center transition-all hover:scale-110 active:scale-95 bg-[#C7A77B] hover:bg-[#B7804D] text-brand-navy text-base cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#C7A77B]" aria-label="Panel Administrasi RT">
-    <i class="fas fa-lock"></i>
-  </button>
 
   <!-- ==================== ADMIN CONTROL PANEL MODAL ==================== -->
   <div id="adminModal" class="fixed inset-0 z-[9999] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 md:p-6 transition-all duration-300 hidden" role="dialog" aria-modal="true" aria-label="Panel administrasi RT 006">
@@ -585,11 +583,12 @@
         <div class="w-14 h-14 rounded-full bg-[#FAF7F0] border border-[#C7A77B]/30 text-brand-navy flex items-center justify-center text-xl mb-5 shadow-sm">
           <i class="fas fa-lock text-[#C7A77B]"></i>
         </div>
-        <h3 class="text-base font-extrabold text-brand-navy">Akses Administrator RT 006</h3>
-        <p class="text-xxs text-[#64748B] mt-1 mb-6 uppercase tracking-wider font-semibold">Guna Mengelola Data Portal Warga</p>
+        <h3 class="text-base font-extrabold text-brand-navy">Editor Lokal RT 006</h3>
+        <p class="text-sm text-[#465044] mt-2 mb-6">Perubahan hanya tersimpan di browser ini, bukan dipublikasikan ke semua warga. Jangan masukkan data sensitif. Sandi ini hanya pembatas antarmuka, bukan autentikasi server.</p>
         
         <form id="admin-login-form" class="w-full flex flex-col gap-3">
-          <input type="password" id="admin-password-input" required placeholder="Masukkan Sandi Admin (rt006admin)" class="w-full px-4 py-2.5 rounded-xl border border-[#DDE3DF] focus:outline-none focus:ring-2 focus:ring-brand-green text-center font-bold bg-brand-ivory/10 text-xs">
+          <label for="admin-password-input">Sandi editor lokal</label>
+          <input type="password" id="admin-password-input" required autocomplete="current-password" placeholder="Masukkan sandi editor" class="w-full px-4 py-2.5 rounded-xl border border-[#DDE3DF] focus:outline-none focus:ring-2 focus:ring-brand-green text-center font-bold bg-brand-ivory/10 text-xs">
           <p id="admin-login-error" class="text-xxs text-[#B42318] font-bold hidden uppercase tracking-wide">Kata sandi salah!</p>
           <button type="submit" class="w-full bg-[#776044] hover:bg-[#604B33] text-white py-3 rounded-xl font-bold text-xs shadow-md mt-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#776044]">
             Masuk Panel Kontrol
@@ -604,7 +603,7 @@
           <h3 class="text-base font-extrabold flex items-center gap-2 text-white">
             <i class="fas fa-user-cog text-brand-gold text-sm"></i> Panel Kontrol Administrasi RT
           </h3>
-          <p class="text-[10px] text-brand-ivory/80 mt-0.5">Tambahkan dan sesuaikan informasi pengumuman, program, ronda malam, dan dokumentasi secara real-time.</p>
+          <p class="text-sm text-brand-ivory mt-2">Mode lokal: perubahan hanya tersimpan di browser ini. Tidak otomatis memperbarui website untuk pengunjung lain.</p>
         </div>
 
         <!-- Tab Buttons -->

@@ -1,15 +1,39 @@
 .story-quote, #statistik p[lang="su"], #prestasi p[lang="su"], #jadwal-ronda .text-center > p { font-family:'Newsreader',Georgia,serif; font-size:clamp(1.15rem,2vw,1.5rem); line-height:1.6; font-weight:400; text-transform:none; letter-spacing:normal; }
 #kontak .resident-contact-form > .story-quote, #layanan .resident-services-heading > .story-quote { font-size:clamp(1.15rem,2vw,1.5rem); }
-body > header { margin-bottom:-76px; }
+body > header { margin-bottom:0; }
 #galeri .gallery-scene-heading .story-quote { color:#FAF7F0; max-width:650px; }
 #navbar { background:rgba(41,57,46,.78); backdrop-filter:blur(8px); transition:background 300ms,color 300ms; }
 #navbar .nav-link, #navbar .text-brand-navy, #menu-toggle, #navbar .text-xxs { color:#FAF7F0; }
 .story-scrolled #navbar { background:rgba(41,57,46,.96); }
-.hero-story { padding-top:110px; }
 #sambutan { background:linear-gradient(100deg,rgba(238,225,200,.92),rgba(238,225,200,.80)),url('../img/pilihan/warga-pos-kamling-1600.webp') center/cover; }
 @media(max-width:767px) { #sambutan { background-image:linear-gradient(100deg,rgba(238,225,200,.92),rgba(238,225,200,.80)),url('../img/pilihan/warga-pos-kamling-800.webp'); } }
-#statistik { background:linear-gradient(rgba(238,225,200,.88),rgba(238,225,200,.92)),url('../img/backgrounds/profil-800.webp') center/cover; }
+#statistik { background:linear-gradient(rgba(238,225,200,.94),rgba(238,225,200,.94)),url('../img/backgrounds/profil-800.webp') center/cover; border-block:1px solid #C7A77B; }
 #pengurus { background:linear-gradient(rgba(250,247,240,.88),rgba(238,225,200,.85)),url('../img/backgrounds/galeri-1600.webp') center/cover; }
 #pengurus .organigram-card:not(.text-white) { background:rgba(250,247,240,.90); }
 @media(min-width:1024px) and (prefers-reduced-motion:no-preference) { #profil #wilayah { position:sticky; top:100px; } }
 @media(prefers-reduced-motion:reduce) { .hero-photo { transform:none!important; } #profil #wilayah { position:static; } }
+
+/* Photo-led composition: text never covers the residents' faces. */
+#beranda.heritage-hero { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.2fr); height:auto; min-height:0; max-height:none; padding:48px max(24px,calc((100% - 1280px)/2)) 32px; gap:32px; }
+.hero-story { grid-column:1; grid-row:1; padding:0; margin:0; width:auto; align-self:center; }
+.hero-story h1 { font-size:clamp(2.5rem,4.3vw,4.4rem); max-width:12ch; }
+.hero-photo { position:relative; inset:auto; grid-column:2; grid-row:1; width:100%; height:auto; aspect-ratio:16/9; object-fit:contain; align-self:center; border-radius:4px; }
+.hero-shade { display:none; }
+.hero-place { position:static; grid-column:1/-1; padding-top:20px; }
+#profil.photo-section { background-size:100% 420px,auto 420px; background-position:center top; background-color:#29392E; }
+#sambutan { border-bottom:8px solid #FAF7F0; }
+#statistik .grid > div:last-child { border-right:0; }
+.editorial-gallery { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.editorial-gallery figure:first-child, .editorial-gallery figure:last-child { grid-column:auto; grid-row:auto; }
+.editorial-gallery img, .editorial-gallery figure:first-child img { aspect-ratio:16/9; }
+.footer-admin { padding:10px 16px; color:#EEE1C8; border:1px solid #776044; border-radius:3px; }
+.mobile-nav-link[aria-current="location"] { color:#29392E; font-weight:800; border-bottom:2px solid #776044; }
+@media(max-width:767px) {
+  #beranda.heritage-hero { grid-template-columns:minmax(0,1fr); gap:28px; padding:36px 24px 28px; }
+  .hero-story { grid-column:1; grid-row:1; }
+  .hero-story h1 { max-width:14ch; }
+  .hero-photo { grid-column:1; grid-row:2; object-position:center; }
+  .hero-place { grid-row:3; }
+  .editorial-gallery, .editorial-gallery.full-gallery { grid-template-columns:minmax(0,1fr); }
+  #statistik .grid > div:nth-child(even) { border-right:0; }
+}

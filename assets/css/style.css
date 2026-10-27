@@ -4,7 +4,7 @@
    Warna diambil langsung dari Logo RT 006
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&display=swap');400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 
 :root {
   --brand-navy: #29392E;
@@ -442,11 +442,10 @@ main .animate-bounce, #topbar .animate-pulse { animation: none; }
 .hero-story blockquote { font: italic 1.3rem 'Newsreader',serif; color: #EEE1C8; }
 .hero-place { position: absolute; bottom: 24px; left: max(24px,calc((100% - 1184px)/2)); right: 24px; font-size: .7rem; letter-spacing: .15em; border-top: 1px solid #ffffff40; padding-top: 18px; }
 .hero-place span { display: block; letter-spacing: .03em; margin-top: 4px; }
-#statistik { background: #EEE1C8; padding-block: 40px; }
+#statistik { padding-block: 40px; }
 #statistik .grid > div { background: transparent; border: 0; border-radius: 0; border-right: 1px solid #C7A77B; }
 #statistik .grid > div > div { display: none; }
 #statistik .grid > div > span:last-child { font: 500 clamp(1.5rem,3vw,2.8rem) 'Newsreader',serif; }
-#sambutan { background: #F1EBDD; }
 #sambutan img { object-position: center 25%; }
 #pengumuman-grid { display: block; max-width: none; }
 .announcement-card { border: 0; border-top: 1px solid #D8CFBD; background: transparent; border-radius: 0; box-shadow: none; padding: 28px 0; }

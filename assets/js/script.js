@@ -847,16 +847,29 @@ function setupEventListeners() {
   });
 
   const observedSections = document.querySelectorAll("main section[id]");
-  const navLinks = document.querySelectorAll(".nav-link");
-  if ("IntersectionObserver" in window) {
-    const sectionObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        navLinks.forEach(link => link.classList.toggle("active", link.getAttribute("href") === `#${entry.target.id}`));
-      });
-    }, { rootMargin: "-35% 0px -55%", threshold: 0 });
-    observedSections.forEach(section => sectionObserver.observe(section));
-  }
+  const navLinks = document.querySelectorAll(".nav-link, .mobile-nav-link");
+  const sectionMenus = { beranda: "beranda", sambutan: "beranda", statistik: "beranda", profil: "profil", wilayah: "profil", pengurus: "profil", kegiatan: "kegiatan", "jadwal-ronda": "kegiatan", prestasi: "kegiatan", galeri: "galeri", layanan: "layanan", kontak: "layanan", pengumuman: "layanan" };
+  let navFrame = 0;
+  const updateActiveMenu = () => {
+    navFrame = 0;
+    let selected = "beranda", closest = -Infinity;
+    observedSections.forEach(section => {
+      const top = section.getBoundingClientRect().top;
+      if (sectionMenus[section.id] && top <= 140 && top >= closest) {
+        closest = top; selected = sectionMenus[section.id];
+      }
+    });
+    navLinks.forEach(link => {
+      const active = link.getAttribute("href") === `#${selected}`;
+      link.classList.toggle("active", active);
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  };
+  const scheduleNav = () => { if (!navFrame) navFrame = requestAnimationFrame(updateActiveMenu); };
+  addEventListener("scroll", scheduleNav, { passive: true });
+  addEventListener("resize", scheduleNav);
+  updateActiveMenu();
 
   // 2. Navbar Styling on Scroll
   window.addEventListener("scroll", () => {
