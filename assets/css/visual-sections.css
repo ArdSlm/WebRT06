@@ -20,7 +20,7 @@ main > .photo-section {
 
 /* Profil: one editorial reading surface over the village lane. */
 #profil.photo-section {
-  --scene: url('../img/backgrounds/profil-1600.webp');
+  --scene: url('../img/pilihan/warga-pos-kamling-1600.webp');
   --veil: linear-gradient(110deg, rgba(41,57,46,.70), rgba(41,57,46,.24));
   --scene-position: center 35%;
 }
@@ -56,7 +56,7 @@ main > .photo-section {
 
 /* Kegiatan: a distinct working-together scene and spacious photo stories. */
 #kegiatan.photo-section {
-  --scene: url('../img/backgrounds/kegiatan-1600.webp');
+  --scene: url('../img/pilihan/gotong-royong-jalan-1600.webp');
   --veil: linear-gradient(105deg, rgba(41,57,46,.82), rgba(41,57,46,.48));
   --scene-position: center 55%;
 }
@@ -86,7 +86,7 @@ main > .photo-section {
 
 /* Contact: restrained facility photo; retain the simplified two-column flow. */
 #layanan.photo-section {
-  --scene: url('../img/backgrounds/layanan-1600.webp');
+  --scene: url('../img/pilihan/interior-bambu-1600.webp');
   --veil: linear-gradient(105deg,rgba(238,225,200,.84),rgba(238,225,200,.72));
   --scene-position: center 45%;
 }
@@ -107,10 +107,10 @@ main > .photo-section {
 footer { border-top-color: #C7A77B; }
 
 @media (max-width: 767px) {
-  #profil.photo-section { --scene: url('../img/backgrounds/profil-800.webp'); --scene-position: 65% top; }
+  #profil.photo-section { --scene: url('../img/pilihan/warga-pos-kamling-800.webp'); --scene-position: 55% top; }
   #pengumuman.photo-section { --scene: url('../img/backgrounds/informasi-800.webp'); --scene-position: 60% center; }
-  #kegiatan.photo-section { --scene: url('../img/backgrounds/kegiatan-800.webp'); --scene-position: 48% center; }
-  #layanan.photo-section { --scene: url('../img/backgrounds/layanan-800.webp'); --scene-position: 55% center; }
+  #kegiatan.photo-section { --scene: url('../img/pilihan/gotong-royong-jalan-800.webp'); --scene-position: 65% center; }
+  #layanan.photo-section { --scene: url('../img/pilihan/interior-bambu-800.webp'); --scene-position: 55% center; }
   #galeri .gallery-scene-heading { background-image: linear-gradient(90deg,rgba(41,57,46,.82),rgba(41,57,46,.40)),url('../img/backgrounds/galeri-800.webp'); min-height: 260px; }
   #profil .photo-heading { min-height: 180px; }
   #profil .profile-story-panel { padding: 24px 20px; gap: 28px; }

@@ -6,7 +6,8 @@ body > header { margin-bottom:-76px; }
 #navbar .nav-link, #navbar .text-brand-navy, #menu-toggle, #navbar .text-xxs { color:#FAF7F0; }
 .story-scrolled #navbar { background:rgba(41,57,46,.96); }
 .hero-story { padding-top:110px; }
-#sambutan { background:linear-gradient(100deg,rgba(238,225,200,.92),rgba(238,225,200,.80)),url('../img/backgrounds/informasi-1600.webp') center/cover; }
+#sambutan { background:linear-gradient(100deg,rgba(238,225,200,.92),rgba(238,225,200,.80)),url('../img/pilihan/warga-pos-kamling-1600.webp') center/cover; }
+@media(max-width:767px) { #sambutan { background-image:linear-gradient(100deg,rgba(238,225,200,.92),rgba(238,225,200,.80)),url('../img/pilihan/warga-pos-kamling-800.webp'); } }
 #statistik { background:linear-gradient(rgba(238,225,200,.88),rgba(238,225,200,.92)),url('../img/backgrounds/profil-800.webp') center/cover; }
 #pengurus { background:linear-gradient(rgba(250,247,240,.88),rgba(238,225,200,.85)),url('../img/backgrounds/galeri-1600.webp') center/cover; }
 #pengurus .organigram-card:not(.text-white) { background:rgba(250,247,240,.90); }

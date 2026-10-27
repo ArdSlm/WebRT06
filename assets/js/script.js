@@ -255,6 +255,20 @@ const DATA_GALERI = JSON.parse(localStorage.getItem("DATA_GALERI")) || [
   }
 ];
 
+// One-time selected-photo import; preserve saved galleries and later admin removal.
+if (!localStorage.getItem("GALERI_PILIHAN_20261027")) {
+  const selectedPhoto = "assets/img/pilihan/dokumentasi-karnaval-1600.webp";
+  if (!DATA_GALERI.some(item => (item.gambar || item.image) === selectedPhoto)) {
+    DATA_GALERI.unshift({
+      judul: "Kebersamaan Warga dalam Karnaval",
+      deskripsi: "Dokumentasi kebersamaan warga dalam busana karnaval.",
+      gambar: selectedPhoto
+    });
+  }
+  localStorage.setItem("DATA_GALERI", JSON.stringify(DATA_GALERI));
+  localStorage.setItem("GALERI_PILIHAN_20261027", "1");
+}
+
 // Migrasi non-destruktif agar dokumentasi baru juga muncul bagi warga yang
 // sudah memiliki DATA_KEGIATAN atau DATA_GALERI lama di localStorage.
 if (!DATA_KEGIATAN.some(item => item.gambar === KARNAVAL_KEGIATAN.gambar)) {
@@ -666,6 +680,10 @@ function renderGaleri() {
     button.setAttribute("aria-label", "Perbesar foto: " + item.judul);
     const img = document.createElement("img");
     img.src = item.gambar || item.image;
+    if (img.getAttribute("src") === "assets/img/pilihan/dokumentasi-karnaval-1600.webp") {
+      img.srcset = "assets/img/pilihan/dokumentasi-karnaval-800.webp 800w, assets/img/pilihan/dokumentasi-karnaval-1600.webp 1600w";
+      img.sizes = "(min-width: 1024px) 50vw, 100vw";
+    }
     img.alt = item.deskripsi || item.judul;
     img.loading = "lazy"; img.width = 1600; img.height = 900;
     button.append(img);
