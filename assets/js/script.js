@@ -457,128 +457,70 @@ function renderInfoUmum() {
 function renderOrganigram() {
   const container = document.getElementById("organigram-root");
   if (!container) return;
-
-  // Helper function to format names
-  const formatNames = (names) => {
-    if (Array.isArray(names)) {
-      return `
-        <ul class="text-xs font-semibold text-slate-700 mt-2 flex flex-col gap-1 items-center">
-          ${names.map(name => {
-        if (name === "Belum terbaca" || name === "Belum tersedia") {
-          return `<li class="text-slate-400 italic font-normal">${name}</li>`;
-        }
-        return `<li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>${name}</li>`;
-      }).join('')}
-        </ul>
-      `;
-    } else {
-      if (names === "Belum tersedia" || names === "Belum terbaca") {
-        return `<span class="text-slate-400 italic font-normal text-xs block mt-2">${names}</span>`;
-      }
-      return `<span class="text-slate-700 font-semibold text-sm block mt-2">${names}</span>`;
-    }
+  const core = ["ketua", "sekretaris", "bendahara"];
+  const card = key => {
+    const person = DATA_PENGURUS[key];
+    const names = Array.isArray(person.nama) ? person.nama : [person.nama];
+    return `<article class="org-card ${key === "ketua" ? "org-chair" : ""}" data-role="${key}">
+      <i class="${person.icon} org-icon" aria-hidden="true"></i>
+      <h3>${person.roleName}</h3>
+      <ul>${names.map(name => `<li>${name}</li>`).join("")}</ul>
+      <details class="org-duty"><summary>Rincian tugas</summary><p>${person.tugas}</p></details>
+    </article>`;
   };
-
-  // Helper function to create card HTML
-  const createCard = (key, data, isMain = false) => {
-    const cardClass = isMain
-      ? "bg-gradient-to-br from-emerald-700 to-emerald-900 text-white shadow-xl ring-4 ring-emerald-100/50"
-      : "bg-white border-2 border-emerald-600/70 shadow-md";
-    const iconClass = isMain
-      ? "bg-white text-emerald-800"
-      : "bg-emerald-50 text-emerald-800";
-    const titleClass = isMain
-      ? "text-amber-300 font-bold uppercase tracking-widest text-xs mt-1"
-      : "text-emerald-700 font-bold uppercase tracking-wider text-xxs mt-0.5";
-
-    let namesHtml = "";
-    if (isMain) {
-      if (Array.isArray(data.nama)) {
-        namesHtml = `
-          <ul class="text-xs font-semibold text-emerald-100 mt-2 flex flex-col gap-1 items-center">
-            ${data.nama.map(name => `<li class="flex items-center gap-1.5">${name}</li>`).join('')}
-          </ul>
-        `;
-      } else {
-        if (data.nama === "Belum tersedia" || data.nama === "Belum terbaca") {
-          namesHtml = `<span class="text-emerald-300 italic font-normal text-xs block mt-2">${data.nama}</span>`;
-        } else {
-          namesHtml = `<span class="text-white font-extrabold text-base block mt-2">${data.nama}</span>`;
-        }
-      }
-    } else {
-      namesHtml = formatNames(data.nama);
-    }
-
-    return `
-      <div class="organigram-card ${cardClass} rounded-2xl p-5 text-center hover-card-trigger flex flex-col items-center justify-between h-full w-full">
-        <div class="flex flex-col items-center w-full">
-          <div class="w-10 h-10 ${iconClass} rounded-full flex items-center justify-center mb-2 text-base font-bold">
-            <i class="${data.icon}"></i>
-          </div>
-          <p class="${titleClass}">${data.roleName}</p>
-          ${namesHtml}
-        </div>
-      </div>
-    `;
+  const additional = Object.keys(DATA_PENGURUS).filter(key => !core.includes(key));
+  container.innerHTML = `<div class="org-core">${core.map(card).join("")}</div>
+    <button type="button" class="org-toggle" id="org-toggle" aria-expanded="false" aria-controls="org-panel">
+      <span>Lihat Semua Pengurus</span><i class="fas fa-chevron-down" aria-hidden="true"></i>
+    </button>
+    <div id="org-panel" role="region" aria-labelledby="org-toggle" aria-hidden="true" hidden inert>
+      <div class="org-grid">${additional.map(card).join("")}</div>
+    </div>`;
+  const toggle = container.querySelector(".org-toggle");
+  const panel = container.querySelector("#org-panel");
+  const cards = [...panel.querySelectorAll(".org-card")];
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+  let expanded = false, heightAnimation = null, animations = [], revision = 0;
+  const settle = () => {
+    panel.hidden = !expanded;
+    panel.style.height = expanded ? "auto" : "0px";
   };
-
-  let html = `
-    <div class="flex flex-col items-center gap-6 w-full">
-      <!-- LEVEL 1: PENASIHAT -->
-      <div class="w-full max-w-sm">
-        ${createCard('penasihat', DATA_PENGURUS.penasihat)}
-      </div>
-
-      <!-- Arrow down to Ketua -->
-      <div class="w-0.5 h-6 bg-emerald-400"></div>
-
-      <!-- LEVEL 2: KETUA & WAKIL KETUA -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl">
-        ${createCard('ketua', DATA_PENGURUS.ketua, true)}
-        ${createCard('wakilKetua', DATA_PENGURUS.wakilKetua)}
-      </div>
-
-      <!-- Arrow down to Sekretaris & Bendahara -->
-      <div class="w-0.5 h-6 bg-emerald-400"></div>
-
-      <!-- LEVEL 3: SEKRETARIS & BENDAHARA -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl">
-        ${createCard('sekretaris', DATA_PENGURUS.sekretaris)}
-        ${createCard('bendahara', DATA_PENGURUS.bendahara)}
-      </div>
-
-      <!-- Arrow down to Humas -->
-      <div class="w-0.5 h-6 bg-emerald-400"></div>
-
-      <!-- LEVEL 4: HUMAS & HUMAS TAMBAHAN -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl">
-        ${createCard('humasInternal', DATA_PENGURUS.humasInternal)}
-        ${createCard('humasEksternal', DATA_PENGURUS.humasEksternal)}
-      </div>
-
-      <!-- Divider / Section Title for Seksi-Seksi -->
-      <div class="w-full text-center mt-6">
-        <div class="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 px-4 py-2 rounded-full text-xs font-bold text-emerald-800">
-          <i class="fas fa-users-cog"></i> SEKSI / DIVISI KERJA
-        </div>
-      </div>
-
-      <!-- LEVEL 5: SEKSI-SEKSI GRID -->
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full mt-4">
-        <div>${createCard('keagamaan', DATA_PENGURUS.keagamaan)}</div>
-        <div>${createCard('keamanan', DATA_PENGURUS.keamanan)}</div>
-        <div>${createCard('pelayanan', DATA_PENGURUS.pelayanan)}</div>
-        <div>${createCard('wirausaha', DATA_PENGURUS.wirausaha)}</div>
-        <div>${createCard('gotongRoyong', DATA_PENGURUS.gotongRoyong)}</div>
-        <div>${createCard('kesejahteraan', DATA_PENGURUS.kesejahteraan)}</div>
-        <div>${createCard('pemuda', DATA_PENGURUS.pemuda)}</div>
-        <div>${createCard('pkk', DATA_PENGURUS.pkk)}</div>
-      </div>
-    </div>
-  `;
-
-  container.innerHTML = html;
+  function setExpanded(next) {
+    expanded = next;
+    const current = ++revision;
+    const height = panel.hidden ? 0 : panel.getBoundingClientRect().height;
+    const states = cards.map(card => ({ opacity: getComputedStyle(card).opacity, transform: getComputedStyle(card).transform }));
+    heightAnimation?.cancel();
+    animations.forEach(animation => animation.cancel());
+    animations = [];
+    toggle.setAttribute("aria-expanded", String(expanded));
+    toggle.querySelector("span").textContent = expanded ? "Sembunyikan Pengurus" : "Lihat Semua Pengurus";
+    if (!expanded && panel.contains(document.activeElement)) toggle.focus({ preventScroll: true });
+    panel.inert = !expanded;
+    panel.setAttribute("aria-hidden", String(!expanded));
+    panel.hidden = false;
+    panel.style.height = "auto";
+    const target = expanded ? panel.getBoundingClientRect().height : 0;
+    if (reduced.matches || !panel.animate) { settle(); return; }
+    panel.style.height = height + "px";
+    heightAnimation = panel.animate([{height: height + "px"}, {height: target + "px"}],
+      {duration: expanded ? 500 : 400, easing: "cubic-bezier(.22,1,.36,1)", fill: "forwards"});
+    cards.forEach((card, index) => {
+      const from = height === 0 ? {opacity: 0, transform: "translateY(10px)"} : states[index];
+      animations.push(card.animate([from, expanded ? {opacity: 1, transform: "translateY(0)"} : {opacity: 0, transform: "translateY(6px)"}],
+        {duration: expanded ? 450 : 180, delay: expanded ? index * 75 : 0, easing: "cubic-bezier(.22,1,.36,1)", fill: "both"}));
+    });
+    heightAnimation.finished.then(() => {
+      if (current !== revision) return;
+      settle(); heightAnimation.cancel(); heightAnimation = null;
+    }).catch(() => {});
+  }
+  toggle.addEventListener("click", () => setExpanded(!expanded));
+  // A change in viewport, font metrics, or task details cannot leave a stale fixed height.
+  new ResizeObserver(() => {
+    if (heightAnimation && expanded) setExpanded(true);
+  }).observe(panel.firstElementChild);
+  reduced.addEventListener("change", () => setExpanded(expanded));
 }
 
 // C. RENDER PENGUMUMAN
