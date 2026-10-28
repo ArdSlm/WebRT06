@@ -6,6 +6,8 @@
 #pengurus .org-administration { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); border:1px solid rgba(119,96,68,.26); border-radius:10px; background:rgba(250,247,240,.92); box-shadow:0 3px 14px rgba(41,57,46,.06); }
 #pengurus .org-administration .org-card { background:transparent; border:0; border-radius:0; box-shadow:none; }
 #pengurus .org-administration .org-card + .org-card { border-left:1px solid rgba(119,96,68,.18); }
+#pengurus .org-grid .org-administration { grid-template-columns:minmax(0,1fr); min-width:0; }
+#pengurus .org-grid .org-administration .org-card + .org-card { border-left:0; border-top:1px solid rgba(119,96,68,.18); }
 #pengurus .org-card { display:flex; flex-direction:column; padding:20px; border:1px solid rgba(119,96,68,.26); border-radius:10px; background:rgba(250,247,240,.92); box-shadow:0 3px 14px rgba(41,57,46,.06); color:#29392E; min-width:0; }
 #pengurus .org-core .org-card { text-align:center; }
 #pengurus .org-chair { grid-column:1/-1; background:rgba(41,57,46,.95); color:#FAF7F0; text-align:center; }

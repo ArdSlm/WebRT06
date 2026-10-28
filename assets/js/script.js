@@ -457,7 +457,7 @@ function renderInfoUmum() {
 function renderOrganigram() {
   const container = document.getElementById("organigram-root");
   if (!container) return;
-  const core = ["ketua", "wakilKetua", "sekretaris", "bendahara"];
+  const core = ["ketua", "wakilKetua"];
   const card = key => {
     const person = DATA_PENGURUS[key];
     const names = Array.isArray(person.nama) ? person.nama : [person.nama];
@@ -468,18 +468,20 @@ function renderOrganigram() {
       <details class="org-duty"><summary>Rincian tugas</summary><p>${person.tugas}</p></details>
     </article>`;
   };
-  const additional = Object.keys(DATA_PENGURUS).filter(key => !core.includes(key));
-  container.innerHTML = `<div class="org-core">${card("ketua")}${card("wakilKetua")}
-    <div class="org-administration" role="group" aria-label="Sekretaris dan Bendahara">${card("sekretaris")}${card("bendahara")}</div></div>
+  const additional = Object.keys(DATA_PENGURUS).filter(key => !core.includes(key) && key !== "bendahara");
+  const additionalCard = key => key === "sekretaris"
+    ? `<div class="org-administration" role="group" aria-label="Sekretaris dan Bendahara">${card("sekretaris")}${card("bendahara")}</div>`
+    : card(key);
+  container.innerHTML = `<div class="org-core">${core.map(card).join("")}</div>
     <button type="button" class="org-toggle" id="org-toggle" aria-expanded="false" aria-controls="org-panel">
       <span>Lihat Semua Pengurus</span><i class="fas fa-chevron-down" aria-hidden="true"></i>
     </button>
     <div id="org-panel" role="region" aria-labelledby="org-toggle" aria-hidden="true" hidden inert>
-      <div class="org-grid">${additional.map(card).join("")}</div>
+      <div class="org-grid">${additional.map(additionalCard).join("")}</div>
     </div>`;
   const toggle = container.querySelector(".org-toggle");
   const panel = container.querySelector("#org-panel");
-  const cards = [...panel.querySelectorAll(".org-card")];
+  const cards = [...panel.querySelector(".org-grid").children];
   const reduced = matchMedia("(prefers-reduced-motion: reduce)");
   let expanded = false, heightAnimation = null, animations = [], revision = 0;
   const settle = () => {
