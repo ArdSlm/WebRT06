@@ -7,6 +7,12 @@ body > header { margin-bottom:0; }
 .story-scrolled #navbar { background:rgba(41,57,46,.96); }
 .hero-story { padding-top:64px; }
 #sambutan { background:linear-gradient(100deg,rgba(238,225,200,.92),rgba(238,225,200,.80)),url('../img/pilihan/warga-pos-kamling-1600.webp') center/cover; }
+#sambutan { padding-block:clamp(32px,4vw,56px); }
+#sambutan .sambutan-copy { min-width:0; }
+#sambutan .sambutan-message { font:400 16px/1.7 'Manrope',sans-serif; color:#29392E; text-align:left; margin-top:8px; }
+#sambutan .sambutan-closing { position:relative; border-top:1px solid rgba(119,96,68,.3); margin:12px 0 0; padding:16px 0 0 22px; font:italic 400 clamp(20px,2vw,24px)/1.5 'Newsreader',Georgia,serif; color:#776044; text-align:left; }
+#sambutan .sambutan-quote-mark { position:absolute; left:0; top:12px; font-size:30px; color:#776044; }
+@media(max-width:767px) { #sambutan .sambutan-message { font-size:15px; } #sambutan .max-w-4xl { gap:20px; } }
 @media(max-width:767px) { #sambutan { background-image:linear-gradient(100deg,rgba(238,225,200,.92),rgba(238,225,200,.80)),url('../img/pilihan/warga-pos-kamling-800.webp'); } }
 #statistik { background:linear-gradient(rgba(238,225,200,.88),rgba(238,225,200,.92)),url('../img/backgrounds/profil-800.webp') center/cover; }
 #pengurus { background:linear-gradient(rgba(250,247,240,.88),rgba(238,225,200,.85)),url('../img/backgrounds/galeri-1600.webp') center/cover; }

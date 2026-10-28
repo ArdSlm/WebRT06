@@ -14,6 +14,15 @@
     ], {duration:target.matches('.activity-card, .editorial-gallery figure, #sambutan .max-w-4xl') ? 1200 : 900,easing:'cubic-bezier(.22,1,.36,1)',delay:Number(target.dataset.storyDelay || 0),fill:'backwards'});
     running.add(animation);
     animation.finished.catch(()=>{}).finally(()=>running.delete(animation));
+    if (target.matches('#sambutan .max-w-4xl')) {
+      const quote = target.querySelector('.sambutan-closing');
+      if (quote) {
+        const closing = quote.animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],
+          {duration:500,delay:Number(target.dataset.storyDelay || 0)+300,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'});
+        running.add(closing);
+        closing.finished.catch(()=>{}).finally(()=>running.delete(closing));
+      }
+    }
     }
   }), {threshold:.12});
   function register() {
