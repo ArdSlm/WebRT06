@@ -457,7 +457,7 @@ function renderInfoUmum() {
 function renderOrganigram() {
   const container = document.getElementById("organigram-root");
   if (!container) return;
-  const core = ["ketua", "sekretaris", "bendahara"];
+  const core = ["ketua", "wakilKetua", "sekretaris", "bendahara"];
   const card = key => {
     const person = DATA_PENGURUS[key];
     const names = Array.isArray(person.nama) ? person.nama : [person.nama];
@@ -469,7 +469,8 @@ function renderOrganigram() {
     </article>`;
   };
   const additional = Object.keys(DATA_PENGURUS).filter(key => !core.includes(key));
-  container.innerHTML = `<div class="org-core">${core.map(card).join("")}</div>
+  container.innerHTML = `<div class="org-core">${card("ketua")}${card("wakilKetua")}
+    <div class="org-administration" role="group" aria-label="Sekretaris dan Bendahara">${card("sekretaris")}${card("bendahara")}</div></div>
     <button type="button" class="org-toggle" id="org-toggle" aria-expanded="false" aria-controls="org-panel">
       <span>Lihat Semua Pengurus</span><i class="fas fa-chevron-down" aria-hidden="true"></i>
     </button>

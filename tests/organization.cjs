@@ -21,7 +21,10 @@ const os = require('node:os');
     for (const width of [320,390,430,768,1366]) {
       await page.setViewportSize({ width, height:900 });
       await page.locator('#pengurus').scrollIntoViewIfNeeded();
-      assert.equal(await page.locator('#pengurus .org-card:visible').count(), 3);
+      assert.equal(await page.locator('#pengurus .org-card:visible').count(), 4);
+      assert.deepEqual(await page.locator('.org-core [data-role]').evaluateAll(cards => cards.map(card => card.dataset.role)), ['ketua','wakilKetua','sekretaris','bendahara']);
+      assert.equal(await page.locator('.org-administration [data-role]').count(), 2);
+      assert.equal(await panel.locator('[data-role="wakilKetua"]').count(), 0);
       assert.equal(await panel.getAttribute('aria-hidden'), 'true');
       assert.equal(await panel.evaluate(e => e.inert), true);
       await page.screenshot({ path:path.join(os.tmpdir(), `organization-collapsed-${width}.png`) });
