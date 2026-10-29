@@ -8,7 +8,7 @@
   audio.volume = 0;
   let pending = false;
   let frame = 0;
-  const events = ['pointerdown', 'keydown'];
+  const events = ['pointerdown', 'pointerup', 'touchend', 'click', 'keydown'];
   function fadeIn() {
     cancelAnimationFrame(frame);
     const started = performance.now();
@@ -20,6 +20,7 @@
     frame = requestAnimationFrame(step);
   }
   async function start(event) {
+    if (event?.type === 'pointerdown' && event.pointerType !== 'mouse') return;
     if (event?.type === 'keydown' && (event.repeat || event.ctrlKey || event.metaKey || event.altKey)) return;
     if (pending || !audio.paused || document.hidden) return;
     pending = true;
@@ -32,7 +33,7 @@
       // Autoplay rejection or unavailable media must never break the website.
     } finally { pending = false; }
   }
-  events.forEach(type => document.addEventListener(type, start, { passive: true }));
+  events.forEach(type => document.addEventListener(type, start, { passive: true, capture: true }));
   addEventListener('pagehide', () => { cancelAnimationFrame(frame); audio.pause(); });
   addEventListener('pageshow', start);
   start();
