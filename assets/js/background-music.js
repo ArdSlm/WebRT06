@@ -4,10 +4,12 @@
   const audio = new Audio('public/audio/karedok-leunca.mp3');
   window.rt06BackgroundMusic = audio;
   audio.loop = true;
-  audio.preload = 'metadata';
+  audio.preload = 'auto';
   audio.volume = 0;
   let pending = false;
   let frame = 0;
+  let autoplayTimer = 0;
+  let delayElapsed = false;
   const events = ['pointerdown', 'pointerup', 'touchend', 'click', 'keydown'];
   function fadeIn() {
     cancelAnimationFrame(frame);
@@ -20,6 +22,7 @@
     frame = requestAnimationFrame(step);
   }
   async function start(event) {
+    if (!delayElapsed) return;
     if (event?.type === 'pointerdown' && event.pointerType !== 'mouse') return;
     if (event?.type === 'keydown' && (event.repeat || event.ctrlKey || event.metaKey || event.altKey)) return;
     if (pending || !audio.paused || document.hidden) return;
@@ -34,7 +37,16 @@
     } finally { pending = false; }
   }
   events.forEach(type => document.addEventListener(type, start, { passive: true, capture: true }));
-  addEventListener('pagehide', () => { cancelAnimationFrame(frame); audio.pause(); });
-  addEventListener('pageshow', start);
-  start();
+  function scheduleAutoplay() {
+    clearTimeout(autoplayTimer);
+    delayElapsed = false;
+    autoplayTimer = setTimeout(() => {
+      delayElapsed = true;
+      start();
+    }, 1500);
+  }
+  addEventListener('pagehide', () => { clearTimeout(autoplayTimer); cancelAnimationFrame(frame); audio.pause(); });
+  addEventListener('pageshow', event => { if (event.persisted) scheduleAutoplay(); });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && delayElapsed) start(); });
+  scheduleAutoplay();
 })();
