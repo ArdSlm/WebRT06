@@ -62,12 +62,14 @@ main > .photo-section {
 }
 #kegiatan .filter-btn { min-height: 44px; border-radius: 3px; }
 #kegiatan .filter-btn.active { background: #EEE1C8; color: #29392E; border-color: #EEE1C8; }
-#kegiatan-grid { align-items: start; gap: 32px; }
+#kegiatan-grid { align-items: start; gap: 24px; }
 #kegiatan .activity-card { background: rgba(250,247,240,.91); border: 1px solid rgba(238,225,200,.4); border-radius: 5px; overflow: hidden; }
-#kegiatan .activity-card > div { padding: 24px; }
-#kegiatan .activity-card > div:last-child { padding-block: 14px; border-color: #D8CFBD; }
-#kegiatan .activity-card h3 { color: #29392E; }
-#kegiatan .activity-card p { color: #465044; }
+#kegiatan .activity-card > div { padding: 18px; }
+#kegiatan .activity-card > div:last-child { padding-block: 10px; border-color: #D8CFBD; }
+#kegiatan .activity-card > div:first-of-type > div { margin-bottom:10px; gap:8px; flex-wrap:wrap; }
+#kegiatan .activity-card h3 { color: #29392E; font-size:1.5rem; margin-bottom:6px; }
+#kegiatan .activity-card p { color: #465044; font-size:14px; line-height:1.65; margin-bottom:0; }
+#kegiatan .activity-card > div:last-child :is(span,i) { font-size:12px; }
 #kegiatan-grid > .text-center { background: rgba(250,247,240,.91); color: #29392E; }
 
 /* Gallery stays light: photography only supports the heading. */
@@ -115,5 +117,12 @@ footer { border-top-color: #C7A77B; }
   #profil .photo-heading { min-height: 180px; }
   #profil .profile-story-panel { padding: 24px 20px; gap: 28px; }
   #layanan .resident-contact-layout { padding: 24px 20px; gap: 32px; }
-  #kegiatan .activity-card > div { padding-inline: 20px; }
+  #kegiatan-grid { gap:18px; }
+  #kegiatan.photo-section { padding-left:60px; padding-right:20px; }
+  #kegiatan .activity-card > img { aspect-ratio:2/1; height:auto; object-fit:cover; object-position:center 40%; }
+  #kegiatan .activity-card > div { padding:14px 16px; }
+  #kegiatan .activity-card > div:last-child { padding-block:8px; }
+  #kegiatan .activity-card h3 { font-size:1.3rem; line-height:1.25; }
+  #kegiatan .activity-card > div:first-of-type > div { margin-bottom:8px; }
+  #kegiatan .activity-card > div:first-of-type > div > span { font-size:10px; letter-spacing:.03em; }
 }

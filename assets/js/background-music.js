@@ -29,7 +29,7 @@
     const started = performance.now();
     const step = now => {
       const progress = Math.min(1, (now - started) / 2000);
-      audio.volume = 0.35 * progress;
+      audio.volume = 0.45 * progress;
       if (progress < 1 && !audio.paused) frame = requestAnimationFrame(step);
     };
     frame = requestAnimationFrame(step);

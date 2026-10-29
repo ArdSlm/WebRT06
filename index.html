@@ -536,9 +536,14 @@
   </footer>
 
   <!-- ==================== BACK TO TOP BUTTON ==================== -->
-  <button id="music-toggle" type="button" class="fixed bottom-20 right-6 z-40 bg-[#29392E] text-white w-11 h-11 rounded-xl shadow-lg flex items-center justify-center" aria-label="Nonaktifkan musik" aria-pressed="true" title="Nonaktifkan musik" hidden>
+  <div class="floating-tools" role="group" aria-label="Musik dan administrasi">
+  <button id="music-toggle" type="button" class="text-white flex items-center justify-center" aria-label="Nonaktifkan musik" aria-pressed="true" title="Nonaktifkan musik" hidden>
     <i class="fas fa-volume-up" aria-hidden="true"></i>
   </button>
+  <button id="admin-floating-btn" type="button" onclick="triggerAdminLogin()" class="text-brand-navy flex items-center justify-center" aria-label="Panel Administrasi RT">
+    <i class="fas fa-lock" aria-hidden="true"></i>
+  </button>
+  </div>
   <a id="back-to-top" href="#beranda" class="fixed bottom-6 right-6 z-40 bg-[#776044] hover:bg-[#604B33] text-white w-11 h-11 rounded-xl shadow-lg flex items-center justify-center transition-colors text-base focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-green" aria-label="Kembali ke atas">
     <i class="fas fa-arrow-up"></i>
   </a>
@@ -571,9 +576,6 @@
   </div>
 
   <!-- ==================== FLOATING ADMIN BUTTON ==================== -->
-  <button id="admin-floating-btn" onclick="triggerAdminLogin()" class="fixed bottom-6 left-6 z-40 w-11 h-11 rounded-xl shadow-lg flex items-center justify-center transition-all hover:scale-110 active:scale-95 bg-[#C7A77B] hover:bg-[#B7804D] text-brand-navy text-base cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#C7A77B]" aria-label="Panel Administrasi RT">
-    <i class="fas fa-lock"></i>
-  </button>
 
   <!-- ==================== ADMIN CONTROL PANEL MODAL ==================== -->
   <div id="adminModal" class="fixed inset-0 z-[9999] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 md:p-6 transition-all duration-300 hidden" role="dialog" aria-modal="true" aria-label="Panel administrasi RT 006">
@@ -796,6 +798,6 @@
   <!-- Main JS -->
   <script src="assets/js/script.js?v=21"></script>
   <script src="assets/js/scroll-story.js" defer></script>
-  <script src="assets/js/background-music.js?v=4" defer></script>
+  <script src="assets/js/background-music.js?v=5" defer></script>
 </body>
 </html>
